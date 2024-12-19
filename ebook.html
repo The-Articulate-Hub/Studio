@@ -66,6 +66,17 @@
     .progress-bar {
       background-color: #0056b3;
     }
+    .quiz-container {
+      background: #f9f9f9;
+      border: 1px solid #ddd;
+      border-radius: 5px;
+      padding: 20px;
+      margin-top: 20px;
+      box-shadow: 0 4px 6px rgba(0, 0, 0, 0.1);
+    }
+    .quiz-question {
+      font-weight: bold;
+    }
   </style>
 </head>
 <body>
@@ -86,6 +97,9 @@
           </li>
           <li class="nav-item">
             <a class="nav-link" href="#chapter3">Chapter 3: Support Resources</a>
+          </li>
+          <li class="nav-item">
+            <a class="nav-link" href="#quiz">Chapter 4: Quiz</a>
           </li>
           <li class="nav-item mt-4">
             <a class="nav-link quick-exit" href="https://example.com">Quick Exit</a>
@@ -132,6 +146,26 @@
             <li><a href="#">Helpline Directory</a></li>
             <li><a href="#">Guide to Reporting Issues</a></li>
           </ul>
+        </section>
+
+        <section id="quiz" class="chapter-section">
+          <h2>Chapter 4: Quiz</h2>
+          <div class="quiz-container">
+            <p class="quiz-question">Question 1: What is the best practice for creating a strong password?</p>
+            <div class="form-check">
+              <input class="form-check-input" type="radio" name="q1" id="q1a1">
+              <label class="form-check-label" for="q1a1">Use your pet's name</label>
+            </div>
+            <div class="form-check">
+              <input class="form-check-input" type="radio" name="q1" id="q1a2">
+              <label class="form-check-label" for="q1a2">Use a mix of uppercase, lowercase, numbers, and special characters</label>
+            </div>
+            <div class="form-check">
+              <input class="form-check-input" type="radio" name="q1" id="q1a3">
+              <label class="form-check-label" for="q1a3">Use your birthday</label>
+            </div>
+            <button class="btn btn-primary mt-3" onclick="alert('Correct! Strong passwords include a mix of characters.')">Submit Answer</button>
+          </div>
         </section>
       </main>
     </div>
