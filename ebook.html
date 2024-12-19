@@ -83,6 +83,17 @@
       font-size: 14px;
       color: #333;
     }
+    .bookmark {
+      position: absolute;
+      top: 10px;
+      right: 20px;
+      cursor: pointer;
+      color: #776cca;
+      font-size: 24px;
+    }
+    .bookmark:hover {
+      color: #5fae8d;
+    }
   </style>
 </head>
 <body>
@@ -90,6 +101,7 @@
     <div class="ebook-header">
       <h1>Interactive eBook</h1>
       <p>Navigate through chapters like flipping pages in a book!</p>
+      <span class="bookmark" id="bookmark">🔖</span>
     </div>
 
     <!-- Book pages -->
@@ -147,12 +159,19 @@
     </div>
   </div>
 
-  <!-- JavaScript for page navigation and progress tracking -->
+  <!-- JavaScript for page navigation, progress tracking, and bookmarking -->
   <script>
     const pages = document.querySelectorAll('.page');
     const progressBar = document.getElementById('progress-bar');
     const progressText = document.getElementById('progress-text');
+    const bookmark = document.getElementById('bookmark');
     let currentPage = 0;
+    let savedPage = localStorage.getItem('savedPage');
+
+    if (savedPage) {
+      currentPage = parseInt(savedPage);
+      showPage(currentPage);
+    }
 
     function updateProgress() {
       const progress = ((currentPage + 1) / pages.length) * 100;
@@ -184,6 +203,11 @@
         showPage(currentPage - 1);
       }
     }
+
+    bookmark.addEventListener('click', () => {
+      localStorage.setItem('savedPage', currentPage);
+      alert('Bookmark saved!');
+    });
 
     // Initialize progress bar and buttons
     updateProgress();
