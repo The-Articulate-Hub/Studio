@@ -1,47 +1,81 @@
-<!DOCTYPE html>
+<!doctype html>
 <html lang="en-GB">
-<head>
-  <meta charset="UTF-8" />
-  <meta name="viewport" content="width=device-width, initial-scale=1.0"/>
-  <title>Resource Hub</title>
-  <style>
-    nav {
-      background: #f2f2f2;
-      padding: 1em;
-    }
-    nav ul {
-      list-style: none;
-      margin: 0;
-      padding: 0;
-      display: flex;
-      gap: 1em;
-    }
-    nav a {
-      text-decoration: none;
-      font-weight: bold;
-      color: #333;
-    }
-    nav a:hover {
-      color: #000;
-    }
-    main {
-      padding: 2em;
-    }
-  </style>
-</head>
-<body>
-  <header>
-    <nav aria-label="Main Navigation">
-      <ul>
-        <li><a href="ebook.html">E-book</a></li>
-        <li><a href="kit.html">Kit</a></li>
-      </ul>
+  <head>
+    <!-- Required meta tags -->
+    <meta charset="utf-8"/>
+    <meta name="viewport" content="width=device-width, initial-scale=1"/>
+
+    <title>Resource Hub</title>
+
+    <!-- Bootstrap CSS -->
+    <link 
+      href="https://cdn.jsdelivr.net/npm/bootstrap@5.3.0/dist/css/bootstrap.min.css" 
+      rel="stylesheet"
+    />
+
+    <style>
+      body {
+        background-color: #f8f9fa;
+      }
+      .hero-text {
+        font-size: 1.25rem;
+        color: #6c757d;
+      }
+    </style>
+  </head>
+  <body>
+    <!-- Navigation -->
+    <nav class="navbar navbar-expand-lg navbar-light bg-white border-bottom shadow-sm">
+      <div class="container">
+        <a class="navbar-brand fw-bold" href="#">Resource Hub</a>
+        <button class="navbar-toggler" type="button" 
+                data-bs-toggle="collapse" 
+                data-bs-target="#navbarSupportedContent" 
+                aria-controls="navbarSupportedContent" 
+                aria-expanded="false" 
+                aria-label="Toggle navigation">
+          <span class="navbar-toggler-icon"></span>
+        </button>
+        <div 
+          class="collapse navbar-collapse justify-content-end" 
+          id="navbarSupportedContent"
+        >
+          <ul class="navbar-nav">
+            <li class="nav-item me-3">
+              <a class="nav-link active" aria-current="page" href="ebook.html">E-book</a>
+            </li>
+            <li class="nav-item">
+              <a class="nav-link" href="kit.html">Kit</a>
+            </li>
+          </ul>
+        </div>
+      </div>
     </nav>
-  </header>
 
-  <main>
-    <h1>Welcome to the Resource Hub</h1>
-    <p>Use the links above to access different resources. The E-book section offers valuable reading materials, and the Kit section includes practical tools. We aim to provide a calm, supportive learning space for you. If you have questions, consider adding a support page or chat feature to help guide you.</p>
-  </main>
+    <!-- Hero Section -->
+    <section class="py-5">
+      <div class="container text-center">
+        <h1 class="fw-bold mb-4">Welcome to the Resource Hub</h1>
+        <p class="hero-text mb-4">
+          Explore reading materials in the E-book section and find practical tools in the Kit section. 
+          We aim to create a calm, supportive learning environment for you. Consider adding 
+          a support page or a secure chat tool for extra guidance. We value your privacy, so 
+          all interactions are designed with security and inclusivity in mind.
+        </p>
+        <div class="d-inline-flex gap-3">
+          <a href="ebook.html" class="btn btn-primary btn-lg">Go to E-book</a>
+          <a href="kit.html" class="btn btn-outline-secondary btn-lg">Go to Kit</a>
+        </div>
+      </div>
+    </section>
 
-  <fo
+    <footer class="text-center py-3 border-top">
+      <p class="mb-0">&copy; 2024 Resource Hub | Respecting Your Journey</p>
+    </footer>
+
+    <!-- Bootstrap JS -->
+    <script 
+      src="https://cdn.jsdelivr.net/npm/bootstrap@5.3.0/dist/js/bootstrap.bundle.min.js">
+    </script>
+  </body>
+</html>
