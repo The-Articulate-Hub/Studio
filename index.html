@@ -22,6 +22,14 @@
       max-width: 100px;
       margin-bottom: 10px;
     }
+    .room-select {
+      text-align: center;
+      margin: 20px;
+    }
+    .room-select select {
+      padding: 10px;
+      font-size: 1em;
+    }
     .kit {
       border: 1px solid #ddd;
       border-radius: 5px;
@@ -56,31 +64,75 @@
     <img src="https://lwfiles.mycourse.app/655b35fbfdce42739eabd7cf-public/e7bb21dceaac753035eba14d6abfd207.png" alt="Logo">
     <h1>Kit Management System</h1>
   </header>
+  <div class="room-select">
+    <label for="room">Select Room:</label>
+    <select id="room" onchange="filterByRoom()">
+      <option value="all">All Rooms</option>
+    </select>
+  </div>
   <div id="kits-container"></div>
   <footer>
     <p>© 2025 Your Organisation Name | <a href="https://yourwebsite.com">Visit Our Website</a></p>
   </footer>
   <script>
-    const apiEndpoint = 'https://script.google.com/macros/s/1LQGvQ_Vte138jsAEfQb_jGIDFu1qgq1pJwkUlAx6RM2kYKRlLqyqQ86k/exec'; // Corrected Apps Script Web App URL
+    const apiEndpoint = 'https://script.google.com/macros/s/1LQGvQ_Vte138jsAEfQb_jGIDFu1qgq1pJwkUlAx6RM2kYKRlLqyqQ86k/exec'; // Apps Script URL
+
+    let allKits = []; // Store all kits
+    let rooms = new Set(); // Store unique room names
 
     // Fetch kits from the backend
     fetch(apiEndpoint)
       .then((response) => response.json())
       .then((kits) => {
-        const container = document.getElementById('kits-container');
+        allKits = kits;
+        rooms.add('All Rooms'); // Default option
         kits.forEach((kit) => {
-          const kitDiv = document.createElement('div');
-          kitDiv.className = 'kit';
-          kitDiv.innerHTML = `
-            <h3>${kit.name}</h3>
-            <p><strong>Location:</strong> ${kit.location}</p>
-            <p><strong>Status:</strong> ${kit.status}</p>
-            <button onclick="selectKit('${kit.uuid}')">${kit.status === 'Available' ? 'Clock Out' : 'Clock In'}</button>
-          `;
-          container.appendChild(kitDiv);
+          rooms.add(kit.sheetName);
         });
+
+        populateRoomDropdown();
+        displayKits(allKits);
       })
       .catch((error) => console.error('Error fetching kits:', error));
+
+    // Populate the room dropdown menu
+    function populateRoomDropdown() {
+      const roomDropdown = document.getElementById('room');
+      rooms.forEach((room) => {
+        const option = document.createElement('option');
+        option.value = room;
+        option.textContent = room;
+        roomDropdown.appendChild(option);
+      });
+    }
+
+    // Filter kits by room
+    function filterByRoom() {
+      const selectedRoom = document.getElementById('room').value;
+      if (selectedRoom === 'All Rooms') {
+        displayKits(allKits);
+      } else {
+        const filteredKits = allKits.filter((kit) => kit.sheetName === selectedRoom);
+        displayKits(filteredKits);
+      }
+    }
+
+    // Display kits
+    function displayKits(kits) {
+      const container = document.getElementById('kits-container');
+      container.innerHTML = ''; // Clear the container
+      kits.forEach((kit) => {
+        const kitDiv = document.createElement('div');
+        kitDiv.className = 'kit';
+        kitDiv.innerHTML = `
+          <h3>${kit.name}</h3>
+          <p><strong>Location:</strong> ${kit.sheetName}</p>
+          <p><strong>Status:</strong> ${kit.status}</p>
+          <button onclick="selectKit('${kit.uuid}')">${kit.status === 'Available' ? 'Clock Out' : 'Clock In'}</button>
+        `;
+        container.appendChild(kitDiv);
+      });
+    }
 
     // Handle kit actions
     function selectKit(uuid) {
