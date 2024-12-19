@@ -1,0 +1,46 @@
+<!DOCTYPE html>
+<html>
+<head>
+  <title>Kit Logging System</title>
+</head>
+<body>
+  <h1>Kit Management</h1>
+  <form id="action-form">
+    <label for="udid">Enter or Scan UDID:</label>
+    <input type="text" id="udid" name="udid" required />
+    <br />
+    <label for="action">Select Action:</label>
+    <select id="action" name="action">
+      <option value="Clock Out">Clock Out</option>
+      <option value="Clock In">Clock In</option>
+    </select>
+    <br />
+    <button type="button" onclick="logAction()">Submit</button>
+  </form>
+  <script>
+    const scriptUrl = 'https://script.google.com/macros/s/1LQGvQ_Vte138jsAEfQb_jGIDFu1qgq1pJwkUlAx6RM2kYKRlLqyqQ86k/exec'; // Replace with your Apps Script URL
+
+    function logAction() {
+      const udid = document.getElementById('udid').value;
+      const action = document.getElementById('action').value;
+
+      fetch(scriptUrl, {
+        method: 'POST',
+        headers: { 'Content-Type': 'application/json' },
+        body: JSON.stringify({ udid, action }),
+      })
+        .then((response) => response.json())
+        .then((data) => {
+          if (data.status === 'success') {
+            alert('Action logged successfully.');
+          } else {
+            alert('Error: ' + data.message);
+          }
+        })
+        .catch((error) => {
+          console.error('Error:', error);
+        });
+    }
+  </script>
+</body>
+</html>
