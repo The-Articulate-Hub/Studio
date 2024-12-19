@@ -59,6 +59,30 @@
     .navigation button:hover {
       background: #5fae8d;
     }
+    .progress-container {
+      display: flex;
+      align-items: center;
+      margin-top: 20px;
+    }
+    .progress-bar {
+      flex: 1;
+      height: 10px;
+      background-color: #e0e0e0;
+      border-radius: 5px;
+      overflow: hidden;
+      position: relative;
+    }
+    .progress-bar-inner {
+      height: 100%;
+      background-color: #776cca;
+      width: 0%;
+      transition: width 0.3s ease;
+    }
+    .progress-text {
+      margin-left: 15px;
+      font-size: 14px;
+      color: #333;
+    }
   </style>
 </head>
 <body>
@@ -108,6 +132,14 @@
       </div>
     </div>
 
+    <!-- Progress bar -->
+    <div class="progress-container">
+      <div class="progress-bar">
+        <div class="progress-bar-inner" id="progress-bar"></div>
+      </div>
+      <div class="progress-text" id="progress-text">0% Complete</div>
+    </div>
+
     <!-- Navigation buttons -->
     <div class="navigation">
       <button id="prev-btn" onclick="prevPage()">Previous</button>
@@ -115,10 +147,18 @@
     </div>
   </div>
 
-  <!-- JavaScript for page navigation -->
+  <!-- JavaScript for page navigation and progress tracking -->
   <script>
     const pages = document.querySelectorAll('.page');
+    const progressBar = document.getElementById('progress-bar');
+    const progressText = document.getElementById('progress-text');
     let currentPage = 0;
+
+    function updateProgress() {
+      const progress = ((currentPage + 1) / pages.length) * 100;
+      progressBar.style.width = `${progress}%`;
+      progressText.textContent = `${Math.round(progress)}% Complete`;
+    }
 
     function updateButtons() {
       document.getElementById('prev-btn').style.visibility = currentPage === 0 ? 'hidden' : 'visible';
@@ -129,6 +169,7 @@
       pages[currentPage].classList.remove('active');
       currentPage = index;
       pages[currentPage].classList.add('active');
+      updateProgress();
       updateButtons();
     }
 
@@ -144,6 +185,8 @@
       }
     }
 
+    // Initialize progress bar and buttons
+    updateProgress();
     updateButtons();
   </script>
 </body>
