@@ -22,12 +22,13 @@
       max-width: 100px;
       margin-bottom: 10px;
     }
-    footer {
-      text-align: center;
-      padding: 10px;
-      margin-top: 20px;
-      font-size: 0.9em;
-      background: #f1f1f1;
+    .kit {
+      border: 1px solid #ddd;
+      border-radius: 5px;
+      margin: 10px;
+      padding: 15px;
+      background: white;
+      box-shadow: 0px 2px 5px rgba(0, 0, 0, 0.1);
     }
     button {
       background-color: #007BFF;
@@ -41,15 +42,12 @@
     button:hover {
       background-color: #0056b3;
     }
-    input, select {
-      padding: 10px;
-      margin: 10px 0;
-      width: 100%;
-      max-width: 400px;
-    }
-    form {
+    footer {
       text-align: center;
-      margin: 20px;
+      padding: 10px;
+      margin-top: 20px;
+      font-size: 0.9em;
+      background: #f1f1f1;
     }
   </style>
 </head>
@@ -58,38 +56,43 @@
     <img src="https://lwfiles.mycourse.app/655b35fbfdce42739eabd7cf-public/e7bb21dceaac753035eba14d6abfd207.png" alt="Logo">
     <h1>Kit Management System</h1>
   </header>
-  <form id="action-form">
-    <label for="udid">Enter or Scan UDID:</label>
-    <input type="text" id="udid" name="udid" required />
-    <label for="action">Select Action:</label>
-    <select id="action" name="action">
-      <option value="Clock Out">Clock Out</option>
-      <option value="Clock In">Clock In</option>
-    </select>
-    <button type="button" onclick="logAction()">Submit</button>
-  </form>
+  <div id="kits-container"></div>
   <footer>
     <p>© 2025 Your Organisation Name | <a href="https://yourwebsite.com">Visit Our Website</a></p>
   </footer>
   <script>
-    const scriptUrl = 'https://script.google.com/macros/s/1LQGvQ_Vte138jsAEfQb_jGIDFu1qgq1pJwkUlAx6RM2kYKRlLqyqQ86k/exec'; // Replace with your Apps Script URL
+    const apiEndpoint = 'https://script.google.com/macros/s/1LQGvQ_Vte138jsAEfQb_jGIDFu1qgq1pJwkUlAx6RM2kYKRlLqyqQ86k/exec'; // Replace with your Apps Script URL
 
-    function logAction() {
-      const udid = document.getElementById('udid').value;
-      const action = document.getElementById('action').value;
+    // Fetch kits from the backend
+    fetch(apiEndpoint)
+      .then((response) => response.json())
+      .then((kits) => {
+        const container = document.getElementById('kits-container');
+        kits.forEach((kit) => {
+          const kitDiv = document.createElement('div');
+          kitDiv.className = 'kit';
+          kitDiv.innerHTML = `
+            <h3>${kit.name}</h3>
+            <p><strong>Location:</strong> ${kit.location}</p>
+            <p><strong>Status:</strong> ${kit.status}</p>
+            <button onclick="selectKit('${kit.uuid}')">${kit.status === 'Available' ? 'Clock Out' : 'Clock In'}</button>
+          `;
+          container.appendChild(kitDiv);
+        });
+      })
+      .catch((error) => console.error('Error fetching kits:', error));
 
-      fetch(scriptUrl, {
+    // Handle kit actions
+    function selectKit(uuid) {
+      const action = confirm('Clock In or Out?') ? 'Clock In' : 'Clock Out';
+      fetch(apiEndpoint, {
         method: 'POST',
         headers: { 'Content-Type': 'application/json' },
-        body: JSON.stringify({ udid, action }),
+        body: JSON.stringify({ udid: uuid, action }),
       })
         .then((response) => response.json())
-        .then((data) => {
-          alert(data.message);
-        })
-        .catch((error) => {
-          alert('Error: ' + error.message);
-        });
+        .then((data) => alert(data.message))
+        .catch((error) => console.error('Error performing action:', error));
     }
   </script>
 </body>
