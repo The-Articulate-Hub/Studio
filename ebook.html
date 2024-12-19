@@ -6,47 +6,56 @@
   <title>Interactive eBook</title>
   <!-- Bootstrap CSS -->
   <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.3.0/dist/css/bootstrap.min.css" rel="stylesheet">
-  <link href="https://fonts.googleapis.com/css2?family=Roboto:wght@400;500;700&display=swap" rel="stylesheet">
+  <link href="https://fonts.googleapis.com/css2?family=Rubik:wght@400;500;700&display=swap" rel="stylesheet">
   <style>
+    /* General body styles for the eBook, including the use of Rubik font */
     body {
-      font-family: 'Roboto', sans-serif;
+      font-family: 'Rubik', sans-serif;
       background-color: #f3f4f6;
       color: #333;
     }
+    /* Sidebar styles for the navigation menu */
     .sidebar {
       background-color: #ffffff;
       border-right: 1px solid #ddd;
       min-height: 100vh;
       padding-top: 20px;
     }
+    /* Styling for active links in the sidebar */
     .nav-link.active {
-      background-color: #0056b3;
+      background-color: #776cca; /* Brand colour: Connectivity and Collaboration */
       color: #ffffff !important;
       font-weight: bold;
     }
+    /* General styles for navigation links */
     .nav-link {
       color: #333;
       transition: background-color 0.3s, color 0.3s;
     }
+    /* Hover effect for navigation links */
     .nav-link:hover {
-      background-color: #f0f8ff;
-      color: #0056b3;
+      background-color: #e9bed4; /* Brand colour: Secondary gradient */
+      color: #776cca;
     }
+    /* Main content area styling */
     .main-content {
       padding: 20px;
     }
+    /* Styling for the quick exit link */
     .quick-exit {
       color: red;
       font-weight: bold;
     }
+    /* Hero section with gradient background */
     .hero {
-      background: linear-gradient(135deg, #0056b3, #007bff);
+      background: linear-gradient(135deg, #776cca, #53aec9); /* Brand gradients */
       color: white;
       padding: 30px;
       text-align: center;
       border-radius: 5px;
       margin-bottom: 20px;
     }
+    /* Styling for individual chapter sections */
     .chapter-section {
       background: #ffffff;
       border: 1px solid #ddd;
@@ -55,17 +64,20 @@
       margin-bottom: 20px;
       box-shadow: 0 4px 6px rgba(0, 0, 0, 0.1);
     }
+    /* Button styling using the brand colours */
     .btn-primary {
-      background-color: #0056b3;
+      background-color: #776cca;
       border: none;
       transition: background-color 0.3s;
     }
     .btn-primary:hover {
-      background-color: #003d80;
+      background-color: #5fae8d; /* Brand colour: Health and Wellbeing */
     }
+    /* Progress bar styling */
     .progress-bar {
-      background-color: #0056b3;
+      background-color: #776cca;
     }
+    /* Styling for quiz container */
     .quiz-container {
       background: #f9f9f9;
       border: 1px solid #ddd;
@@ -77,6 +89,18 @@
     .quiz-question {
       font-weight: bold;
     }
+    /* Hidden sections for pagination */
+    .chapter-section {
+      display: none;
+    }
+    .chapter-section.active {
+      display: block;
+    }
+    /* Pagination buttons styling */
+    .pagination-buttons {
+      text-align: center;
+      margin-top: 20px;
+    }
   </style>
 </head>
 <body>
@@ -87,19 +111,19 @@
         <h2 class="text-center mb-4">eBook Chapters</h2>
         <ul class="nav flex-column">
           <li class="nav-item">
-            <a class="nav-link active" href="#intro" aria-current="page">Introduction</a>
+            <a class="nav-link active" href="#intro" onclick="showChapter(0)">Introduction</a>
           </li>
           <li class="nav-item">
-            <a class="nav-link" href="#chapter1">Chapter 1: Online Safety Basics</a>
+            <a class="nav-link" href="#chapter1" onclick="showChapter(1)">Chapter 1: Online Safety Basics</a>
           </li>
           <li class="nav-item">
-            <a class="nav-link" href="#chapter2">Chapter 2: Recognising Risks</a>
+            <a class="nav-link" href="#chapter2" onclick="showChapter(2)">Chapter 2: Recognising Risks</a>
           </li>
           <li class="nav-item">
-            <a class="nav-link" href="#chapter3">Chapter 3: Support Resources</a>
+            <a class="nav-link" href="#chapter3" onclick="showChapter(3)">Chapter 3: Support Resources</a>
           </li>
           <li class="nav-item">
-            <a class="nav-link" href="#quiz">Chapter 4: Quiz</a>
+            <a class="nav-link" href="#quiz" onclick="showChapter(4)">Chapter 4: Quiz</a>
           </li>
           <li class="nav-item mt-4">
             <a class="nav-link quick-exit" href="https://example.com">Quick Exit</a>
@@ -109,12 +133,7 @@
 
       <!-- Main Content Area -->
       <main class="col-12 col-md-9 col-lg-10 main-content">
-        <section class="hero">
-          <h1>Welcome to the eBook</h1>
-          <p>Navigate through the chapters using the menu on the left. Take breaks as needed, and revisit any section at your own pace.</p>
-        </section>
-
-        <section id="intro" class="chapter-section">
+        <section id="intro" class="chapter-section active">
           <h2>Introduction</h2>
           <p>This interactive eBook will guide you through essential online safety practices, helping you stay informed and secure online.</p>
         </section>
@@ -122,8 +141,10 @@
         <section id="chapter1" class="chapter-section">
           <h2>Chapter 1: Online Safety Basics</h2>
           <p>Learn about creating strong passwords, managing privacy settings, and identifying trustworthy websites.</p>
+          <!-- Button providing a quick tip -->
           <button class="btn btn-primary mt-3" onclick="alert('Tip: Use a mix of uppercase, lowercase, numbers, and special characters in your passwords!')">Quick Tip</button>
           <div class="progress mt-3">
+            <!-- Progress bar to show chapter completion -->
             <div class="progress-bar" role="progressbar" style="width: 33%;" aria-valuenow="33" aria-valuemin="0" aria-valuemax="100">33% Complete</div>
           </div>
         </section>
@@ -132,6 +153,7 @@
           <h2>Chapter 2: Recognising Risks</h2>
           <p>Explore common online threats such as phishing, scams, and cyberbullying. Understand how to spot and avoid them.</p>
           <div class="form-check">
+            <!-- Checkbox for user understanding -->
             <input class="form-check-input" type="checkbox" value="" id="exampleCheck1">
             <label class="form-check-label" for="exampleCheck1">
               I understand how to identify phishing emails.
@@ -164,14 +186,43 @@
               <input class="form-check-input" type="radio" name="q1" id="q1a3">
               <label class="form-check-label" for="q1a3">Use your birthday</label>
             </div>
+            <!-- Submit button for quiz question -->
             <button class="btn btn-primary mt-3" onclick="alert('Correct! Strong passwords include a mix of characters.')">Submit Answer</button>
           </div>
         </section>
+
+        <!-- Pagination Buttons -->
+        <div class="pagination-buttons">
+          <button class="btn btn-secondary" onclick="previousChapter()">Previous</button>
+          <button class="btn btn-secondary" onclick="nextChapter()">Next</button>
+        </div>
       </main>
     </div>
   </div>
 
   <!-- Bootstrap JS -->
   <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.3.0/dist/js/bootstrap.bundle.min.js"></script>
+  <script>
+    let currentChapter = 0;
+    const chapters = document.querySelectorAll('.chapter-section');
+
+    function showChapter(index) {
+      chapters[currentChapter].classList.remove('active');
+      currentChapter = index;
+      chapters[currentChapter].classList.add('active');
+    }
+
+    function nextChapter() {
+      if (currentChapter < chapters.length - 1) {
+        showChapter(currentChapter + 1);
+      }
+    }
+
+    function previousChapter() {
+      if (currentChapter > 0) {
+        showChapter(currentChapter - 1);
+      }
+    }
+  </script>
 </body>
 </html>
