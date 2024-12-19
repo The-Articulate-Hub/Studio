@@ -1,22 +1,76 @@
 <!DOCTYPE html>
 <html>
 <head>
-  <title>Kit Logging System</title>
+  <title>Kit Management System</title>
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <link href="https://fonts.googleapis.com/css2?family=Roboto:wght@400;700&display=swap" rel="stylesheet">
+  <style>
+    body {
+      font-family: 'Roboto', sans-serif;
+      background-color: #f4f4f9;
+      color: #333;
+      margin: 0;
+      padding: 0;
+    }
+    header {
+      background-color: #007BFF;
+      color: white;
+      padding: 20px;
+      text-align: center;
+    }
+    header img {
+      max-width: 100px;
+      margin-bottom: 10px;
+    }
+    footer {
+      text-align: center;
+      padding: 10px;
+      margin-top: 20px;
+      font-size: 0.9em;
+      background: #f1f1f1;
+    }
+    button {
+      background-color: #007BFF;
+      color: white;
+      border: none;
+      padding: 10px 20px;
+      cursor: pointer;
+      border-radius: 5px;
+      font-size: 1em;
+    }
+    button:hover {
+      background-color: #0056b3;
+    }
+    input, select {
+      padding: 10px;
+      margin: 10px 0;
+      width: 100%;
+      max-width: 400px;
+    }
+    form {
+      text-align: center;
+      margin: 20px;
+    }
+  </style>
 </head>
 <body>
-  <h1>Kit Management</h1>
+  <header>
+    <img src="https://lwfiles.mycourse.app/655b35fbfdce42739eabd7cf-public/e7bb21dceaac753035eba14d6abfd207.png" alt="Logo">
+    <h1>Kit Management System</h1>
+  </header>
   <form id="action-form">
     <label for="udid">Enter or Scan UDID:</label>
     <input type="text" id="udid" name="udid" required />
-    <br />
     <label for="action">Select Action:</label>
     <select id="action" name="action">
       <option value="Clock Out">Clock Out</option>
       <option value="Clock In">Clock In</option>
     </select>
-    <br />
     <button type="button" onclick="logAction()">Submit</button>
   </form>
+  <footer>
+    <p>© 2025 Your Organisation Name | <a href="https://yourwebsite.com">Visit Our Website</a></p>
+  </footer>
   <script>
     const scriptUrl = 'https://script.google.com/macros/s/1LQGvQ_Vte138jsAEfQb_jGIDFu1qgq1pJwkUlAx6RM2kYKRlLqyqQ86k/exec'; // Replace with your Apps Script URL
 
@@ -31,14 +85,10 @@
       })
         .then((response) => response.json())
         .then((data) => {
-          if (data.status === 'success') {
-            alert('Action logged successfully.');
-          } else {
-            alert('Error: ' + data.message);
-          }
+          alert(data.message);
         })
         .catch((error) => {
-          console.error('Error:', error);
+          alert('Error: ' + error.message);
         });
     }
   </script>
