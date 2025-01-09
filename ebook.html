@@ -8,13 +8,11 @@
   <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.3.0/dist/css/bootstrap.min.css" rel="stylesheet">
   <link href="https://fonts.googleapis.com/css2?family=Rubik:wght@400;500;700&display=swap" rel="stylesheet">
   <style>
-    /* General body styles for the eBook, including the use of Rubik font */
     body {
       font-family: 'Rubik', sans-serif;
       background-color: #f3f4f6;
       color: #333;
     }
-    /* Centered book-style layout */
     .ebook-container {
       max-width: 900px;
       margin: auto;
@@ -30,7 +28,6 @@
       text-align: center;
       padding: 20px;
     }
-    /* Page styling */
     .page {
       padding: 20px;
       display: none;
@@ -39,7 +36,6 @@
     .page.active {
       display: block;
     }
-    /* Navigation buttons */
     .navigation {
       display: flex;
       justify-content: space-between;
@@ -94,17 +90,49 @@
     .bookmark:hover {
       color: #5fae8d;
     }
+    .toast-message {
+      position: fixed;
+      bottom: 20px;
+      right: 20px;
+      background-color: #5fae8d;
+      color: white;
+      padding: 10px 20px;
+      border-radius: 5px;
+      box-shadow: 0 4px 10px rgba(0, 0, 0, 0.1);
+      animation: fadeOut 3s forwards;
+    }
+    @keyframes fadeOut {
+      0% { opacity: 1; }
+      100% { opacity: 0; }
+    }
   </style>
 </head>
 <body>
+  <!-- Side Navigation Menu -->
+  <div class="offcanvas offcanvas-start" id="sideNav" tabindex="-1">
+    <div class="offcanvas-header">
+      <h5>Chapter Navigation</h5>
+      <button type="button" class="btn-close" data-bs-dismiss="offcanvas"></button>
+    </div>
+    <div class="offcanvas-body">
+      <button class="btn btn-link" onclick="showPage(0)">Introduction</button>
+      <button class="btn btn-link" onclick="showPage(1)">Chapter 1</button>
+      <button class="btn btn-link" onclick="showPage(2)">Chapter 2</button>
+      <button class="btn btn-link" onclick="showPage(3)">Chapter 3</button>
+      <button class="btn btn-link" onclick="showPage(4)">Quiz</button>
+    </div>
+  </div>
+
   <div class="ebook-container">
     <div class="ebook-header">
       <h1>Interactive eBook</h1>
       <p>Navigate through chapters like flipping pages in a book!</p>
       <span class="bookmark" id="bookmark">🔖</span>
+      <button class="btn btn-light" type="button" data-bs-toggle="offcanvas" data-bs-target="#sideNav">
+        Open Navigation
+      </button>
     </div>
 
-    <!-- Book pages -->
     <div class="page active" id="page-intro">
       <h2>Introduction</h2>
       <p>This interactive eBook will guide you through essential online safety practices, helping you stay informed and secure online.</p>
@@ -144,7 +172,6 @@
       </div>
     </div>
 
-    <!-- Progress bar -->
     <div class="progress-container">
       <div class="progress-bar">
         <div class="progress-bar-inner" id="progress-bar"></div>
@@ -152,14 +179,12 @@
       <div class="progress-text" id="progress-text">0% Complete</div>
     </div>
 
-    <!-- Navigation buttons -->
     <div class="navigation">
       <button id="prev-btn" onclick="prevPage()">Previous</button>
       <button id="next-btn" onclick="nextPage()">Next</button>
     </div>
   </div>
 
-  <!-- JavaScript for page navigation, progress tracking, and bookmarking -->
   <script>
     const pages = document.querySelectorAll('.page');
     const progressBar = document.getElementById('progress-bar');
@@ -185,9 +210,9 @@
     }
 
     function showPage(index) {
-      pages[currentPage].classList.remove('active');
+      pages.forEach(page => page.classList.remove('active'));
+      pages[index].classList.add('active');
       currentPage = index;
-      pages[currentPage].classList.add('active');
       updateProgress();
       updateButtons();
     }
@@ -206,12 +231,17 @@
 
     bookmark.addEventListener('click', () => {
       localStorage.setItem('savedPage', currentPage);
-      alert('Bookmark saved!');
+      const toast = document.createElement('div');
+      toast.innerText = 'Bookmark Saved!';
+      toast.classList.add('toast-message');
+      document.body.appendChild(toast);
+      setTimeout(() => toast.remove(), 3000);
     });
 
-    // Initialize progress bar and buttons
     updateProgress();
     updateButtons();
   </script>
+
+  <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.3.0/dist/js/bootstrap.bundle.min.js"></script>
 </body>
 </html>
