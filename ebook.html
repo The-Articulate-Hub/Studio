@@ -3,7 +3,7 @@
 <head>
   <meta charset="UTF-8">
   <meta name="viewport" content="width=device-width, initial-scale=1.0">
-  <title>Interactive eBook</title>
+  <title>Interactive eBook - Full Content Experience</title>
   <!-- Bootstrap CSS -->
   <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.3.0/dist/css/bootstrap.min.css" rel="stylesheet">
   <link href="https://fonts.googleapis.com/css2?family=Rubik:wght@400;500;700&display=swap" rel="stylesheet">
@@ -123,10 +123,12 @@
     <div class="side-nav">
       <h5>Chapters</h5>
       <button onclick="showPage(0)" id="nav-0">Introduction</button>
-      <button onclick="showPage(1)" id="nav-1">Chapter 1</button>
-      <button onclick="showPage(2)" id="nav-2">Chapter 2</button>
-      <button onclick="showPage(3)" id="nav-3">Chapter 3</button>
-      <button onclick="showPage(4)" id="nav-4">Quiz</button>
+      <button onclick="showPage(1)" id="nav-1">Chapter 1: Online Safety Basics</button>
+      <button onclick="showPage(2)" id="nav-2">Chapter 2: Recognising Risks</button>
+      <button onclick="showPage(3)" id="nav-3">Chapter 3: Support Resources</button>
+      <button onclick="showPage(4)" id="nav-4">Quiz: Test Your Knowledge</button>
+      <button onclick="showPage(5)" id="nav-5">Extra Resources</button>
+      <button onclick="showPage(6)" id="nav-6">Discussion and Reflection</button>
     </div>
 
     <div class="ebook-content">
@@ -138,25 +140,31 @@
       <div class="page active" id="page-intro">
         <h2>Introduction</h2>
         <p>Welcome to your interactive eBook. This guide will walk you through the basics of online safety to keep you informed and protected online.</p>
+        <p><strong>Did you know?</strong> Your digital footprint is like a shadow—you can’t always see it, but it follows you everywhere online.</p>
       </div>
 
       <div class="page" id="page-chapter1">
         <h2>Chapter 1: Online Safety Basics</h2>
         <p>Learn how to create strong passwords, manage privacy settings, and identify trustworthy websites.</p>
-        <button class="btn btn-primary mt-3">Quick Tip: Use a mix of characters in your passwords!</button>
+        <ul>
+          <li>Understand privacy controls on social media platforms.</li>
+          <li>Identify phishing attempts and suspicious messages.</li>
+        </ul>
+        <p><em>Tip:</em> Use a password manager to keep track of your login details securely.</p>
       </div>
 
       <div class="page" id="page-chapter2">
         <h2>Chapter 2: Recognising Risks</h2>
-        <p>Understand how to spot phishing attempts, scams, and online harassment.</p>
+        <p>Explore how to spot online scams and avoid cyberbullying. This section includes real-world examples and reflective prompts.</p>
       </div>
 
       <div class="page" id="page-chapter3">
         <h2>Chapter 3: Support Resources</h2>
-        <p>Get a list of resources to seek help when facing online threats.</p>
+        <p>Here’s a list of resources to help you when facing online threats:</p>
         <ul>
           <li><a href="#">Helpline Directory</a></li>
           <li><a href="#">Guide to Reporting Issues</a></li>
+          <li><a href="#">Mental Health Support Links</a></li>
         </ul>
       </div>
 
@@ -175,6 +183,22 @@
         <div class="mt-4" id="quiz-result" style="display: none;">
           <p><strong>Result:</strong> <span id="quiz-feedback"></span></p>
         </div>
+      </div>
+
+      <div class="page" id="page-resources">
+        <h2>Extra Resources</h2>
+        <p>Explore additional content, including:</p>
+        <ul>
+          <li>Downloadable PDFs on online safety tips</li>
+          <li>Links to recommended blog posts and digital wellbeing videos</li>
+        </ul>
+      </div>
+
+      <div class="page" id="page-discussion">
+        <h2>Discussion and Reflection</h2>
+        <p>Share your thoughts and experiences:</p>
+        <textarea class="form-control mb-3" placeholder="Type your reflection here..."></textarea>
+        <button class="btn btn-primary">Submit Reflection</button>
       </div>
 
       <div class="progress-container">
@@ -210,7 +234,7 @@
     }
 
     function updateProgress() {
-      const progress = ((currentPage - 1 + 1) / (pages.length - 1)) * 100; // Progress starts from Chapter 1
+      const progress = ((currentPage - 1 + 1) / (pages.length - 1)) * 100;
       progressBar.style.width = `${Math.max(progress, 0)}%`;
       progressText.textContent = `${Math.round(progress)}% Complete`;
     }
@@ -264,7 +288,6 @@
       }
     });
 
-    // Initialize to show the correct page and progress
     showPage(currentPage);
   </script>
 
