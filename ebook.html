@@ -12,19 +12,32 @@
       font-family: 'Rubik', sans-serif;
       background-color: #f8f9fa;
       margin: 0;
+      display: flex;
+      justify-content: center;
+      align-items: center;
+      height: 100vh;
     }
     .ebook-container {
+      width: 70%;
+      max-width: 900px;
+      height: 90%;
       display: flex;
-      height: 100vh;
+      border-radius: 10px;
+      box-shadow: 0 8px 16px rgba(0, 0, 0, 0.1);
       overflow: hidden;
+      position: relative;
+      background-color: #fff;
     }
     .side-nav {
-      width: 300px;
+      width: 250px;
       background-color: #fff;
       padding: 20px;
       border-right: 1px solid #ddd;
       overflow-y: auto;
-      box-shadow: 0 0 10px rgba(0, 0, 0, 0.1);
+      transition: transform 0.3s ease;
+    }
+    .side-nav.closed {
+      transform: translateX(-250px);
     }
     .side-nav h5 {
       font-size: 20px;
@@ -50,6 +63,17 @@
     .side-nav button.active {
       background-color: #776cca;
       color: white;
+    }
+    .toggle-nav-btn {
+      position: absolute;
+      top: 10px;
+      left: 10px;
+      background-color: #776cca;
+      border: none;
+      color: white;
+      padding: 8px 12px;
+      border-radius: 5px;
+      cursor: pointer;
     }
     .ebook-content {
       flex-grow: 1;
@@ -120,15 +144,19 @@
 </head>
 <body>
   <div class="ebook-container">
-    <div class="side-nav">
+    <button class="toggle-nav-btn" onclick="toggleNavBar()">Toggle Navigation</button>
+    <div class="side-nav" id="sideNav">
       <h5>Chapters</h5>
       <button onclick="showPage(0)" id="nav-0">Introduction</button>
       <button onclick="showPage(1)" id="nav-1">Chapter 1: Online Safety Basics</button>
       <button onclick="showPage(2)" id="nav-2">Chapter 2: Recognising Risks</button>
       <button onclick="showPage(3)" id="nav-3">Chapter 3: Support Resources</button>
       <button onclick="showPage(4)" id="nav-4">Quiz: Test Your Knowledge</button>
-      <button onclick="showPage(5)" id="nav-5">Extra Resources</button>
-      <button onclick="showPage(6)" id="nav-6">Discussion and Reflection</button>
+      <button onclick="showPage(5)" id="nav-5">Online Etiquette and Digital Wellbeing</button>
+      <button onclick="showPage(6)" id="nav-6">Safe Social Media Practices</button>
+      <button onclick="showPage(7)" id="nav-7">Understanding Online Privacy</button>
+      <button onclick="showPage(8)" id="nav-8">Avoiding Online Scams</button>
+      <button onclick="showPage(9)" id="nav-9">Healthy Digital Habits</button>
     </div>
 
     <div class="ebook-content">
@@ -185,20 +213,29 @@
         </div>
       </div>
 
-      <div class="page" id="page-resources">
-        <h2>Extra Resources</h2>
-        <p>Explore additional content, including:</p>
-        <ul>
-          <li>Downloadable PDFs on online safety tips</li>
-          <li>Links to recommended blog posts and digital wellbeing videos</li>
-        </ul>
+      <div class="page" id="page-online-etiquette">
+        <h2>Chapter 5: Online Etiquette and Digital Wellbeing</h2>
+        <p>Learn the importance of respectful communication online and how to maintain your mental health in the digital world.</p>
       </div>
 
-      <div class="page" id="page-discussion">
-        <h2>Discussion and Reflection</h2>
-        <p>Share your thoughts and experiences:</p>
-        <textarea class="form-control mb-3" placeholder="Type your reflection here..."></textarea>
-        <button class="btn btn-primary">Submit Reflection</button>
+      <div class="page" id="page-social-media-practices">
+        <h2>Chapter 6: Safe Social Media Practices</h2>
+        <p>Understand how to safely use social media platforms, manage your privacy, and avoid oversharing.</p>
+      </div>
+
+      <div class="page" id="page-privacy">
+        <h2>Chapter 7: Understanding Online Privacy</h2>
+        <p>Discover how to protect your personal information online and understand privacy policies and terms of service.</p>
+      </div>
+
+      <div class="page" id="page-scams">
+        <h2>Chapter 8: Avoiding Online Scams</h2>
+        <p>Explore real-life examples of online scams and learn tips on how to identify and avoid them.</p>
+      </div>
+
+      <div class="page" id="page-digital-habits">
+        <h2>Chapter 9: Healthy Digital Habits</h2>
+        <p>Learn how to balance screen time, practice digital mindfulness, and create healthy routines that support your overall wellbeing.</p>
       </div>
 
       <div class="progress-container">
@@ -220,14 +257,17 @@
     const navButtons = document.querySelectorAll('.side-nav button');
     const progressBar = document.getElementById('progress-bar');
     const progressText = document.getElementById('progress-text');
+    const sideNav = document.getElementById('sideNav');
     let currentPage = 0;
 
-    // Automatically save the current page in localStorage
+    function toggleNavBar() {
+      sideNav.classList.toggle('closed');
+    }
+
     window.addEventListener('beforeunload', () => {
       localStorage.setItem('savedPage', currentPage);
     });
 
-    // Load saved page from localStorage
     const savedPage = localStorage.getItem('savedPage');
     if (savedPage !== null && savedPage >= 1 && savedPage < pages.length) {
       currentPage = parseInt(savedPage);
