@@ -1,0 +1,218 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>Interactive eBook - Enhanced UX</title>
+  <!-- Bootstrap CSS -->
+  <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.3.0/dist/css/bootstrap.min.css" rel="stylesheet">
+  <link href="https://fonts.googleapis.com/css2?family=Rubik:wght@400;500;700&display=swap" rel="stylesheet">
+  <script src="https://website-widgets.pages.dev/dist/sienna.min.js" defer></script>
+  <style>
+    body {
+      font-family: 'Rubik', sans-serif;
+      background-color: #f5f6fa;
+      margin: 0;
+      height: 100vh;
+      display: flex;
+      justify-content: center;
+      align-items: center;
+      overflow: hidden;
+    }
+    .ebook-container {
+      width: 70%;
+      height: 90vh;
+      max-width: 800px;
+      background: linear-gradient(135deg, #fdfbfb, #ebedee);
+      border-radius: 15px;
+      box-shadow: 0 10px 20px rgba(0, 0, 0, 0.15);
+      overflow: hidden;
+      display: flex;
+      flex-direction: column;
+    }
+    .side-nav {
+      background-color: #fff;
+      padding: 20px;
+      border-right: 2px solid #e0e0e0;
+      overflow-y: auto;
+      width: 20%;
+      display: flex;
+      flex-direction: column;
+      gap: 10px;
+      max-height: 100%;
+      overflow-y: scroll;
+      transition: all 0.3s ease;
+    }
+    .side-nav.closed {
+      display: none;
+    }
+    .toggle-nav-btn {
+      background-color: #776cca;
+      border: none;
+      color: white;
+      padding: 8px 16px;
+      font-size: 16px;
+      border-radius: 8px;
+      margin: 10px;
+      cursor: pointer;
+      align-self: flex-start;
+    }
+    .ebook-content {
+      flex: 1;
+      padding: 20px;
+      overflow-y: auto;
+    }
+    .page {
+      display: none;
+      padding: 20px;
+      background-color: #f8f9fa;
+      border-radius: 10px;
+      box-shadow: 0 4px 10px rgba(0, 0, 0, 0.1);
+    }
+    .page.active {
+      display: block;
+    }
+    .ebook-header {
+      background-color: #4c5ec5;
+      color: white;
+      text-align: center;
+      padding: 20px;
+      border-radius: 15px 15px 0 0;
+    }
+    .progress-container {
+      margin-top: 20px;
+    }
+    .progress-bar {
+      width: 100%;
+      height: 10px;
+      background-color: #ddd;
+      border-radius: 5px;
+    }
+    .progress-bar-inner {
+      height: 100%;
+      background-color: #4c5ec5;
+      width: 0%;
+      border-radius: 5px;
+      transition: width 0.3s;
+    }
+    .navigation {
+      display: flex;
+      justify-content: space-between;
+      margin-top: 20px;
+    }
+    .navigation button {
+      padding: 10px 20px;
+      background-color: #776cca;
+      border: none;
+      color: white;
+      border-radius: 5px;
+      cursor: pointer;
+      font-size: 16px;
+      transition: background-color 0.3s;
+    }
+    .navigation button:hover {
+      background-color: #5fae8d;
+    }
+    .navigation button:disabled {
+      background-color: #ccc;
+      cursor: not-allowed;
+    }
+  </style>
+</head>
+<body>
+  <div class="ebook-container">
+    <div class="d-flex">
+      <button class="toggle-nav-btn" onclick="toggleNavBar()">Toggle Chapters</button>
+      <div class="side-nav" id="sideNav">
+        <h5>Chapters</h5>
+        <button onclick="showPage(0)" id="nav-0">Introduction</button>
+        <button onclick="showPage(1)" id="nav-1">Chapter 1: Online Safety Basics</button>
+        <button onclick="showPage(2)" id="nav-2">Chapter 2: Recognising Risks</button>
+        <button onclick="showPage(3)" id="nav-3">Chapter 3: Support Resources</button>
+        <button onclick="showPage(4)" id="nav-4">Quiz: Test Your Knowledge</button>
+      </div>
+    </div>
+
+    <div class="ebook-content">
+      <div class="ebook-header">
+        <h1>Interactive eBook</h1>
+        <p>A seamless and immersive reading experience.</p>
+      </div>
+
+      <div class="page active" id="page-intro">
+        <h2>Introduction</h2>
+        <p>Welcome to your interactive eBook. This guide will walk you through the basics of online safety.</p>
+      </div>
+
+      <div class="page" id="page-chapter1">
+        <h2>Chapter 1: Online Safety Basics</h2>
+        <p>Learn how to create strong passwords and identify trustworthy websites.</p>
+      </div>
+
+      <div class="page" id="page-chapter2">
+        <h2>Chapter 2: Recognising Risks</h2>
+        <p>Spot online scams and avoid cyberbullying with real-world examples.</p>
+      </div>
+
+      <div class="page" id="page-chapter3">
+        <h2>Chapter 3: Support Resources</h2>
+        <p>Here’s a list of resources to help you when facing online threats.</p>
+      </div>
+
+      <div class="progress-container">
+        <div class="progress-bar">
+          <div class="progress-bar-inner" id="progress-bar"></div>
+        </div>
+        <p class="text-center mt-2" id="progress-text">0% Complete</p>
+      </div>
+
+      <div class="navigation">
+        <button id="prev-btn" onclick="prevPage()" disabled title="This is the first page, you can't go back.">Previous</button>
+        <button id="next-btn" onclick="nextPage()">Next</button>
+      </div>
+    </div>
+  </div>
+
+  <script>
+    const pages = document.querySelectorAll('.page');
+    const sideNav = document.getElementById('sideNav');
+    let currentPage = 0;
+
+    function toggleNavBar() {
+      sideNav.classList.toggle('closed');
+    }
+
+    function showPage(index) {
+      pages.forEach((page, i) => page.classList.toggle('active', i === index));
+      currentPage = index;
+      updateProgress();
+      updateNavButtons();
+    }
+
+    function updateProgress() {
+      const progress = ((currentPage + 1) / pages.length) * 100;
+      document.getElementById('progress-bar').style.width = `${progress}%`;
+      document.getElementById('progress-text').innerText = `${Math.round(progress)}% Complete`;
+    }
+
+    function updateNavButtons() {
+      document.getElementById('prev-btn').disabled = currentPage === 0;
+      document.getElementById('next-btn').disabled = currentPage === pages.length - 1;
+    }
+
+    function nextPage() {
+      if (currentPage < pages.length - 1) {
+        showPage(currentPage + 1);
+      }
+    }
+
+    function prevPage() {
+      if (currentPage > 0) {
+        showPage(currentPage - 1);
+      }
+    }
+
+    showPage(currentPage);
+  </script>
+</body>
+</html>
