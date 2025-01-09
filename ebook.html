@@ -13,116 +13,71 @@
       font-family: 'Rubik', sans-serif;
       background-color: #f5f6fa;
       margin: 0;
+      height: 100vh;
       display: flex;
       justify-content: center;
       align-items: center;
-      height: 100vh;
       overflow: hidden;
     }
     .ebook-container {
-      width: 100%;
-      max-width: 900px;
-      height: 95vh;
-      border-radius: 20px;
-      box-shadow: 0 12px 24px rgba(0, 0, 0, 0.15);
-      background-color: #fff;
-      display: grid;
-      grid-template-columns: 1fr;
-    }
-    .side-nav {
-      width: 250px;
-      background-color: #fff;
-      padding: 20px;
-      border-right: 1px solid #ddd;
-      overflow-y: auto;
-      transition: all 0.3s ease-in-out;
-    }
-    .side-nav.closed {
-      transform: translateX(-260px);
-    }
-    .side-nav h5 {
-      font-size: 20px;
-      margin-bottom: 20px;
-      text-align: center;
-    }
-    .side-nav button {
-      display: block;
-      width: 100%;
-      background: transparent;
-      border: none;
-      font-size: 16px;
-      padding: 12px;
-      margin-bottom: 8px;
-      border-radius: 8px;
-      text-align: left;
-      cursor: pointer;
-      transition: background-color 0.3s;
-    }
-    .side-nav button:hover {
-      background-color: #ececec;
-    }
-    .side-nav button.active {
-      background-color: #776cca;
-      color: white;
-    }
-    .toggle-nav-btn {
-      position: absolute;
-      top: 10px;
-      left: 10px;
-      background-color: #776cca;
-      border: none;
-      color: white;
-      padding: 8px 12px;
-      border-radius: 5px;
-      cursor: pointer;
-      z-index: 10;
-    }
-    .toggle-nav-btn:hover {
-      background-color: #5f89c9;
-    }
-    .ebook-content {
-      padding: 30px;
-      overflow-y: auto;
+      width: 70%;
+      height: 90vh;
+      max-width: 800px;
+      background-color: white;
+      border-radius: 15px;
+      box-shadow: 0 10px 20px rgba(0, 0, 0, 0.15);
+      overflow: hidden;
       display: flex;
       flex-direction: column;
-      justify-content: space-between;
     }
-    .ebook-header {
-      background: linear-gradient(135deg, #4c5ec5, #7bc4f7);
-      color: white;
-      text-align: center;
+    .side-nav {
+      background-color: #fff;
       padding: 20px;
-      border-radius: 15px;
-      margin-bottom: 20px;
-      font-size: 1.5rem;
+      border-right: 2px solid #e0e0e0;
+      overflow-y: auto;
+      width: 20%;
+      display: flex;
+      flex-direction: column;
+      gap: 10px;
+      max-height: 100%;
+      overflow-y: scroll;
+      transition: all 0.3s ease;
+    }
+    .side-nav.closed {
+      display: none;
+    }
+    .toggle-nav-btn {
+      background-color: #776cca;
+      border: none;
+      color: white;
+      padding: 8px 16px;
+      font-size: 16px;
+      border-radius: 8px;
+      margin: 10px;
+      cursor: pointer;
+      align-self: flex-start;
+    }
+    .ebook-content {
+      flex: 1;
+      padding: 20px;
+      overflow-y: auto;
     }
     .page {
       display: none;
       padding: 20px;
-      border-radius: 8px;
-      background-color: #f7f7f9;
-      box-shadow: 0 4px 8px rgba(0, 0, 0, 0.05);
+      background-color: #f8f9fa;
+      border-radius: 10px;
+      box-shadow: 0 4px 10px rgba(0, 0, 0, 0.1);
     }
     .page.active {
       display: block;
     }
-    .navigation {
-      display: flex;
-      justify-content: space-between;
-      margin-top: 20px;
-    }
-    .navigation button {
-      background-color: #776cca;
-      border: none;
+    .ebook-header {
+      background-color: #4c5ec5;
       color: white;
-      padding: 12px 24px;
-      border-radius: 5px;
-      font-size: 16px;
-      cursor: pointer;
-      transition: background 0.3s;
-    }
-    .navigation button:hover {
-      background-color: #5fae8d;
+      text-align: center;
+      padding: 20px;
+      border-radius: 15px 15px 0 0;
     }
     .progress-container {
       margin-top: 20px;
@@ -130,84 +85,81 @@
     .progress-bar {
       width: 100%;
       height: 10px;
-      background-color: #e0e0e0;
-      border-radius: 4px;
-      overflow: hidden;
+      background-color: #ddd;
+      border-radius: 5px;
     }
     .progress-bar-inner {
       height: 100%;
-      background-color: #4a61c1;
+      background-color: #4c5ec5;
       width: 0%;
-      transition: width 0.4s ease;
+      border-radius: 5px;
+      transition: width 0.3s;
     }
-    .progress-text {
-      margin-top: 10px;
-      font-size: 14px;
-      text-align: center;
+    .navigation {
+      display: flex;
+      justify-content: space-between;
+      margin-top: 20px;
+    }
+    .navigation button {
+      padding: 10px 20px;
+      background-color: #776cca;
+      border: none;
+      color: white;
+      border-radius: 5px;
+      cursor: pointer;
+      font-size: 16px;
+      transition: background-color 0.3s;
+    }
+    .navigation button:hover {
+      background-color: #5fae8d;
     }
   </style>
 </head>
 <body>
   <div class="ebook-container">
-    <button class="toggle-nav-btn" onclick="toggleNavBar()">📚 Toggle Navigation</button>
-    <div class="side-nav" id="sideNav">
-      <h5>Chapters</h5>
-      <button onclick="showPage(0)" id="nav-0">Introduction</button>
-      <button onclick="showPage(1)" id="nav-1">Chapter 1: Online Safety Basics</button>
-      <button onclick="showPage(2)" id="nav-2">Chapter 2: Recognising Risks</button>
-      <button onclick="showPage(3)" id="nav-3">Chapter 3: Support Resources</button>
-      <button onclick="showPage(4)" id="nav-4">Quiz: Test Your Knowledge</button>
-      <button onclick="showPage(5)" id="nav-5">Online Etiquette and Digital Wellbeing</button>
-      <button onclick="showPage(6)" id="nav-6">Safe Social Media Practices</button>
-      <button onclick="showPage(7)" id="nav-7">Understanding Online Privacy</button>
-      <button onclick="showPage(8)" id="nav-8">Avoiding Online Scams</button>
-      <button onclick="showPage(9)" id="nav-9">Healthy Digital Habits</button>
+    <div class="d-flex">
+      <button class="toggle-nav-btn" onclick="toggleNavBar()">Toggle Chapters</button>
+      <div class="side-nav" id="sideNav">
+        <h5>Chapters</h5>
+        <button onclick="showPage(0)" id="nav-0">Introduction</button>
+        <button onclick="showPage(1)" id="nav-1">Chapter 1: Online Safety Basics</button>
+        <button onclick="showPage(2)" id="nav-2">Chapter 2: Recognising Risks</button>
+        <button onclick="showPage(3)" id="nav-3">Chapter 3: Support Resources</button>
+        <button onclick="showPage(4)" id="nav-4">Quiz: Test Your Knowledge</button>
+      </div>
     </div>
 
     <div class="ebook-content">
       <div class="ebook-header">
         <h1>Interactive eBook</h1>
-        <p>A seamless and immersive reading experience with practical online safety tips.</p>
+        <p>A seamless and immersive reading experience.</p>
       </div>
 
       <div class="page active" id="page-intro">
         <h2>Introduction</h2>
-        <p>Welcome to your interactive eBook. This guide will walk you through the basics of online safety to keep you informed and protected online.</p>
-        <p><strong>Did you know?</strong> Your digital footprint is like a shadow—you can’t always see it, but it follows you everywhere online.</p>
+        <p>Welcome to your interactive eBook. This guide will walk you through the basics of online safety.</p>
       </div>
 
       <div class="page" id="page-chapter1">
         <h2>Chapter 1: Online Safety Basics</h2>
-        <p>Learn how to create strong passwords, manage privacy settings, and identify trustworthy websites.</p>
-        <ul>
-          <li>Understand privacy controls on social media platforms.</li>
-          <li>Identify phishing attempts and suspicious messages.</li>
-          <li>Secure your email and accounts with two-factor authentication.</li>
-        </ul>
-        <p><em>Tip:</em> Use a password manager to keep track of your login details securely.</p>
+        <p>Learn how to create strong passwords and identify trustworthy websites.</p>
       </div>
 
       <div class="page" id="page-chapter2">
         <h2>Chapter 2: Recognising Risks</h2>
-        <p>Explore how to spot online scams, fake news, and avoid cyberbullying. This section includes real-world examples and reflective prompts.</p>
-        <p>Always verify sources before clicking on links.</p>
+        <p>Spot online scams and avoid cyberbullying with real-world examples.</p>
       </div>
 
       <div class="page" id="page-chapter3">
         <h2>Chapter 3: Support Resources</h2>
-        <p>Here’s a list of resources to help you when facing online threats:</p>
-        <ul>
-          <li><a href="#">Helpline Directory</a></li>
-          <li><a href="#">Guide to Reporting Issues</a></li>
-          <li><a href="#">Mental Health Support Links</a></li>
-        </ul>
+        <p>Here’s a list of resources to help you when facing online threats.</p>
       </div>
 
       <div class="progress-container">
         <div class="progress-bar">
           <div class="progress-bar-inner" id="progress-bar"></div>
         </div>
-        <div class="progress-text" id="progress-text">0% Complete</div>
+        <p class="text-center mt-2" id="progress-text">0% Complete</p>
       </div>
 
       <div class="navigation">
@@ -219,9 +171,6 @@
 
   <script>
     const pages = document.querySelectorAll('.page');
-    const navButtons = document.querySelectorAll('.side-nav button');
-    const progressBar = document.getElementById('progress-bar');
-    const progressText = document.getElementById('progress-text');
     const sideNav = document.getElementById('sideNav');
     let currentPage = 0;
 
@@ -229,33 +178,16 @@
       sideNav.classList.toggle('closed');
     }
 
-    window.addEventListener('beforeunload', () => {
-      localStorage.setItem('savedPage', currentPage);
-    });
-
-    const savedPage = localStorage.getItem('savedPage');
-    if (savedPage !== null && savedPage >= 1 && savedPage < pages.length) {
-      currentPage = parseInt(savedPage);
+    function showPage(index) {
+      pages.forEach((page, i) => page.classList.toggle('active', i === index));
+      currentPage = index;
+      updateProgress();
     }
 
     function updateProgress() {
-      const progress = ((currentPage) / (pages.length - 1)) * 100;
-      progressBar.style.width = `${Math.max(progress, 0)}%`;
-      progressText.textContent = `${Math.round(progress)}% Complete`;
-    }
-
-    function updateNavButtons() {
-      navButtons.forEach((btn, index) => {
-        btn.classList.toggle('active', index === currentPage);
-      });
-    }
-
-    function showPage(index) {
-      pages.forEach(page => page.classList.remove('active'));
-      pages[index].classList.add('active');
-      currentPage = index;
-      updateProgress();
-      updateNavButtons();
+      const progress = ((currentPage + 1) / pages.length) * 100;
+      document.getElementById('progress-bar').style.width = `${progress}%`;
+      document.getElementById('progress-text').innerText = `${Math.round(progress)}% Complete`;
     }
 
     function nextPage() {
@@ -269,14 +201,6 @@
         showPage(currentPage - 1);
       }
     }
-
-    navButtons.forEach((btn, index) => {
-      btn.addEventListener('click', () => showPage(index));
-    });
-
-    showPage(currentPage);
   </script>
-
-  <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.3.0/dist/js/bootstrap.bundle.min.js"></script>
 </body>
 </html>
