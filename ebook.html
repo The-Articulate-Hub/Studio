@@ -12,26 +12,66 @@
       font-family: 'Rubik', sans-serif;
       background-color: #f3f4f6;
       color: #333;
+      display: flex;
+      height: 100vh;
+      margin: 0;
     }
     .ebook-container {
-      max-width: 900px;
-      margin: auto;
-      background: #fff;
+      display: flex;
+      width: 100%;
+    }
+    .side-nav {
+      width: 250px;
+      background-color: #fff;
+      border-right: 2px solid #ddd;
+      padding: 20px;
+      height: 100vh;
+      position: sticky;
+      top: 0;
+    }
+    .side-nav h5 {
+      text-align: center;
+      margin-bottom: 20px;
+    }
+    .side-nav button {
+      width: 100%;
+      padding: 12px;
+      margin-bottom: 10px;
+      border: none;
+      background-color: #f3f4f6;
+      font-size: 16px;
+      color: #333;
+      text-align: left;
+      cursor: pointer;
+      border-radius: 5px;
+      transition: background 0.3s;
+    }
+    .side-nav button.active {
+      background-color: #776cca;
+      color: white;
+    }
+    .side-nav button:hover {
+      background-color: #5fae8d;
+      color: white;
+    }
+    .ebook-content {
+      flex-grow: 1;
+      padding: 40px;
+      overflow-y: auto;
+      background-color: #fff;
       border-radius: 10px;
       box-shadow: 0 4px 10px rgba(0, 0, 0, 0.1);
-      overflow: hidden;
-      position: relative;
     }
     .ebook-header {
       background: linear-gradient(135deg, #776cca, #53aec9);
       color: white;
       text-align: center;
       padding: 20px;
+      border-radius: 10px;
     }
     .page {
-      padding: 20px;
       display: none;
-      min-height: 400px;
+      padding: 20px;
     }
     .page.active {
       display: block;
@@ -39,8 +79,7 @@
     .navigation {
       display: flex;
       justify-content: space-between;
-      padding: 10px 20px;
-      background: #f9f9f9;
+      margin-top: 20px;
     }
     .navigation button {
       background: #776cca;
@@ -56,17 +95,14 @@
       background: #5fae8d;
     }
     .progress-container {
-      display: flex;
-      align-items: center;
       margin-top: 20px;
     }
     .progress-bar {
-      flex: 1;
+      width: 100%;
       height: 10px;
       background-color: #e0e0e0;
       border-radius: 5px;
       overflow: hidden;
-      position: relative;
     }
     .progress-bar-inner {
       height: 100%;
@@ -75,133 +111,118 @@
       transition: width 0.3s ease;
     }
     .progress-text {
-      margin-left: 15px;
+      margin-top: 10px;
       font-size: 14px;
-      color: #333;
+      text-align: center;
     }
     .bookmark {
       position: absolute;
-      top: 10px;
-      right: 20px;
+      top: 20px;
+      right: 40px;
       cursor: pointer;
-      color: #776cca;
-      font-size: 24px;
-    }
-    .bookmark:hover {
-      color: #5fae8d;
-    }
-    .toast-message {
-      position: fixed;
-      bottom: 20px;
-      right: 20px;
-      background-color: #5fae8d;
       color: white;
-      padding: 10px 20px;
-      border-radius: 5px;
-      box-shadow: 0 4px 10px rgba(0, 0, 0, 0.1);
-      animation: fadeOut 3s forwards;
-    }
-    @keyframes fadeOut {
-      0% { opacity: 1; }
-      100% { opacity: 0; }
+      font-size: 24px;
     }
   </style>
 </head>
 <body>
-  <!-- Side Navigation Menu -->
-  <div class="offcanvas offcanvas-start" id="sideNav" tabindex="-1">
-    <div class="offcanvas-header">
-      <h5>Chapter Navigation</h5>
-      <button type="button" class="btn-close" data-bs-dismiss="offcanvas"></button>
-    </div>
-    <div class="offcanvas-body">
-      <button class="btn btn-link" onclick="showPage(0)">Introduction</button>
-      <button class="btn btn-link" onclick="showPage(1)">Chapter 1</button>
-      <button class="btn btn-link" onclick="showPage(2)">Chapter 2</button>
-      <button class="btn btn-link" onclick="showPage(3)">Chapter 3</button>
-      <button class="btn btn-link" onclick="showPage(4)">Quiz</button>
-    </div>
-  </div>
-
   <div class="ebook-container">
-    <div class="ebook-header">
-      <h1>Interactive eBook</h1>
-      <p>Navigate through chapters like flipping pages in a book!</p>
-      <span class="bookmark" id="bookmark">🔖</span>
-      <button class="btn btn-light" type="button" data-bs-toggle="offcanvas" data-bs-target="#sideNav">
-        Open Navigation
-      </button>
+    <div class="side-nav">
+      <h5>Chapters</h5>
+      <button onclick="showPage(0)" id="nav-0">Introduction</button>
+      <button onclick="showPage(1)" id="nav-1">Chapter 1</button>
+      <button onclick="showPage(2)" id="nav-2">Chapter 2</button>
+      <button onclick="showPage(3)" id="nav-3">Chapter 3</button>
+      <button onclick="showPage(4)" id="nav-4">Quiz</button>
     </div>
 
-    <div class="page active" id="page-intro">
-      <h2>Introduction</h2>
-      <p>This interactive eBook will guide you through essential online safety practices, helping you stay informed and secure online.</p>
-    </div>
+    <div class="ebook-content">
+      <div class="ebook-header">
+        <h1>Interactive eBook</h1>
+        <p>Navigate through chapters like flipping pages in a book!</p>
+        <span class="bookmark" id="bookmark">🔖</span>
+      </div>
 
-    <div class="page" id="page-chapter1">
-      <h2>Chapter 1: Online Safety Basics</h2>
-      <p>Learn about creating strong passwords, managing privacy settings, and identifying trustworthy websites.</p>
-      <button class="btn btn-primary mt-3" onclick="alert('Tip: Use a mix of uppercase, lowercase, numbers, and special characters in your passwords!')">Quick Tip</button>
-    </div>
+      <div class="page active" id="page-intro">
+        <h2>Introduction</h2>
+        <p>This interactive eBook will guide you through essential online safety practices, helping you stay informed and secure online.</p>
+      </div>
 
-    <div class="page" id="page-chapter2">
-      <h2>Chapter 2: Recognising Risks</h2>
-      <p>Explore common online threats such as phishing, scams, and cyberbullying. Understand how to spot and avoid them.</p>
-    </div>
+      <div class="page" id="page-chapter1">
+        <h2>Chapter 1: Online Safety Basics</h2>
+        <p>Learn about creating strong passwords, managing privacy settings, and identifying trustworthy websites.</p>
+        <button class="btn btn-primary mt-3" onclick="alert('Tip: Use a mix of uppercase, lowercase, numbers, and special characters in your passwords!')">Quick Tip</button>
+      </div>
 
-    <div class="page" id="page-chapter3">
-      <h2>Chapter 3: Support Resources</h2>
-      <p>Find resources to help if you encounter issues online. Knowing where to turn for help is key to staying safe.</p>
-      <ul>
-        <li><a href="#">Helpline Directory</a></li>
-        <li><a href="#">Guide to Reporting Issues</a></li>
-      </ul>
-    </div>
+      <div class="page" id="page-chapter2">
+        <h2>Chapter 2: Recognising Risks</h2>
+        <p>Explore common online threats such as phishing, scams, and cyberbullying. Understand how to spot and avoid them.</p>
+      </div>
 
-    <div class="page" id="page-quiz">
-      <h2>Chapter 4: Quiz</h2>
-      <p>Test your knowledge on online safety with this quick quiz:</p>
-      <div>
-        <p><strong>Question:</strong> What is the best practice for creating a strong password?</p>
+      <div class="page" id="page-chapter3">
+        <h2>Chapter 3: Support Resources</h2>
+        <p>Find resources to help if you encounter issues online. Knowing where to turn for help is key to staying safe.</p>
         <ul>
-          <li><input type="radio" name="q1" id="q1-a1"> <label for="q1-a1">Use your pet's name</label></li>
-          <li><input type="radio" name="q1" id="q1-a2"> <label for="q1-a2">Use a mix of uppercase, lowercase, numbers, and special characters</label></li>
-          <li><input type="radio" name="q1" id="q1-a3"> <label for="q1-a3">Use your birthday</label></li>
+          <li><a href="#">Helpline Directory</a></li>
+          <li><a href="#">Guide to Reporting Issues</a></li>
         </ul>
-        <button class="btn btn-primary mt-3" onclick="alert('Correct! Always use a mix of characters for strong passwords.')">Submit Answer</button>
       </div>
-    </div>
 
-    <div class="progress-container">
-      <div class="progress-bar">
-        <div class="progress-bar-inner" id="progress-bar"></div>
+      <div class="page" id="page-quiz">
+        <h2>Chapter 4: Quiz</h2>
+        <p>Test your knowledge on online safety with this quick quiz:</p>
+        <div>
+          <p><strong>Question:</strong> What is the best practice for creating a strong password?</p>
+          <ul>
+            <li><input type="radio" name="q1" id="q1-a1"> <label for="q1-a1">Use your pet's name</label></li>
+            <li><input type="radio" name="q1" id="q1-a2"> <label for="q1-a2">Use a mix of uppercase, lowercase, numbers, and special characters</label></li>
+            <li><input type="radio" name="q1" id="q1-a3"> <label for="q1-a3">Use your birthday</label></li>
+          </ul>
+          <button class="btn btn-primary mt-3" onclick="alert('Correct! Always use a mix of characters for strong passwords.')">Submit Answer</button>
+        </div>
       </div>
-      <div class="progress-text" id="progress-text">0% Complete</div>
-    </div>
 
-    <div class="navigation">
-      <button id="prev-btn" onclick="prevPage()">Previous</button>
-      <button id="next-btn" onclick="nextPage()">Next</button>
+      <div class="progress-container">
+        <div class="progress-bar">
+          <div class="progress-bar-inner" id="progress-bar"></div>
+        </div>
+        <div class="progress-text" id="progress-text">0% Complete</div>
+      </div>
+
+      <div class="navigation">
+        <button id="prev-btn" onclick="prevPage()">Previous</button>
+        <button id="next-btn" onclick="nextPage()">Next</button>
+      </div>
     </div>
   </div>
 
   <script>
     const pages = document.querySelectorAll('.page');
+    const navButtons = document.querySelectorAll('.side-nav button');
     const progressBar = document.getElementById('progress-bar');
     const progressText = document.getElementById('progress-text');
     const bookmark = document.getElementById('bookmark');
     let currentPage = 0;
     let savedPage = localStorage.getItem('savedPage');
 
-    if (savedPage) {
+    if (savedPage && savedPage < pages.length) {
       currentPage = parseInt(savedPage);
-      showPage(currentPage);
+    } else {
+      currentPage = 0;
     }
+
+    showPage(currentPage);
 
     function updateProgress() {
       const progress = ((currentPage + 1) / pages.length) * 100;
       progressBar.style.width = `${progress}%`;
       progressText.textContent = `${Math.round(progress)}% Complete`;
+    }
+
+    function updateNavButtons() {
+      navButtons.forEach((btn, index) => {
+        btn.classList.toggle('active', index === currentPage);
+      });
     }
 
     function updateButtons() {
@@ -214,6 +235,7 @@
       pages[index].classList.add('active');
       currentPage = index;
       updateProgress();
+      updateNavButtons();
       updateButtons();
     }
 
@@ -239,6 +261,7 @@
     });
 
     updateProgress();
+    updateNavButtons();
     updateButtons();
   </script>
 
