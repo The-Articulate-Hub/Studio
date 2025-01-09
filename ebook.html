@@ -166,10 +166,14 @@
         <div>
           <p><strong>Question:</strong> What makes a strong password?</p>
           <ul>
-            <li><input type="radio" name="q1"> <label>Using your pet's name</label></li>
-            <li><input type="radio" name="q1"> <label>Using uppercase, lowercase, numbers, and special characters</label></li>
-            <li><input type="radio" name="q1"> <label>Using your birthday</label></li>
+            <li><input type="radio" name="q1" id="q1-a1"> <label for="q1-a1">Using your pet's name</label></li>
+            <li><input type="radio" name="q1" id="q1-a2"> <label for="q1-a2">Using uppercase, lowercase, numbers, and special characters</label></li>
+            <li><input type="radio" name="q1" id="q1-a3"> <label for="q1-a3">Using your birthday</label></li>
           </ul>
+          <button class="btn btn-success mt-3" id="submit-quiz">Submit Quiz</button>
+        </div>
+        <div class="mt-4" id="quiz-result" style="display: none;">
+          <p><strong>Result:</strong> <span id="quiz-feedback"></span></p>
         </div>
       </div>
 
@@ -239,6 +243,25 @@
 
     navButtons.forEach((btn, index) => {
       btn.addEventListener('click', () => showPage(index));
+    });
+
+    document.getElementById('submit-quiz').addEventListener('click', () => {
+      const selectedAnswer = document.querySelector('input[name="q1"]:checked');
+      const feedback = document.getElementById('quiz-feedback');
+      const resultContainer = document.getElementById('quiz-result');
+
+      if (selectedAnswer) {
+        const correctAnswer = 'q1-a2';
+        if (selectedAnswer.id === correctAnswer) {
+          feedback.textContent = 'Correct! Strong passwords use a combination of different character types.';
+        } else {
+          feedback.textContent = 'Incorrect. Remember, a strong password uses uppercase, lowercase, numbers, and symbols.';
+        }
+        resultContainer.style.display = 'block';
+      } else {
+        feedback.textContent = 'Please select an answer before submitting.';
+        resultContainer.style.display = 'block';
+      }
     });
 
     // Initialize to show the correct page and progress
