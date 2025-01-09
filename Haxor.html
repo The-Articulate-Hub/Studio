@@ -1,0 +1,133 @@
+<!doctype html>
+<html lang="en-GB">
+  <head>
+    <meta charset="utf-8"/>
+    <meta name="viewport" content="width=device-width, initial-scale=1"/>
+    <title>Articulate Resource Hub</title>
+
+    <!-- Bootstrap CSS -->
+    <link 
+      href="https://cdn.jsdelivr.net/npm/bootstrap@5.3.0/dist/css/bootstrap.min.css" 
+      rel="stylesheet"
+    />
+    <link href="https://fonts.googleapis.com/css2?family=Rubik:wght@300;400;700;900&display=swap" rel="stylesheet">
+
+    <style>
+      body {
+        background-color: #1c1c1b;
+        color: #ffffff;
+        font-family: 'Rubik', sans-serif;
+        overflow-x: hidden;
+      }
+
+      .navbar {
+        background-color: #000 !important;
+        padding: 1rem;
+        border-bottom: 2px solid #776cca;
+      }
+
+      .navbar-brand, .nav-link {
+        color: #ef9a5c !important;
+        font-weight: 700;
+        text-transform: uppercase;
+      }
+
+      .hero-section {
+        text-align: center;
+        padding: 5rem 2rem;
+        background: linear-gradient(135deg, #776cca, #ef9a5c);
+        position: relative;
+      }
+
+      .hero-text {
+        font-size: 2rem;
+        font-weight: 900;
+        animation: glitch 1.5s infinite;
+      }
+
+      @keyframes glitch {
+        0% { text-shadow: 2px 2px #ff00ff; }
+        50% { text-shadow: -2px -2px #00ffff; }
+        100% { text-shadow: 2px 2px #ff00ff; }
+      }
+
+      .organic-shape {
+        position: absolute;
+        width: 200px;
+        height: 200px;
+        border-radius: 50%;
+        background: rgba(255, 255, 255, 0.1);
+      }
+
+      .button-container a {
+        display: inline-block;
+        padding: 1rem 2rem;
+        margin: 10px;
+        font-size: 1.25rem;
+        border-radius: 15px;
+        border: 2px solid #ef9a5c;
+        text-decoration: none;
+        transition: background-color 0.3s;
+        color: #ef9a5c;
+      }
+
+      .button-container a:hover {
+        background-color: #ef9a5c;
+        color: #1c1c1b;
+      }
+
+      .footer {
+        background-color: #000;
+        padding: 1.5rem;
+        text-align: center;
+        border-top: 2px solid #776cca;
+      }
+
+      .footer p {
+        margin: 0;
+        font-size: 1rem;
+      }
+    </style>
+  </head>
+
+  <body>
+    <!-- Navigation -->
+    <nav class="navbar navbar-expand-lg">
+      <div class="container">
+        <a class="navbar-brand" href="#">Articulate Hub</a>
+        <div class="collapse navbar-collapse justify-content-end">
+          <ul class="navbar-nav">
+            <li class="nav-item me-3">
+              <a class="nav-link active" href="#">E-book</a>
+            </li>
+            <li class="nav-item">
+              <a class="nav-link" href="#">Kit</a>
+            </li>
+          </ul>
+        </div>
+      </div>
+    </nav>
+
+    <!-- Hero Section -->
+    <section class="hero-section">
+      <div class="organic-shape" style="top: -50px; left: 30%;"></div>
+      <div class="organic-shape" style="bottom: -50px; right: 10%;"></div>
+      <h1 class="hero-text">ACCESS GRANTED</h1>
+      <p>If you're not supposed to be here... we know who you are 🕵️‍♂️</p>
+      <div class="button-container">
+        <a href="ebook.html">Go to E-book</a>
+        <a href="kit.html">Go to Kit</a>
+      </div>
+    </section>
+
+    <!-- Footer -->
+    <footer class="footer">
+      <p>&copy; Made by Articulate Hub | Respect the code, or else!</p>
+    </footer>
+
+    <!-- Bootstrap JS -->
+    <script 
+      src="https://cdn.jsdelivr.net/npm/bootstrap@5.3.0/dist/js/bootstrap.bundle.min.js">
+    </script>
+  </body>
+</html>
