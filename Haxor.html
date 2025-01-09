@@ -3,7 +3,7 @@
   <head>
     <meta charset="utf-8"/>
     <meta name="viewport" content="width=device-width, initial-scale=1"/>
-    <title>Articulate Resource Hub</title>
+    <title>Articulate Hacker Hub</title>
 
     <!-- Bootstrap CSS -->
     <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.3.0/dist/css/bootstrap.min.css" rel="stylesheet" />
@@ -11,11 +11,10 @@
 
     <style>
       body {
-        background-color: #1c1c1b;
+        background-color: #0d0d0d;
         color: #ffffff;
         font-family: 'Rubik', sans-serif;
         overflow-x: hidden;
-        cursor: crosshair;
       }
 
       .navbar {
@@ -29,10 +28,6 @@
         font-weight: 700;
         text-transform: uppercase;
         transition: color 0.2s ease-in-out;
-      }
-
-      .navbar-brand:hover, .nav-link:hover {
-        color: #e5608e !important;
       }
 
       .hero-section {
@@ -56,16 +51,6 @@
         100% { text-shadow: 2px 2px #ff00ff; }
       }
 
-      .particle-bg {
-        position: absolute;
-        width: 100%;
-        height: 100%;
-        top: 0;
-        left: 0;
-        pointer-events: none;
-        background-image: radial-gradient(circle at random, rgba(255, 255, 255, 0.05), transparent 40%);
-      }
-
       .ip-display {
         background-color: #000;
         padding: 1rem;
@@ -74,24 +59,23 @@
         display: inline-block;
         color: #ef9a5c;
         font-size: 1.2rem;
+        animation: fadeIn 2s;
       }
 
-      .button-container a {
-        display: inline-block;
-        padding: 1rem 2rem;
-        margin: 10px;
-        font-size: 1.25rem;
-        border-radius: 15px;
-        border: 2px solid #ef9a5c;
-        text-decoration: none;
-        transition: background-color 0.3s, transform 0.3s;
-        color: #ef9a5c;
+      @keyframes fadeIn {
+        from { opacity: 0; }
+        to { opacity: 1; }
       }
 
-      .button-container a:hover {
-        background-color: #ef9a5c;
-        color: #1c1c1b;
-        transform: scale(1.05);
+      .matrix-bg {
+        position: absolute;
+        top: 0;
+        left: 0;
+        width: 100%;
+        height: 100%;
+        z-index: -1;
+        background-image: url('https://media.giphy.com/media/3o7aCSPqXE0McJ8DrG/giphy.gif');
+        opacity: 0.08;
       }
 
       .footer {
@@ -104,7 +88,6 @@
       .footer p {
         margin: 0;
         font-size: 1rem;
-        color: #ffffff;
       }
     </style>
   </head>
@@ -129,15 +112,11 @@
 
     <!-- Hero Section -->
     <section class="hero-section">
-      <div class="particle-bg"></div>
+      <div class="matrix-bg"></div>
       <h1 class="hero-text">ACCESS GRANTED</h1>
       <p>If you're not supposed to be here... we know who you are 🕵️‍♂️</p>
-      <div class="button-container">
-        <a href="ebook.html">Go to E-book</a>
-        <a href="kit.html">Go to Kits</a>
-      </div>
       <div class="ip-display">
-        Your IP Address: <span id="user-ip">Loading...</span>
+        Your IP Address: <span id="user-ip">Fetching...</span>
       </div>
     </section>
 
@@ -149,13 +128,18 @@
     <!-- Bootstrap JS -->
     <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.3.0/dist/js/bootstrap.bundle.min.js"></script>
 
-    <!-- Mock IP Fetch -->
+    <!-- Fetch Real IP Address -->
     <script>
-      function getRandomIP() {
-        const randomIP = `192.168.${Math.floor(Math.random() * 255)}.${Math.floor(Math.random() * 255)}`;
-        document.getElementById("user-ip").innerText = randomIP;
+      async function fetchIP() {
+        try {
+          const response = await fetch('https://api.ipify.org?format=json');
+          const data = await response.json();
+          document.getElementById("user-ip").innerText = data.ip;
+        } catch (error) {
+          document.getElementById("user-ip").innerText = "Error fetching IP!";
+        }
       }
-      window.onload = getRandomIP;
+      fetchIP();
     </script>
   </body>
 </html>
