@@ -4,10 +4,8 @@
   <meta charset="UTF-8">
   <meta name="viewport" content="width=device-width, initial-scale=1.0">
   <title>Interactive eBook - Enhanced UX</title>
-  <!-- Bootstrap CSS -->
   <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.3.0/dist/css/bootstrap.min.css" rel="stylesheet">
   <link href="https://fonts.googleapis.com/css2?family=Rubik:wght@400;500;700&display=swap" rel="stylesheet">
-  <script src="https://website-widgets.pages.dev/dist/sienna.min.js" defer></script>
   <style>
     body {
       font-family: 'Rubik', sans-serif;
@@ -29,6 +27,11 @@
       overflow: hidden;
       display: flex;
       flex-direction: column;
+      animation: fadeIn 1s ease-in-out;
+    }
+    @keyframes fadeIn {
+      from { opacity: 0; transform: scale(0.9); }
+      to { opacity: 1; transform: scale(1); }
     }
     .side-nav {
       background-color: #fff;
@@ -39,8 +42,6 @@
       display: flex;
       flex-direction: column;
       gap: 10px;
-      max-height: 100%;
-      overflow-y: scroll;
       transition: all 0.3s ease;
     }
     .side-nav.closed {
@@ -68,9 +69,11 @@
       background-color: #f8f9fa;
       border-radius: 10px;
       box-shadow: 0 4px 10px rgba(0, 0, 0, 0.1);
+      transition: opacity 0.5s ease;
     }
     .page.active {
       display: block;
+      opacity: 1;
     }
     .ebook-header {
       background-color: #4c5ec5;
@@ -117,6 +120,23 @@
       background-color: #ccc;
       cursor: not-allowed;
     }
+    .quiz-option {
+      padding: 10px;
+      background-color: #ebedf0;
+      border-radius: 5px;
+      margin-bottom: 10px;
+      cursor: pointer;
+      transition: background-color 0.3s ease;
+    }
+    .quiz-option:hover {
+      background-color: #d1e7dd;
+    }
+    .quiz-option.correct {
+      background-color: #b6e0c3;
+    }
+    .quiz-option.wrong {
+      background-color: #f8d7da;
+    }
   </style>
 </head>
 <body>
@@ -125,11 +145,11 @@
       <button class="toggle-nav-btn" onclick="toggleNavBar()">Toggle Chapters</button>
       <div class="side-nav" id="sideNav">
         <h5>Chapters</h5>
-        <button onclick="showPage(0)" id="nav-0">Introduction</button>
-        <button onclick="showPage(1)" id="nav-1">Chapter 1: Online Safety Basics</button>
-        <button onclick="showPage(2)" id="nav-2">Chapter 2: Recognising Risks</button>
-        <button onclick="showPage(3)" id="nav-3">Chapter 3: Support Resources</button>
-        <button onclick="showPage(4)" id="nav-4">Quiz: Test Your Knowledge</button>
+        <button onclick="showPage(0)">Introduction</button>
+        <button onclick="showPage(1)">Chapter 1: Online Safety Basics</button>
+        <button onclick="showPage(2)">Chapter 2: Recognising Risks</button>
+        <button onclick="showPage(3)">Chapter 3: Support Resources</button>
+        <button onclick="showPage(4)">Quiz: Test Your Knowledge</button>
       </div>
     </div>
 
@@ -139,24 +159,38 @@
         <p>A seamless and immersive reading experience.</p>
       </div>
 
-      <div class="page active" id="page-intro">
+      <!-- Introduction -->
+      <div class="page active">
         <h2>Introduction</h2>
         <p>Welcome to your interactive eBook. This guide will walk you through the basics of online safety.</p>
       </div>
 
-      <div class="page" id="page-chapter1">
+      <!-- Chapter 1 -->
+      <div class="page">
         <h2>Chapter 1: Online Safety Basics</h2>
         <p>Learn how to create strong passwords and identify trustworthy websites.</p>
       </div>
 
-      <div class="page" id="page-chapter2">
+      <!-- Chapter 2 -->
+      <div class="page">
         <h2>Chapter 2: Recognising Risks</h2>
         <p>Spot online scams and avoid cyberbullying with real-world examples.</p>
       </div>
 
-      <div class="page" id="page-chapter3">
+      <!-- Chapter 3 -->
+      <div class="page">
         <h2>Chapter 3: Support Resources</h2>
         <p>Here’s a list of resources to help you when facing online threats.</p>
+      </div>
+
+      <!-- Quiz -->
+      <div class="page">
+        <h2>Quiz: Test Your Knowledge</h2>
+        <p>Choose the correct answer below:</p>
+        <div class="quiz-option" onclick="checkAnswer(this, true)">Correct! Stay cautious with unknown links.</div>
+        <div class="quiz-option" onclick="checkAnswer(this, false)">Click all links to check!</div>
+        <div class="quiz-option" onclick="checkAnswer(this, false)">Ignore safety guidelines!</div>
+        <p id="quiz-feedback" style="margin-top: 15px;"></p>
       </div>
 
       <div class="progress-container">
@@ -167,7 +201,7 @@
       </div>
 
       <div class="navigation">
-        <button id="prev-btn" onclick="prevPage()" disabled title="This is the first page, you can't go back.">Previous</button>
+        <button id="prev-btn" onclick="prevPage()" disabled>Previous</button>
         <button id="next-btn" onclick="nextPage()">Next</button>
       </div>
     </div>
@@ -175,11 +209,10 @@
 
   <script>
     const pages = document.querySelectorAll('.page');
-    const sideNav = document.getElementById('sideNav');
     let currentPage = 0;
 
     function toggleNavBar() {
-      sideNav.classList.toggle('closed');
+      document.getElementById('sideNav').classList.toggle('closed');
     }
 
     function showPage(index) {
@@ -201,18 +234,23 @@
     }
 
     function nextPage() {
-      if (currentPage < pages.length - 1) {
-        showPage(currentPage + 1);
-      }
+      if (currentPage < pages.length - 1) showPage(currentPage + 1);
     }
 
     function prevPage() {
-      if (currentPage > 0) {
-        showPage(currentPage - 1);
-      }
+      if (currentPage > 0) showPage(currentPage - 1);
     }
 
-    showPage(currentPage);
+    function checkAnswer(option, isCorrect) {
+      const feedback = document.getElementById('quiz-feedback');
+      if (isCorrect) {
+        option.classList.add('correct');
+        feedback.textContent = "Well done! You're correct.";
+      } else {
+        option.classList.add('wrong');
+        feedback.textContent = "Try again! This isn't the best option.";
+      }
+    }
   </script>
 </body>
 </html>
