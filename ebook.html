@@ -3,11 +3,11 @@
 <head>
   <meta charset="UTF-8">
   <meta name="viewport" content="width=device-width, initial-scale=1.0">
-  <title>Online Safety eBook</title>
+  <title>Accessible Online Safety eBook</title>
   <!-- Bootstrap and Accessibility Widget -->
   <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.3.0/dist/css/bootstrap.min.css" rel="stylesheet">
   <link href="https://fonts.googleapis.com/css2?family=Rubik:wght@400;500;700&display=swap" rel="stylesheet">
-  <script src="https://accessibility-widget.pages.dev/accessibility-widget.js" defer></script>
+  <script src="https://website-widgets.pages.dev/dist/sienna.min.js" defer></script>
   <style>
     body {
       font-family: 'Rubik', sans-serif;
@@ -83,27 +83,9 @@
       from { opacity: 0; transform: translateY(20px); }
       to { opacity: 1; transform: translateY(0); }
     }
-    .navigation {
-      display: flex;
-      justify-content: space-between;
-      margin-top: 20px;
-    }
-    .navigation button {
-      background-color: #004c97;
-      border: none;
-      color: white;
-      padding: 12px 24px;
-      font-size: 16px;
-      border-radius: 8px;
-      cursor: pointer;
-      transition: background-color 0.3s;
-    }
-    .navigation button:hover {
-      background-color: #2566b3;
-    }
-    .navigation button:disabled {
-      background-color: #ccc;
-      cursor: not-allowed;
+    .badge-container {
+      text-align: center;
+      margin: 20px 0;
     }
     .reflection-box {
       margin-top: 30px;
@@ -127,7 +109,12 @@
     <div class="content">
       <div class="header">
         <h1 id="moduleTitle">Introduction to Online Safety</h1>
-        <button class="btn btn-outline-dark" onclick="toggleDarkMode()">Toggle Dark Mode</button>
+        <div>
+          <button class="btn btn-outline-dark" onclick="toggleDarkMode()">Toggle Dark Mode</button>
+          <button class="btn btn-secondary" onclick="readAloud()">🔊 Read Aloud</button>
+          <button class="btn btn-outline-primary" onclick="adjustFontSize(1)">A+</button>
+          <button class="btn btn-outline-primary" onclick="adjustFontSize(-1)">A-</button>
+        </div>
       </div>
 
       <!-- Progress Bar -->
@@ -141,13 +128,18 @@
       <div class="page-content active" id="page-0">
         <h2>Introduction</h2>
         <p>Welcome to the Online Safety eBook. Learn how to navigate the internet safely, recognise scams, and protect your personal data.</p>
+        <div class="badge-container">
+          <p>You’ve earned <span id="points">0</span> points!</p>
+          <div id="badge" class="badge bg-success" style="display: none;">Security Pro 🏆</div>
+        </div>
         <div class="reflection-box">
           <h4>Reflection Prompt:</h4>
-          <p>What are three ways you can improve your online safety after reading this chapter?</p>
-          <textarea class="form-control" placeholder="Write your reflection here..." rows="4"></textarea>
+          <textarea class="form-control" id="userNotes" rows="4" placeholder="Write your reflection here..."></textarea>
+          <button class="btn btn-primary mt-2" onclick="saveNotes()">Save Notes</button>
         </div>
       </div>
 
+      <!-- Example Quiz Page -->
       <div class="page-content" id="page-1">
         <h2>Social Media Safety</h2>
         <p>Follow these tips to stay safe on social platforms:</p>
@@ -156,47 +148,13 @@
           <li>Avoid sharing your location publicly.</li>
           <li>Think before clicking any unknown links.</li>
         </ul>
+        <h4>Quiz:</h4>
+        <p>What should you do if you receive a suspicious link?</p>
+        <button class="btn btn-secondary" onclick="checkAnswer(true)">A. Ignore and delete it</button>
+        <button class="btn btn-secondary" onclick="checkAnswer(false)">B. Click to see if it works</button>
       </div>
 
-      <div class="page-content" id="page-2">
-        <h2>Identifying Scams</h2>
-        <p>Scammers often use urgency to trick people. Be cautious:</p>
-        <ul>
-          <li>Watch out for emails asking for financial details.</li>
-          <li>Don’t trust pop-ups claiming you’ve won a prize.</li>
-          <li>Ignore messages from unknown senders promising quick rewards.</li>
-        </ul>
-      </div>
-
-      <div class="page-content" id="page-3">
-        <h2>Protecting Personal Information</h2>
-        <p>Your data is valuable. Here’s how to protect it:</p>
-        <ul>
-          <li>Use unique passwords for different accounts.</li>
-          <li>Enable two-factor authentication (2FA).</li>
-          <li>Review permissions for apps that access your data.</li>
-        </ul>
-      </div>
-
-      <div class="page-content" id="page-4">
-        <h2>Responding to Cyberbullying</h2>
-        <p>If you’re facing cyberbullying, here’s what you can do:</p>
-        <ul>
-          <li>Block and report users who send offensive messages.</li>
-          <li>Save screenshots as evidence.</li>
-          <li>Talk to someone you trust or seek support.</li>
-        </ul>
-      </div>
-
-      <div class="page-content" id="page-5">
-        <h2>Support Resources</h2>
-        <p>If you need help, reach out to these resources:</p>
-        <ul>
-          <li><strong>Childline:</strong> Support for young people facing online challenges.</li>
-          <li><strong>Report Harmful Content:</strong> Report offensive or illegal online content.</li>
-          <li><strong>CyberSafe:</strong> Guides to improve online safety.</li>
-        </ul>
-      </div>
+      <!-- Other Content Sections... -->
 
       <!-- Navigation Buttons -->
       <div class="navigation">
@@ -210,6 +168,7 @@
     const pages = document.querySelectorAll('.page-content');
     const navLinks = document.querySelectorAll('.nav-link');
     let currentPage = localStorage.getItem('currentPage') ? parseInt(localStorage.getItem('currentPage')) : 0;
+    let points = 0;
 
     function showPage(index) {
       pages.forEach((page, i) => {
@@ -245,7 +204,42 @@
       document.body.classList.toggle('dark-mode');
     }
 
-    window.onload = () => showPage(currentPage);
+    function readAloud() {
+      const speech = new SpeechSynthesisUtterance(document.querySelector('.active').innerText);
+      window.speechSynthesis.speak(speech);
+    }
+
+    function adjustFontSize(change) {
+      document.body.style.fontSize = `${parseInt(getComputedStyle(document.body).fontSize) + change}px`;
+    }
+
+    function saveNotes() {
+      const notes = document.getElementById('userNotes').value;
+      localStorage.setItem('userNotes', notes);
+      alert('Notes saved!');
+    }
+
+    function checkAnswer(correct) {
+      if (correct) {
+        alert('Correct! Well done!');
+        awardPoints(10);
+      } else {
+        alert('Oops! The answer is incorrect.');
+      }
+    }
+
+    function awardPoints(amount) {
+      points += amount;
+      document.getElementById('points').innerText = points;
+      if (points >= 100) {
+        document.getElementById('badge').style.display = 'inline';
+      }
+    }
+
+    window.onload = function() {
+      showPage(currentPage);
+      document.getElementById('userNotes').value = localStorage.getItem('userNotes') || '';
+    }
   </script>
 </body>
 </html>
