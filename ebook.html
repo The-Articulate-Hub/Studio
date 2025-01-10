@@ -3,92 +3,61 @@
 <head>
   <meta charset="UTF-8">
   <meta name="viewport" content="width=device-width, initial-scale=1.0">
-  <title>Online Safety eBook</title>
+  <title>Online Safety Interactive eBook</title>
+  <!-- Bootstrap CSS -->
+  <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.3.0/dist/css/bootstrap.min.css" rel="stylesheet">
   <link href="https://fonts.googleapis.com/css2?family=Rubik:wght@400;500;700&display=swap" rel="stylesheet">
   <style>
     body {
-      margin: 0;
       font-family: 'Rubik', sans-serif;
-      background-color: #f7f9fc;
+      background-color: #f4f7fb;
     }
-
-    .container {
-      display: flex;
+    .container-fluid {
       height: 100vh;
+      display: flex;
     }
-
     .sidebar {
-      width: 280px;
+      width: 20%;
       background-color: #004c97;
       color: white;
+      padding: 20px;
       display: flex;
       flex-direction: column;
-      padding: 20px;
-      border-right: 3px solid #e0e0e0;
     }
-
     .sidebar h3 {
       font-size: 22px;
-      font-weight: 700;
+      font-weight: bold;
       margin-bottom: 20px;
     }
-
-    .nav-item {
-      padding: 15px 20px;
-      background-color: transparent;
-      border-radius: 5px;
+    .nav-link {
+      padding: 10px;
       color: white;
+      border-radius: 8px;
       margin-bottom: 10px;
       cursor: pointer;
+      text-align: left;
+      transition: all 0.3s ease;
       font-weight: 500;
     }
-
-    .nav-item.active, .nav-item:hover {
+    .nav-link.active, .nav-link:hover {
       background-color: #2566b3;
     }
-
-    .content {
-      flex-grow: 1;
+    .main-content {
+      width: 80%;
       padding: 40px;
+      overflow-y: auto;
       background-color: white;
     }
-
-    .header {
-      display: flex;
-      justify-content: space-between;
-      align-items: center;
-      margin-bottom: 30px;
-    }
-
-    .header h1 {
-      font-size: 32px;
-      color: #004c97;
-    }
-
-    .info-icon {
-      width: 40px;
-      height: 40px;
-      background-color: #f1f3f5;
-      border-radius: 50%;
-      display: flex;
-      justify-content: center;
-      align-items: center;
-      font-size: 20px;
-      cursor: pointer;
-      color: #004c97;
-    }
-
-    .section-content {
-      background-color: #fff8f2;
-      padding: 30px;
+    .page-content {
+      background-color: #fef8f2;
+      padding: 20px 30px;
       border-radius: 10px;
-      box-shadow: 0 4px 8px rgba(0, 0, 0, 0.1);
+      box-shadow: 0 4px 10px rgba(0, 0, 0, 0.1);
+      display: none;
     }
-
-    .section-content h2 {
-      margin-top: 0;
+    .page-content.active {
+      display: block;
     }
-
     .video-placeholder {
       background-color: #e1e1e1;
       width: 100%;
@@ -96,130 +65,119 @@
       display: flex;
       justify-content: center;
       align-items: center;
+      border-radius: 8px;
       margin-top: 20px;
-      border-radius: 10px;
-      font-size: 24px;
-      color: #666;
     }
-
-    .list-group {
-      margin-top: 20px;
-      padding-left: 20px;
+    .btn-primary {
+      background-color: #004c97;
+      border: none;
+      font-size: 16px;
+      padding: 10px 20px;
+      border-radius: 8px;
+      cursor: pointer;
     }
-
-    .list-group li {
-      margin-bottom: 10px;
+    .btn-primary:hover {
+      background-color: #2566b3;
     }
-
   </style>
 </head>
 <body>
-  <div class="container">
+  <div class="container-fluid">
     <!-- Sidebar -->
     <div class="sidebar">
-      <h3>Online Safety Guide</h3>
-      <div class="nav-item active" onclick="showPage(0)">Introduction</div>
-      <div class="nav-item" onclick="showPage(1)">Creating Strong Passwords</div>
-      <div class="nav-item" onclick="showPage(2)">Recognising Scams</div>
-      <div class="nav-item" onclick="showPage(3)">Avoiding Cyberbullying</div>
-      <div class="nav-item" onclick="showPage(4)">Support Resources</div>
-      <div class="nav-item" onclick="showPage(5)">Test Your Knowledge</div>
+      <h3>Online Safety Course</h3>
+      <a class="nav-link active" onclick="showPage(0)">Introduction</a>
+      <a class="nav-link" onclick="showPage(1)">Social Media Safety</a>
+      <a class="nav-link" onclick="showPage(2)">Identifying Scams</a>
+      <a class="nav-link" onclick="showPage(3)">Protecting Personal Information</a>
+      <a class="nav-link" onclick="showPage(4)">Responding to Cyberbullying</a>
+      <a class="nav-link" onclick="showPage(5)">Support Resources</a>
     </div>
 
-    <!-- Content -->
-    <div class="content">
-      <div class="header">
-        <h1 id="moduleTitle">Introduction</h1>
-        <div class="info-icon">ℹ️</div>
-      </div>
-
-      <!-- Section Pages -->
-      <div class="section-content" id="page-0">
+    <!-- Main Content -->
+    <div class="main-content">
+      <!-- Introduction Page -->
+      <div class="page-content active">
         <h2>Introduction to Online Safety</h2>
-        <p>Welcome to the Online Safety eBook. This guide will walk you through essential information to help you stay safe online.</p>
-        <ul class="list-group">
-          <li>Learn to create strong passwords.</li>
-          <li>Recognise scams and phishing attempts.</li>
-          <li>Avoid cyberbullying and stay secure.</li>
-          <li>Access helpful resources for additional support.</li>
+        <p>This eBook is designed to help you navigate the internet safely. Learn how to recognise scams, avoid harmful content, and protect your digital footprint.</p>
+        <ul>
+          <li>Understand the importance of safeguarding personal data.</li>
+          <li>Learn how to report suspicious content and stay informed.</li>
+          <li>Explore support networks if you encounter cyberbullying.</li>
         </ul>
       </div>
 
-      <div class="section-content" id="page-1" style="display: none;">
-        <h2>Creating Strong Passwords</h2>
-        <p>Passwords are your first line of defence. Follow these steps for strong passwords:</p>
-        <ul class="list-group">
-          <li>Use a mix of letters, numbers, and symbols.</li>
-          <li>Avoid using common words like "password" or "123456".</li>
-          <li>Make your passwords at least 12 characters long.</li>
-          <li>Use a password manager to store complex passwords.</li>
+      <!-- Social Media Safety -->
+      <div class="page-content">
+        <h2>Social Media Safety</h2>
+        <p>When using social media platforms like Instagram, Facebook, or TikTok, follow these guidelines to stay safe:</p>
+        <div class="video-placeholder">🎥 Video Placeholder: Social Media Tips</div>
+        <ul class="mt-3">
+          <li>Adjust your privacy settings to limit who can see your posts.</li>
+          <li>Avoid sharing your location publicly in real-time.</li>
+          <li>Think before you click: links sent via DMs can be scams.</li>
         </ul>
-        <div class="video-placeholder">
-          Video Placeholder
-        </div>
+        <p class="mt-3"><strong>Example:</strong> John received a suspicious link claiming he won a prize. He avoided clicking it and reported the message.</p>
       </div>
 
-      <div class="section-content" id="page-2" style="display: none;">
-        <h2>Recognising Scams</h2>
-        <p>Scammers use different tactics to trick you. Here’s what to look for:</p>
-        <ul class="list-group">
-          <li>Emails or messages asking for personal details.</li>
-          <li>Links that look legitimate but redirect you to a fake site.</li>
-          <li>Urgent messages that try to scare you.</li>
-        </ul>
-      </div>
-
-      <div class="section-content" id="page-3" style="display: none;">
-        <h2>Avoiding Cyberbullying</h2>
-        <p>Cyberbullying can have a serious impact on mental health. Here’s how to protect yourself:</p>
-        <ul class="list-group">
-          <li>Block and report users who send hurtful messages.</li>
-          <li>Never engage with negative comments online.</li>
-          <li>Talk to someone you trust if you feel upset.</li>
+      <!-- Identifying Scams -->
+      <div class="page-content">
+        <h2>Identifying Scams</h2>
+        <p>Scammers often use urgency or emotional appeals to trick you. Be aware of the following signs:</p>
+        <ul>
+          <li>Emails asking for immediate action or financial details.</li>
+          <li>Pop-ups claiming you’ve won a prize—don’t click “claim now.”</li>
+          <li>Messages from unknown contacts promising too-good-to-be-true offers.</li>
         </ul>
       </div>
 
-      <div class="section-content" id="page-4" style="display: none;">
+      <!-- Protecting Personal Information -->
+      <div class="page-content">
+        <h2>Protecting Personal Information</h2>
+        <p>Your personal data is valuable. Keep it secure by following these tips:</p>
+        <ul>
+          <li>Use different, strong passwords for each account.</li>
+          <li>Enable two-factor authentication (2FA) wherever possible.</li>
+          <li>Regularly review the permissions you've granted to apps and sites.</li>
+        </ul>
+        <p><strong>Example:</strong> Emma checked her old accounts and revoked access for outdated apps she no longer used.</p>
+      </div>
+
+      <!-- Responding to Cyberbullying -->
+      <div class="page-content">
+        <h2>Responding to Cyberbullying</h2>
+        <p>Cyberbullying can have a serious impact on mental health. Here’s how to respond:</p>
+        <ul>
+          <li>Don’t engage with negative messages—block and report the user.</li>
+          <li>Save evidence of the messages if you need to seek support.</li>
+          <li>Speak to a trusted adult, friend, or professional if you’re feeling overwhelmed.</li>
+        </ul>
+        <div class="video-placeholder">🎥 Video Placeholder: Responding to Negative Comments</div>
+      </div>
+
+      <!-- Support Resources -->
+      <div class="page-content">
         <h2>Support Resources</h2>
-        <p>If you ever feel unsafe online, here are some resources to help you:</p>
-        <ul class="list-group">
-          <li><strong>National Online Safety Hub</strong> – Provides guides for online security.</li>
-          <li><strong>Report Harmful Content</strong> – Helps you report abuse or scams.</li>
-          <li><strong>Childline</strong> – Support for young people facing online harassment.</li>
+        <p>If you ever feel unsafe or overwhelmed, these resources are here to help:</p>
+        <ul>
+          <li><strong>Childline:</strong> 24/7 support for young people facing challenges online.</li>
+          <li><strong>Report Harmful Content:</strong> A platform that helps you report offensive or illegal online content.</li>
+          <li><strong>CyberSafe:</strong> Guides on improving your online safety.</li>
         </ul>
-      </div>
-
-      <div class="section-content" id="page-5" style="display: none;">
-        <h2>Test Your Knowledge</h2>
-        <p>Answer the following questions to see what you’ve learned:</p>
-        <ul class="list-group">
-          <li>1. What should you do if you receive a suspicious email? (A) Reply to it (B) Ignore and delete it</li>
-          <li>2. What is the recommended length of a strong password? (A) 6 characters (B) 12 characters or more</li>
-          <li>3. Who can you contact if you’re being cyberbullied? (A) A trusted adult (B) Ignore the situation</li>
-        </ul>
+        <p><strong>Tip:</strong> Don’t hesitate to report harmful content—you’re contributing to making the web safer for everyone.</p>
       </div>
     </div>
   </div>
 
   <script>
-    const pages = document.querySelectorAll('.section-content');
-    const navItems = document.querySelectorAll('.nav-item');
+    const pages = document.querySelectorAll('.page-content');
+    const navLinks = document.querySelectorAll('.nav-link');
 
     function showPage(index) {
       pages.forEach((page, i) => {
-        page.style.display = i === index ? 'block' : 'none';
-        navItems[i].classList.toggle('active', i === index);
+        page.classList.toggle('active', i === index);
+        navLinks[i].classList.toggle('active', i === index);
       });
-
-      const titles = [
-        'Introduction to Online Safety',
-        'Creating Strong Passwords',
-        'Recognising Scams',
-        'Avoiding Cyberbullying',
-        'Support Resources',
-        'Test Your Knowledge'
-      ];
-      document.getElementById('moduleTitle').innerText = titles[index];
     }
   </script>
 </body>
