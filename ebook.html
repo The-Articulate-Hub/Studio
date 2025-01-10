@@ -3,7 +3,7 @@
 <head>
   <meta charset="UTF-8">
   <meta name="viewport" content="width=device-width, initial-scale=1.0">
-  <title>Interactive eBook - Enhanced UX</title>
+  <title>Interactive eBook - Improved UX</title>
   <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.3.0/dist/css/bootstrap.min.css" rel="stylesheet">
   <link href="https://fonts.googleapis.com/css2?family=Rubik:wght@400;500;700&display=swap" rel="stylesheet">
   <style>
@@ -17,36 +17,46 @@
       align-items: center;
       overflow: hidden;
     }
+
     .ebook-container {
-      width: 70%;
+      width: 90%;
       height: 90vh;
-      max-width: 800px;
+      max-width: 1000px;
       background: linear-gradient(135deg, #fdfbfb, #ebedee);
       border-radius: 15px;
       box-shadow: 0 10px 20px rgba(0, 0, 0, 0.15);
-      overflow: hidden;
       display: flex;
       flex-direction: column;
-      animation: fadeIn 1s ease-in-out;
     }
-    @keyframes fadeIn {
-      from { opacity: 0; transform: scale(0.9); }
-      to { opacity: 1; transform: scale(1); }
-    }
+
     .side-nav {
-      background-color: #fff;
-      padding: 20px;
+      background-color: white;
       border-right: 2px solid #e0e0e0;
-      overflow-y: auto;
-      width: 20%;
-      display: flex;
-      flex-direction: column;
-      gap: 10px;
-      transition: all 0.3s ease;
+      width: 250px;
+      position: fixed;
+      top: 0;
+      left: 0;
+      height: 100%;
+      padding: 20px;
+      transition: all 0.4s ease;
+      z-index: 10;
     }
-    .side-nav.closed {
-      display: none;
+
+    .side-nav.hidden {
+      transform: translateX(-260px);
     }
+
+    .main-content {
+      flex: 1;
+      margin-left: 270px;
+      padding: 20px;
+      transition: margin-left 0.4s ease;
+    }
+
+    .main-content.collapsed {
+      margin-left: 0;
+    }
+
     .toggle-nav-btn {
       background-color: #776cca;
       border: none;
@@ -54,27 +64,14 @@
       padding: 8px 16px;
       font-size: 16px;
       border-radius: 8px;
-      margin: 10px;
       cursor: pointer;
-      align-self: flex-start;
+      margin-top: 10px;
+      position: fixed;
+      top: 15px;
+      left: 15px;
+      z-index: 20;
     }
-    .ebook-content {
-      flex: 1;
-      padding: 20px;
-      overflow-y: auto;
-    }
-    .page {
-      display: none;
-      padding: 20px;
-      background-color: #f8f9fa;
-      border-radius: 10px;
-      box-shadow: 0 4px 10px rgba(0, 0, 0, 0.1);
-      transition: opacity 0.5s ease;
-    }
-    .page.active {
-      display: block;
-      opacity: 1;
-    }
+
     .ebook-header {
       background-color: #4c5ec5;
       color: white;
@@ -82,15 +79,25 @@
       padding: 20px;
       border-radius: 15px 15px 0 0;
     }
+
+    .page {
+      background-color: #f8f9fa;
+      padding: 20px;
+      border-radius: 10px;
+      margin-bottom: 10px;
+    }
+
     .progress-container {
       margin-top: 20px;
     }
+
     .progress-bar {
       width: 100%;
       height: 10px;
       background-color: #ddd;
       border-radius: 5px;
     }
+
     .progress-bar-inner {
       height: 100%;
       background-color: #4c5ec5;
@@ -98,11 +105,13 @@
       border-radius: 5px;
       transition: width 0.3s;
     }
+
     .navigation {
       display: flex;
       justify-content: space-between;
       margin-top: 20px;
     }
+
     .navigation button {
       padding: 10px 20px;
       background-color: #776cca;
@@ -110,99 +119,73 @@
       color: white;
       border-radius: 5px;
       cursor: pointer;
-      font-size: 16px;
       transition: background-color 0.3s;
     }
+
     .navigation button:hover {
       background-color: #5fae8d;
     }
+
     .navigation button:disabled {
       background-color: #ccc;
       cursor: not-allowed;
-    }
-    .quiz-option {
-      padding: 10px;
-      background-color: #ebedf0;
-      border-radius: 5px;
-      margin-bottom: 10px;
-      cursor: pointer;
-      transition: background-color 0.3s ease;
-    }
-    .quiz-option:hover {
-      background-color: #d1e7dd;
-    }
-    .quiz-option.correct {
-      background-color: #b6e0c3;
-    }
-    .quiz-option.wrong {
-      background-color: #f8d7da;
     }
   </style>
 </head>
 <body>
   <div class="ebook-container">
-    <div class="d-flex">
-      <button class="toggle-nav-btn" onclick="toggleNavBar()">Toggle Chapters</button>
-      <div class="side-nav" id="sideNav">
-        <h5>Chapters</h5>
-        <button onclick="showPage(0)">Introduction</button>
-        <button onclick="showPage(1)">Chapter 1: Online Safety Basics</button>
-        <button onclick="showPage(2)">Chapter 2: Recognising Risks</button>
-        <button onclick="showPage(3)">Chapter 3: Support Resources</button>
-        <button onclick="showPage(4)">Quiz: Test Your Knowledge</button>
-      </div>
+    <button class="toggle-nav-btn" onclick="toggleSideNav()">☰ Chapters</button>
+
+    <div class="side-nav" id="sideNav">
+      <h5>Chapters</h5>
+      <button onclick="showPage(0)">Introduction</button>
+      <button onclick="showPage(1)">Chapter 1: Online Safety Basics</button>
+      <button onclick="showPage(2)">Chapter 2: Recognising Risks</button>
+      <button onclick="showPage(3)">Chapter 3: Support Resources</button>
+      <button onclick="showPage(4)">Quiz: Test Your Knowledge</button>
     </div>
 
-    <div class="ebook-content">
+    <div class="main-content" id="mainContent">
       <div class="ebook-header">
         <h1>Interactive eBook</h1>
-        <p>A seamless and immersive reading experience.</p>
+        <p>An engaging and immersive reading experience.</p>
       </div>
 
-      <!-- Introduction -->
-      <div class="page active">
+      <div class="page">
         <h2>Introduction</h2>
         <p>Welcome to your interactive eBook. This guide will walk you through the basics of online safety.</p>
       </div>
 
-      <!-- Chapter 1 -->
       <div class="page">
         <h2>Chapter 1: Online Safety Basics</h2>
         <p>Learn how to create strong passwords and identify trustworthy websites.</p>
       </div>
 
-      <!-- Chapter 2 -->
       <div class="page">
         <h2>Chapter 2: Recognising Risks</h2>
         <p>Spot online scams and avoid cyberbullying with real-world examples.</p>
       </div>
 
-      <!-- Chapter 3 -->
       <div class="page">
         <h2>Chapter 3: Support Resources</h2>
         <p>Here’s a list of resources to help you when facing online threats.</p>
       </div>
 
-      <!-- Quiz -->
       <div class="page">
         <h2>Quiz: Test Your Knowledge</h2>
-        <p>Choose the correct answer below:</p>
-        <div class="quiz-option" onclick="checkAnswer(this, true)">Correct! Stay cautious with unknown links.</div>
-        <div class="quiz-option" onclick="checkAnswer(this, false)">Click all links to check!</div>
-        <div class="quiz-option" onclick="checkAnswer(this, false)">Ignore safety guidelines!</div>
-        <p id="quiz-feedback" style="margin-top: 15px;"></p>
+        <p>Choose the correct answer below to test what you’ve learned!</p>
       </div>
 
       <div class="progress-container">
         <div class="progress-bar">
-          <div class="progress-bar-inner" id="progress-bar"></div>
+          <div class="progress-bar-inner" id="progressBar"></div>
         </div>
-        <p class="text-center mt-2" id="progress-text">0% Complete</p>
+        <p class="text-center mt-2" id="progressText">0% Complete</p>
       </div>
 
       <div class="navigation">
-        <button id="prev-btn" onclick="prevPage()" disabled>Previous</button>
-        <button id="next-btn" onclick="nextPage()">Next</button>
+        <button id="prevBtn" onclick="prevPage()">Previous</button>
+        <button id="nextBtn" onclick="nextPage()">Next</button>
       </div>
     </div>
   </div>
@@ -211,12 +194,15 @@
     const pages = document.querySelectorAll('.page');
     let currentPage = 0;
 
-    function toggleNavBar() {
-      document.getElementById('sideNav').classList.toggle('closed');
+    function toggleSideNav() {
+      const sideNav = document.getElementById('sideNav');
+      const mainContent = document.getElementById('mainContent');
+      sideNav.classList.toggle('hidden');
+      mainContent.classList.toggle('collapsed');
     }
 
     function showPage(index) {
-      pages.forEach((page, i) => page.classList.toggle('active', i === index));
+      pages.forEach((page, i) => page.style.display = i === index ? 'block' : 'none');
       currentPage = index;
       updateProgress();
       updateNavButtons();
@@ -224,13 +210,13 @@
 
     function updateProgress() {
       const progress = ((currentPage + 1) / pages.length) * 100;
-      document.getElementById('progress-bar').style.width = `${progress}%`;
-      document.getElementById('progress-text').innerText = `${Math.round(progress)}% Complete`;
+      document.getElementById('progressBar').style.width = `${progress}%`;
+      document.getElementById('progressText').innerText = `${Math.round(progress)}% Complete`;
     }
 
     function updateNavButtons() {
-      document.getElementById('prev-btn').disabled = currentPage === 0;
-      document.getElementById('next-btn').disabled = currentPage === pages.length - 1;
+      document.getElementById('prevBtn').disabled = currentPage === 0;
+      document.getElementById('nextBtn').disabled = currentPage === pages.length - 1;
     }
 
     function nextPage() {
@@ -241,16 +227,7 @@
       if (currentPage > 0) showPage(currentPage - 1);
     }
 
-    function checkAnswer(option, isCorrect) {
-      const feedback = document.getElementById('quiz-feedback');
-      if (isCorrect) {
-        option.classList.add('correct');
-        feedback.textContent = "Well done! You're correct.";
-      } else {
-        option.classList.add('wrong');
-        feedback.textContent = "Try again! This isn't the best option.";
-      }
-    }
+    showPage(currentPage);
   </script>
 </body>
 </html>
