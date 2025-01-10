@@ -3,231 +3,176 @@
 <head>
   <meta charset="UTF-8">
   <meta name="viewport" content="width=device-width, initial-scale=1.0">
-  <title>Interactive eBook - Improved UX</title>
-  <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.3.0/dist/css/bootstrap.min.css" rel="stylesheet">
+  <title>Interactive eBook - Course Layout</title>
   <link href="https://fonts.googleapis.com/css2?family=Rubik:wght@400;500;700&display=swap" rel="stylesheet">
   <style>
     body {
-      font-family: 'Rubik', sans-serif;
-      background-color: #f5f6fa;
       margin: 0;
+      font-family: 'Rubik', sans-serif;
+      background-color: #f4f6f8;
+    }
+
+    .container {
+      display: flex;
       height: 100vh;
+    }
+
+    .sidebar {
+      width: 300px;
+      background-color: #004c97;
+      color: white;
+      display: flex;
+      flex-direction: column;
+      padding: 20px;
+      border-right: 3px solid #e0e0e0;
+    }
+
+    .sidebar h3 {
+      font-size: 22px;
+      font-weight: 700;
+      margin-bottom: 20px;
+    }
+
+    .nav-item {
+      padding: 15px 20px;
+      background-color: transparent;
+      border-radius: 5px;
+      color: white;
+      margin-bottom: 10px;
+      cursor: pointer;
+      font-weight: 500;
+    }
+
+    .nav-item.active, .nav-item:hover {
+      background-color: #2566b3;
+    }
+
+    .content {
+      flex-grow: 1;
+      padding: 40px;
+      background-color: white;
+    }
+
+    .header {
+      display: flex;
+      justify-content: space-between;
+      align-items: center;
+      margin-bottom: 30px;
+    }
+
+    .header h1 {
+      font-size: 32px;
+      color: #004c97;
+    }
+
+    .info-icon {
+      width: 40px;
+      height: 40px;
+      background-color: #f1f3f5;
+      border-radius: 50%;
       display: flex;
       justify-content: center;
       align-items: center;
-      overflow: hidden;
-    }
-
-    .ebook-container {
-      width: 90%;
-      height: 90vh;
-      max-width: 1000px;
-      background: linear-gradient(135deg, #fdfbfb, #ebedee);
-      border-radius: 15px;
-      box-shadow: 0 10px 20px rgba(0, 0, 0, 0.15);
-      display: flex;
-      flex-direction: column;
-    }
-
-    .side-nav {
-      background-color: white;
-      border-right: 2px solid #e0e0e0;
-      width: 250px;
-      position: fixed;
-      top: 0;
-      left: 0;
-      height: 100%;
-      padding: 20px;
-      transition: all 0.4s ease;
-      z-index: 10;
-    }
-
-    .side-nav.hidden {
-      transform: translateX(-260px);
-    }
-
-    .main-content {
-      flex: 1;
-      margin-left: 270px;
-      padding: 20px;
-      transition: margin-left 0.4s ease;
-    }
-
-    .main-content.collapsed {
-      margin-left: 0;
-    }
-
-    .toggle-nav-btn {
-      background-color: #776cca;
-      border: none;
-      color: white;
-      padding: 8px 16px;
-      font-size: 16px;
-      border-radius: 8px;
+      font-size: 20px;
       cursor: pointer;
-      margin-top: 10px;
-      position: fixed;
-      top: 15px;
-      left: 15px;
-      z-index: 20;
+      color: #004c97;
     }
 
-    .ebook-header {
-      background-color: #4c5ec5;
-      color: white;
-      text-align: center;
-      padding: 20px;
-      border-radius: 15px 15px 0 0;
-    }
-
-    .page {
-      background-color: #f8f9fa;
-      padding: 20px;
+    .section-content {
+      background-color: #fff8f2;
+      padding: 30px;
       border-radius: 10px;
+      box-shadow: 0 4px 8px rgba(0, 0, 0, 0.1);
+    }
+
+    .section-content h2 {
+      margin-top: 0;
+    }
+
+    .video-placeholder {
+      background-color: #e1e1e1;
+      width: 100%;
+      height: 200px;
+      display: flex;
+      justify-content: center;
+      align-items: center;
+      margin-top: 20px;
+      border-radius: 10px;
+    }
+
+    .list-group {
+      margin-top: 20px;
+      padding-left: 20px;
+    }
+
+    .list-group li {
       margin-bottom: 10px;
     }
 
-    .progress-container {
-      margin-top: 20px;
-    }
-
-    .progress-bar {
-      width: 100%;
-      height: 10px;
-      background-color: #ddd;
-      border-radius: 5px;
-    }
-
-    .progress-bar-inner {
-      height: 100%;
-      background-color: #4c5ec5;
-      width: 0%;
-      border-radius: 5px;
-      transition: width 0.3s;
-    }
-
-    .navigation {
-      display: flex;
-      justify-content: space-between;
-      margin-top: 20px;
-    }
-
-    .navigation button {
-      padding: 10px 20px;
-      background-color: #776cca;
-      border: none;
-      color: white;
-      border-radius: 5px;
-      cursor: pointer;
-      transition: background-color 0.3s;
-    }
-
-    .navigation button:hover {
-      background-color: #5fae8d;
-    }
-
-    .navigation button:disabled {
-      background-color: #ccc;
-      cursor: not-allowed;
-    }
   </style>
 </head>
 <body>
-  <div class="ebook-container">
-    <button class="toggle-nav-btn" onclick="toggleSideNav()">☰ Chapters</button>
-
-    <div class="side-nav" id="sideNav">
-      <h5>Chapters</h5>
-      <button onclick="showPage(0)">Introduction</button>
-      <button onclick="showPage(1)">Chapter 1: Online Safety Basics</button>
-      <button onclick="showPage(2)">Chapter 2: Recognising Risks</button>
-      <button onclick="showPage(3)">Chapter 3: Support Resources</button>
-      <button onclick="showPage(4)">Quiz: Test Your Knowledge</button>
+  <div class="container">
+    <!-- Sidebar -->
+    <div class="sidebar">
+      <h3>Course Title</h3>
+      <div class="nav-item active" onclick="showPage(0)">Welcome</div>
+      <div class="nav-item" onclick="showPage(1)">Warm-up Activity</div>
+      <div class="nav-item" onclick="showPage(2)">Exploring Creative Practices</div>
+      <div class="nav-item" onclick="showPage(3)">Creative Challenge</div>
     </div>
 
-    <div class="main-content" id="mainContent">
-      <div class="ebook-header">
-        <h1>Interactive eBook</h1>
-        <p>An engaging and immersive reading experience.</p>
+    <!-- Content -->
+    <div class="content">
+      <div class="header">
+        <h1 id="moduleTitle">Module / Section Title</h1>
+        <div class="info-icon">i</div>
       </div>
 
-      <div class="page">
-        <h2>Introduction</h2>
-        <p>Welcome to your interactive eBook. This guide will walk you through the basics of online safety.</p>
+      <!-- Section Pages -->
+      <div class="section-content" id="page-0">
+        <h2>Welcome</h2>
+        <p>This is the introduction to your interactive module. Let’s explore some warm-up exercises to get started.</p>
       </div>
 
-      <div class="page">
-        <h2>Chapter 1: Online Safety Basics</h2>
-        <p>Learn how to create strong passwords and identify trustworthy websites.</p>
-      </div>
-
-      <div class="page">
-        <h2>Chapter 2: Recognising Risks</h2>
-        <p>Spot online scams and avoid cyberbullying with real-world examples.</p>
-      </div>
-
-      <div class="page">
-        <h2>Chapter 3: Support Resources</h2>
-        <p>Here’s a list of resources to help you when facing online threats.</p>
-      </div>
-
-      <div class="page">
-        <h2>Quiz: Test Your Knowledge</h2>
-        <p>Choose the correct answer below to test what you’ve learned!</p>
-      </div>
-
-      <div class="progress-container">
-        <div class="progress-bar">
-          <div class="progress-bar-inner" id="progressBar"></div>
+      <div class="section-content" id="page-1" style="display: none;">
+        <h2>Warm-up Activity</h2>
+        <p>Lorem ipsum dolor sit amet, consectetur adipiscing elit. Aenean commodo ligula eget dolor.</p>
+        <div class="video-placeholder">
+          <span>🎥 Video Placeholder</span>
         </div>
-        <p class="text-center mt-2" id="progressText">0% Complete</p>
+        <ul class="list-group">
+          <li>Reflect on your first impressions.</li>
+          <li>Discuss in groups or take personal notes.</li>
+          <li>Prepare for the next session.</li>
+        </ul>
       </div>
 
-      <div class="navigation">
-        <button id="prevBtn" onclick="prevPage()">Previous</button>
-        <button id="nextBtn" onclick="nextPage()">Next</button>
+      <div class="section-content" id="page-2" style="display: none;">
+        <h2>Exploring Creative Practices</h2>
+        <p>This section discusses various methods for exploring and experimenting with creativity.</p>
+      </div>
+
+      <div class="section-content" id="page-3" style="display: none;">
+        <h2>Creative Challenge</h2>
+        <p>Ready for the challenge? Let’s apply what you’ve learned to a real-world problem!</p>
       </div>
     </div>
   </div>
 
   <script>
-    const pages = document.querySelectorAll('.page');
-    let currentPage = 0;
-
-    function toggleSideNav() {
-      const sideNav = document.getElementById('sideNav');
-      const mainContent = document.getElementById('mainContent');
-      sideNav.classList.toggle('hidden');
-      mainContent.classList.toggle('collapsed');
-    }
+    const pages = document.querySelectorAll('.section-content');
+    const navItems = document.querySelectorAll('.nav-item');
 
     function showPage(index) {
-      pages.forEach((page, i) => page.style.display = i === index ? 'block' : 'none');
-      currentPage = index;
-      updateProgress();
-      updateNavButtons();
-    }
+      pages.forEach((page, i) => {
+        page.style.display = i === index ? 'block' : 'none';
+        navItems[i].classList.toggle('active', i === index);
+      });
 
-    function updateProgress() {
-      const progress = ((currentPage + 1) / pages.length) * 100;
-      document.getElementById('progressBar').style.width = `${progress}%`;
-      document.getElementById('progressText').innerText = `${Math.round(progress)}% Complete`;
+      const titles = ['Welcome', 'Warm-up Activity', 'Exploring Creative Practices', 'Creative Challenge'];
+      document.getElementById('moduleTitle').innerText = titles[index];
     }
-
-    function updateNavButtons() {
-      document.getElementById('prevBtn').disabled = currentPage === 0;
-      document.getElementById('nextBtn').disabled = currentPage === pages.length - 1;
-    }
-
-    function nextPage() {
-      if (currentPage < pages.length - 1) showPage(currentPage + 1);
-    }
-
-    function prevPage() {
-      if (currentPage > 0) showPage(currentPage - 1);
-    }
-
-    showPage(currentPage);
   </script>
 </body>
 </html>
