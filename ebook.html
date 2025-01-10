@@ -3,24 +3,28 @@
 <head>
   <meta charset="UTF-8">
   <meta name="viewport" content="width=device-width, initial-scale=1.0">
-  <title>Online Safety Interactive eBook</title>
-  <!-- Bootstrap CSS -->
+  <title>Accessible Online Safety eBook</title>
   <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.3.0/dist/css/bootstrap.min.css" rel="stylesheet">
   <link href="https://fonts.googleapis.com/css2?family=Rubik:wght@400;500;700&display=swap" rel="stylesheet">
   <style>
     body {
       font-family: 'Rubik', sans-serif;
       background-color: #f4f7fb;
+      margin: 0;
     }
-    .container-fluid {
-      height: 100vh;
-      display: flex;
+    .ebook-container {
+      max-width: 1000px;
+      margin: 40px auto;
+      background-color: white;
+      border-radius: 12px;
+      box-shadow: 0 10px 20px rgba(0, 0, 0, 0.1);
     }
     .sidebar {
-      width: 20%;
       background-color: #004c97;
       color: white;
       padding: 20px;
+      border-radius: 12px 0 0 12px;
+      width: 280px;
       display: flex;
       flex-direction: column;
     }
@@ -30,141 +34,168 @@
       margin-bottom: 20px;
     }
     .nav-link {
-      padding: 10px;
+      padding: 10px 15px;
       color: white;
       border-radius: 8px;
       margin-bottom: 10px;
       cursor: pointer;
-      text-align: left;
-      transition: all 0.3s ease;
+      transition: background-color 0.3s ease;
       font-weight: 500;
+      text-align: left;
     }
     .nav-link.active, .nav-link:hover {
       background-color: #2566b3;
     }
-    .main-content {
-      width: 80%;
+    .content {
       padding: 40px;
-      overflow-y: auto;
-      background-color: white;
+      flex-grow: 1;
+    }
+    .header {
+      display: flex;
+      justify-content: space-between;
+      align-items: center;
+    }
+    .header h1 {
+      font-size: 28px;
+      color: #004c97;
+    }
+    .progress-bar-container {
+      margin: 20px 0;
+    }
+    .progress-bar {
+      height: 12px;
+      background-color: #f1f1f1;
+      border-radius: 6px;
+      overflow: hidden;
+    }
+    .progress-bar-inner {
+      background-color: #004c97;
+      width: 0%;
+      height: 100%;
+      border-radius: 6px;
+      transition: width 0.4s;
     }
     .page-content {
-      background-color: #fef8f2;
-      padding: 20px 30px;
-      border-radius: 10px;
-      box-shadow: 0 4px 10px rgba(0, 0, 0, 0.1);
       display: none;
+      animation: fadeIn 0.5s ease-in-out;
     }
     .page-content.active {
       display: block;
     }
-    .video-placeholder {
-      background-color: #e1e1e1;
-      width: 100%;
-      height: 200px;
+    @keyframes fadeIn {
+      from { opacity: 0; transform: translateY(20px); }
+      to { opacity: 1; transform: translateY(0); }
+    }
+    .navigation {
       display: flex;
-      justify-content: center;
-      align-items: center;
-      border-radius: 8px;
+      justify-content: space-between;
       margin-top: 20px;
     }
-    .btn-primary {
+    .navigation button {
       background-color: #004c97;
       border: none;
+      color: white;
+      padding: 12px 24px;
       font-size: 16px;
-      padding: 10px 20px;
       border-radius: 8px;
       cursor: pointer;
+      transition: background-color 0.3s;
     }
-    .btn-primary:hover {
+    .navigation button:hover {
       background-color: #2566b3;
+    }
+    .navigation button:disabled {
+      background-color: #ccc;
+      cursor: not-allowed;
     }
   </style>
 </head>
 <body>
-  <div class="container-fluid">
+  <div class="container-fluid d-flex">
     <!-- Sidebar -->
     <div class="sidebar">
-      <h3>Online Safety Course</h3>
-      <a class="nav-link active" onclick="showPage(0)">Introduction</a>
-      <a class="nav-link" onclick="showPage(1)">Social Media Safety</a>
-      <a class="nav-link" onclick="showPage(2)">Identifying Scams</a>
-      <a class="nav-link" onclick="showPage(3)">Protecting Personal Information</a>
-      <a class="nav-link" onclick="showPage(4)">Responding to Cyberbullying</a>
-      <a class="nav-link" onclick="showPage(5)">Support Resources</a>
+      <h3>Online Safety eBook</h3>
+      <a class="nav-link active" href="#0" onclick="showPage(0)">Introduction</a>
+      <a class="nav-link" href="#1" onclick="showPage(1)">Social Media Safety</a>
+      <a class="nav-link" href="#2" onclick="showPage(2)">Identifying Scams</a>
+      <a class="nav-link" href="#3" onclick="showPage(3)">Protecting Personal Information</a>
+      <a class="nav-link" href="#4" onclick="showPage(4)">Responding to Cyberbullying</a>
+      <a class="nav-link" href="#5" onclick="showPage(5)">Support Resources</a>
     </div>
 
     <!-- Main Content -->
-    <div class="main-content">
-      <!-- Introduction Page -->
-      <div class="page-content active">
-        <h2>Introduction to Online Safety</h2>
-        <p>This eBook is designed to help you navigate the internet safely. Learn how to recognise scams, avoid harmful content, and protect your digital footprint.</p>
-        <ul>
-          <li>Understand the importance of safeguarding personal data.</li>
-          <li>Learn how to report suspicious content and stay informed.</li>
-          <li>Explore support networks if you encounter cyberbullying.</li>
-        </ul>
+    <div class="content">
+      <div class="header">
+        <h1 id="moduleTitle">Introduction to Online Safety</h1>
       </div>
 
-      <!-- Social Media Safety -->
-      <div class="page-content">
+      <!-- Progress Bar -->
+      <div class="progress-bar-container">
+        <div class="progress-bar">
+          <div class="progress-bar-inner" id="progressBar"></div>
+        </div>
+      </div>
+
+      <!-- Pages -->
+      <div class="page-content active" id="page-0">
+        <h2>Introduction</h2>
+        <p>Welcome to the Online Safety eBook. Learn how to navigate the internet safely, recognise scams, and protect your personal data.</p>
+      </div>
+
+      <div class="page-content" id="page-1">
         <h2>Social Media Safety</h2>
-        <p>When using social media platforms like Instagram, Facebook, or TikTok, follow these guidelines to stay safe:</p>
-        <div class="video-placeholder">🎥 Video Placeholder: Social Media Tips</div>
-        <ul class="mt-3">
-          <li>Adjust your privacy settings to limit who can see your posts.</li>
-          <li>Avoid sharing your location publicly in real-time.</li>
-          <li>Think before you click: links sent via DMs can be scams.</li>
+        <p>Follow these tips to stay safe on social platforms:</p>
+        <ul>
+          <li>Adjust privacy settings to limit who can see your posts.</li>
+          <li>Avoid sharing your location publicly.</li>
+          <li>Think before clicking any unknown links.</li>
         </ul>
-        <p class="mt-3"><strong>Example:</strong> John received a suspicious link claiming he won a prize. He avoided clicking it and reported the message.</p>
       </div>
 
-      <!-- Identifying Scams -->
-      <div class="page-content">
+      <div class="page-content" id="page-2">
         <h2>Identifying Scams</h2>
-        <p>Scammers often use urgency or emotional appeals to trick you. Be aware of the following signs:</p>
+        <p>Scammers often use urgency to trick people. Be cautious:</p>
         <ul>
-          <li>Emails asking for immediate action or financial details.</li>
-          <li>Pop-ups claiming you’ve won a prize—don’t click “claim now.”</li>
-          <li>Messages from unknown contacts promising too-good-to-be-true offers.</li>
+          <li>Watch out for emails asking for financial details.</li>
+          <li>Don’t trust pop-ups claiming you’ve won a prize.</li>
+          <li>Ignore messages from unknown senders promising quick rewards.</li>
         </ul>
       </div>
 
-      <!-- Protecting Personal Information -->
-      <div class="page-content">
+      <div class="page-content" id="page-3">
         <h2>Protecting Personal Information</h2>
-        <p>Your personal data is valuable. Keep it secure by following these tips:</p>
+        <p>Your data is valuable. Here’s how to protect it:</p>
         <ul>
-          <li>Use different, strong passwords for each account.</li>
-          <li>Enable two-factor authentication (2FA) wherever possible.</li>
-          <li>Regularly review the permissions you've granted to apps and sites.</li>
+          <li>Use unique passwords for different accounts.</li>
+          <li>Enable two-factor authentication (2FA).</li>
+          <li>Review permissions for apps that access your data.</li>
         </ul>
-        <p><strong>Example:</strong> Emma checked her old accounts and revoked access for outdated apps she no longer used.</p>
       </div>
 
-      <!-- Responding to Cyberbullying -->
-      <div class="page-content">
+      <div class="page-content" id="page-4">
         <h2>Responding to Cyberbullying</h2>
-        <p>Cyberbullying can have a serious impact on mental health. Here’s how to respond:</p>
+        <p>If you’re facing cyberbullying, here’s what you can do:</p>
         <ul>
-          <li>Don’t engage with negative messages—block and report the user.</li>
-          <li>Save evidence of the messages if you need to seek support.</li>
-          <li>Speak to a trusted adult, friend, or professional if you’re feeling overwhelmed.</li>
+          <li>Block and report users who send offensive messages.</li>
+          <li>Save screenshots as evidence.</li>
+          <li>Talk to someone you trust or seek support.</li>
         </ul>
-        <div class="video-placeholder">🎥 Video Placeholder: Responding to Negative Comments</div>
       </div>
 
-      <!-- Support Resources -->
-      <div class="page-content">
+      <div class="page-content" id="page-5">
         <h2>Support Resources</h2>
-        <p>If you ever feel unsafe or overwhelmed, these resources are here to help:</p>
+        <p>If you need help, reach out to these resources:</p>
         <ul>
-          <li><strong>Childline:</strong> 24/7 support for young people facing challenges online.</li>
-          <li><strong>Report Harmful Content:</strong> A platform that helps you report offensive or illegal online content.</li>
-          <li><strong>CyberSafe:</strong> Guides on improving your online safety.</li>
+          <li><strong>Childline:</strong> Support for young people facing online challenges.</li>
+          <li><strong>Report Harmful Content:</strong> Report offensive or illegal online content.</li>
+          <li><strong>CyberSafe:</strong> Guides to improve online safety.</li>
         </ul>
-        <p><strong>Tip:</strong> Don’t hesitate to report harmful content—you’re contributing to making the web safer for everyone.</p>
+      </div>
+
+      <!-- Navigation Buttons -->
+      <div class="navigation">
+        <button id="prevBtn" onclick="prevPage()" disabled>Previous</button>
+        <button id="nextBtn" onclick="nextPage()">Next</button>
       </div>
     </div>
   </div>
@@ -172,12 +203,35 @@
   <script>
     const pages = document.querySelectorAll('.page-content');
     const navLinks = document.querySelectorAll('.nav-link');
+    let currentPage = 0;
 
     function showPage(index) {
       pages.forEach((page, i) => {
         page.classList.toggle('active', i === index);
         navLinks[i].classList.toggle('active', i === index);
       });
+      currentPage = index;
+      updateProgress();
+      updateNavButtons();
+      document.getElementById('moduleTitle').innerText = navLinks[index].innerText;
+    }
+
+    function updateProgress() {
+      const progress = ((currentPage + 1) / pages.length) * 100;
+      document.getElementById('progressBar').style.width = `${progress}%`;
+    }
+
+    function updateNavButtons() {
+      document.getElementById('prevBtn').disabled = currentPage === 0;
+      document.getElementById('nextBtn').disabled = currentPage === pages.length - 1;
+    }
+
+    function nextPage() {
+      if (currentPage < pages.length - 1) showPage(currentPage + 1);
+    }
+
+    function prevPage() {
+      if (currentPage > 0) showPage(currentPage - 1);
     }
   </script>
 </body>
