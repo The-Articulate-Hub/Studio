@@ -3,13 +3,13 @@
 <head>
   <meta charset="UTF-8">
   <meta name="viewport" content="width=device-width, initial-scale=1.0">
-  <title>Interactive eBook - Course Layout</title>
+  <title>Online Safety eBook</title>
   <link href="https://fonts.googleapis.com/css2?family=Rubik:wght@400;500;700&display=swap" rel="stylesheet">
   <style>
     body {
       margin: 0;
       font-family: 'Rubik', sans-serif;
-      background-color: #f4f6f8;
+      background-color: #f7f9fc;
     }
 
     .container {
@@ -18,7 +18,7 @@
     }
 
     .sidebar {
-      width: 300px;
+      width: 280px;
       background-color: #004c97;
       color: white;
       display: flex;
@@ -98,6 +98,8 @@
       align-items: center;
       margin-top: 20px;
       border-radius: 10px;
+      font-size: 24px;
+      color: #666;
     }
 
     .list-group {
@@ -115,47 +117,86 @@
   <div class="container">
     <!-- Sidebar -->
     <div class="sidebar">
-      <h3>Course Title</h3>
-      <div class="nav-item active" onclick="showPage(0)">Welcome</div>
-      <div class="nav-item" onclick="showPage(1)">Warm-up Activity</div>
-      <div class="nav-item" onclick="showPage(2)">Exploring Creative Practices</div>
-      <div class="nav-item" onclick="showPage(3)">Creative Challenge</div>
+      <h3>Online Safety Guide</h3>
+      <div class="nav-item active" onclick="showPage(0)">Introduction</div>
+      <div class="nav-item" onclick="showPage(1)">Creating Strong Passwords</div>
+      <div class="nav-item" onclick="showPage(2)">Recognising Scams</div>
+      <div class="nav-item" onclick="showPage(3)">Avoiding Cyberbullying</div>
+      <div class="nav-item" onclick="showPage(4)">Support Resources</div>
+      <div class="nav-item" onclick="showPage(5)">Test Your Knowledge</div>
     </div>
 
     <!-- Content -->
     <div class="content">
       <div class="header">
-        <h1 id="moduleTitle">Module / Section Title</h1>
-        <div class="info-icon">i</div>
+        <h1 id="moduleTitle">Introduction</h1>
+        <div class="info-icon">ℹ️</div>
       </div>
 
       <!-- Section Pages -->
       <div class="section-content" id="page-0">
-        <h2>Welcome</h2>
-        <p>This is the introduction to your interactive module. Let’s explore some warm-up exercises to get started.</p>
-      </div>
-
-      <div class="section-content" id="page-1" style="display: none;">
-        <h2>Warm-up Activity</h2>
-        <p>Lorem ipsum dolor sit amet, consectetur adipiscing elit. Aenean commodo ligula eget dolor.</p>
-        <div class="video-placeholder">
-          <span>🎥 Video Placeholder</span>
-        </div>
+        <h2>Introduction to Online Safety</h2>
+        <p>Welcome to the Online Safety eBook. This guide will walk you through essential information to help you stay safe online.</p>
         <ul class="list-group">
-          <li>Reflect on your first impressions.</li>
-          <li>Discuss in groups or take personal notes.</li>
-          <li>Prepare for the next session.</li>
+          <li>Learn to create strong passwords.</li>
+          <li>Recognise scams and phishing attempts.</li>
+          <li>Avoid cyberbullying and stay secure.</li>
+          <li>Access helpful resources for additional support.</li>
         </ul>
       </div>
 
+      <div class="section-content" id="page-1" style="display: none;">
+        <h2>Creating Strong Passwords</h2>
+        <p>Passwords are your first line of defence. Follow these steps for strong passwords:</p>
+        <ul class="list-group">
+          <li>Use a mix of letters, numbers, and symbols.</li>
+          <li>Avoid using common words like "password" or "123456".</li>
+          <li>Make your passwords at least 12 characters long.</li>
+          <li>Use a password manager to store complex passwords.</li>
+        </ul>
+        <div class="video-placeholder">
+          Video Placeholder
+        </div>
+      </div>
+
       <div class="section-content" id="page-2" style="display: none;">
-        <h2>Exploring Creative Practices</h2>
-        <p>This section discusses various methods for exploring and experimenting with creativity.</p>
+        <h2>Recognising Scams</h2>
+        <p>Scammers use different tactics to trick you. Here’s what to look for:</p>
+        <ul class="list-group">
+          <li>Emails or messages asking for personal details.</li>
+          <li>Links that look legitimate but redirect you to a fake site.</li>
+          <li>Urgent messages that try to scare you.</li>
+        </ul>
       </div>
 
       <div class="section-content" id="page-3" style="display: none;">
-        <h2>Creative Challenge</h2>
-        <p>Ready for the challenge? Let’s apply what you’ve learned to a real-world problem!</p>
+        <h2>Avoiding Cyberbullying</h2>
+        <p>Cyberbullying can have a serious impact on mental health. Here’s how to protect yourself:</p>
+        <ul class="list-group">
+          <li>Block and report users who send hurtful messages.</li>
+          <li>Never engage with negative comments online.</li>
+          <li>Talk to someone you trust if you feel upset.</li>
+        </ul>
+      </div>
+
+      <div class="section-content" id="page-4" style="display: none;">
+        <h2>Support Resources</h2>
+        <p>If you ever feel unsafe online, here are some resources to help you:</p>
+        <ul class="list-group">
+          <li><strong>National Online Safety Hub</strong> – Provides guides for online security.</li>
+          <li><strong>Report Harmful Content</strong> – Helps you report abuse or scams.</li>
+          <li><strong>Childline</strong> – Support for young people facing online harassment.</li>
+        </ul>
+      </div>
+
+      <div class="section-content" id="page-5" style="display: none;">
+        <h2>Test Your Knowledge</h2>
+        <p>Answer the following questions to see what you’ve learned:</p>
+        <ul class="list-group">
+          <li>1. What should you do if you receive a suspicious email? (A) Reply to it (B) Ignore and delete it</li>
+          <li>2. What is the recommended length of a strong password? (A) 6 characters (B) 12 characters or more</li>
+          <li>3. Who can you contact if you’re being cyberbullied? (A) A trusted adult (B) Ignore the situation</li>
+        </ul>
       </div>
     </div>
   </div>
@@ -170,7 +211,14 @@
         navItems[i].classList.toggle('active', i === index);
       });
 
-      const titles = ['Welcome', 'Warm-up Activity', 'Exploring Creative Practices', 'Creative Challenge'];
+      const titles = [
+        'Introduction to Online Safety',
+        'Creating Strong Passwords',
+        'Recognising Scams',
+        'Avoiding Cyberbullying',
+        'Support Resources',
+        'Test Your Knowledge'
+      ];
       document.getElementById('moduleTitle').innerText = titles[index];
     }
   </script>
