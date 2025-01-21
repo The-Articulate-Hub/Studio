@@ -8,211 +8,147 @@
   <style>
     body {
       font-family: Arial, sans-serif;
-      background-color: #f8f9fa;
+      display: flex;
+      min-height: 100vh;
+      margin: 0;
+      background-color: #f4f4f9;
     }
-    .ebook-container {
-      max-width: 900px;
-      margin: 20px auto;
-      background: #fff;
-      border-radius: 10px;
-      box-shadow: 0 4px 10px rgba(0, 0, 0, 0.1);
-    }
-    .chapter-header {
-      background-color: #007bff;
+    .sidebar {
+      background-color: #004c97;
       color: white;
-      padding: 15px;
-      border-radius: 10px 10px 0 0;
-    }
-    .chapter-content {
+      width: 250px;
       padding: 20px;
+      display: flex;
+      flex-direction: column;
+      position: fixed;
+      top: 0;
+      bottom: 0;
+    }
+    .sidebar h2 {
+      font-size: 1.5rem;
+      margin-bottom: 1rem;
+    }
+    .sidebar a {
+      color: white;
+      text-decoration: none;
+      margin: 10px 0;
+      padding: 10px;
+      border-radius: 5px;
+      transition: background-color 0.3s;
+    }
+    .sidebar a:hover, .sidebar a.active {
+      background-color: #2566b3;
+    }
+    .content {
+      margin-left: 270px;
+      padding: 20px;
+      width: 100%;
+    }
+    .chapter {
+      display: none;
+    }
+    .chapter.active {
+      display: block;
+      animation: fadeIn 0.3s ease-in-out;
+    }
+    @keyframes fadeIn {
+      from { opacity: 0; }
+      to { opacity: 1; }
     }
     .quiz-section {
-      background-color: #e9ecef;
+      background-color: #f1f9ff;
       padding: 15px;
-      border-radius: 10px;
+      border: 1px solid #d1e7f3;
+      border-radius: 8px;
       margin-top: 20px;
     }
-    .feedback {
-      display: none;
-      margin-top: 10px;
-    }
-    .hint-text {
-      font-size: 0.9em;
-      color: #6c757d;
-      margin-top: 5px;
-    }
-    .progress {
-      margin-top: 20px;
-      height: 20px;
-    }
-    .badge {
-      display: inline-block;
-      padding: 10px;
-      background-color: #ffc107;
-      border-radius: 5px;
-      margin-top: 10px;
-    }
-    .list-icon {
-      margin-right: 10px;
-    }
-    .nav-buttons {
-      display: flex;
-      justify-content: space-between;
-      margin-top: 20px;
+    .quiz-section button {
+      margin: 5px 0;
     }
   </style>
 </head>
 <body>
 
-<div class="ebook-container">
-  <header class="chapter-header">
-    <h1>Table of Contents</h1>
-  </header>
-  <div class="chapter-content">
-    <ul class="list-group">
-      <li class="list-group-item"><a href="#chapter-1">Chapter 1: Strong Passwords</a></li>
-      <li class="list-group-item"><a href="#chapter-2">Chapter 2: Identifying Fake News</a></li>
-      <li class="list-group-item"><a href="#chapter-3">Chapter 3: Protecting Personal Information</a></li>
-      <li class="list-group-item"><a href="#chapter-4">Chapter 4: Cyberbullying and Online Etiquette</a></li>
-    </ul>
-  </div>
+<div class="sidebar">
+  <h2>Table of Contents</h2>
+  <a href="#" class="nav-link" onclick="showChapter('chapter-1')">Chapter 1: Strong Passwords</a>
+  <a href="#" class="nav-link" onclick="showChapter('chapter-2')">Chapter 2: Identifying Fake News</a>
+  <a href="#" class="nav-link" onclick="showChapter('chapter-3')">Chapter 3: Protecting Personal Information</a>
+  <a href="#" class="nav-link" onclick="showChapter('chapter-4')">Chapter 4: Cyberbullying and Online Etiquette</a>
 </div>
 
-<div id="chapter-1" class="ebook-container mt-5">
-  <header class="chapter-header">
+<div class="content">
+  <div id="chapter-1" class="chapter active">
     <h1>Chapter 1: Strong Passwords</h1>
-  </header>
-  <div class="chapter-content">
     <p><strong>Introduction:</strong> Learn the importance of strong passwords and how to create one to secure your online accounts.</p>
     <ul>
-      <li><i class="bi bi-shield-lock list-icon"></i>Use at least 16 characters.</li>
-      <li><i class="bi bi-fonts list-icon"></i>Include uppercase, lowercase, numbers, and special characters.</li>
-      <li><i class="bi bi-person-x list-icon"></i>Don’t use personal information like your name or birthdate.</li>
+      <li>Use at least 16 characters.</li>
+      <li>Include uppercase, lowercase, numbers, and special characters.</li>
+      <li>Don’t use personal information like your name or birthdate.</li>
     </ul>
     <p><strong>Summary:</strong> Strong passwords are the foundation of your online safety. Always use unique and complex passwords.</p>
-
     <div class="quiz-section">
       <h4>Quiz: How much do you know about strong passwords?</h4>
-      <p><strong>1. What is the recommended minimum length for a strong password?</strong></p>
-      <button class="btn btn-outline-primary" onclick="checkAnswer(1, 'correct')">A. 16 characters</button>
-      <button class="btn btn-outline-primary" onclick="checkAnswer(1, 'incorrect')">B. 8 characters</button>
-      <button class="btn btn-outline-primary" onclick="checkAnswer(1, 'incorrect')">C. 10 characters</button>
-      <div id="feedback-1" class="feedback alert" role="alert" aria-live="polite"></div>
-    </div>
-    <div class="nav-buttons">
-      <button class="btn btn-secondary" disabled>Previous</button>
-      <a href="#chapter-2" class="btn btn-primary">Next</a>
+      <p>What is the recommended minimum length for a strong password?</p>
+      <button class="btn btn-primary" onclick="showFeedback(true)">A. 16 characters</button>
+      <button class="btn btn-primary" onclick="showFeedback(false)">B. 8 characters</button>
+      <button class="btn btn-primary" onclick="showFeedback(false)">C. 10 characters</button>
+      <p id="feedback" style="display:none; color: green;">Correct! Well done.</p>
     </div>
   </div>
-</div>
 
-<div id="chapter-2" class="ebook-container mt-5">
-  <header class="chapter-header">
+  <div id="chapter-2" class="chapter">
     <h1>Chapter 2: Identifying Fake News</h1>
-  </header>
-  <div class="chapter-content">
     <p><strong>Introduction:</strong> Fake news can mislead and harm. Learn how to differentiate credible information from misinformation.</p>
     <ul>
-      <li><i class="bi bi-search list-icon"></i>Verify the source of the information.</li>
-      <li><i class="bi bi-bookmark-check list-icon"></i>Check for supporting evidence from reputable outlets.</li>
-      <li><i class="bi bi-exclamation-circle list-icon"></i>Be cautious of sensational headlines.</li>
+      <li>Verify the source of the information.</li>
+      <li>Check for supporting evidence from reputable outlets.</li>
+      <li>Be cautious of sensational headlines.</li>
     </ul>
     <p><strong>Summary:</strong> Always cross-check the authenticity of information to avoid falling for fake news.</p>
-
-    <div class="quiz-section">
-      <h4>Quiz: Spotting Fake News</h4>
-      <p><strong>1. What’s the first step in verifying if news is fake?</strong></p>
-      <button class="btn btn-outline-primary" onclick="checkAnswer(2, 'correct')">A. Verify the source</button>
-      <button class="btn btn-outline-primary" onclick="checkAnswer(2, 'incorrect')">B. Share it immediately</button>
-      <div id="feedback-2" class="feedback alert" role="alert" aria-live="polite"></div>
-    </div>
-    <div class="nav-buttons">
-      <a href="#chapter-1" class="btn btn-secondary">Previous</a>
-      <a href="#chapter-3" class="btn btn-primary">Next</a>
-    </div>
   </div>
-</div>
 
-<div id="chapter-3" class="ebook-container mt-5">
-  <header class="chapter-header">
+  <div id="chapter-3" class="chapter">
     <h1>Chapter 3: Protecting Personal Information</h1>
-  </header>
-  <div class="chapter-content">
     <p><strong>Introduction:</strong> Your personal information is valuable. This chapter explains how to protect it from being exploited online.</p>
     <ul>
-      <li><i class="bi bi-shield-lock list-icon"></i>Limit the information you share on social media.</li>
-      <li><i class="bi bi-lock-fill list-icon"></i>Enable two-factor authentication on your accounts.</li>
-      <li><i class="bi bi-eye-slash list-icon"></i>Be cautious of sharing personal data on unverified websites.</li>
+      <li>Limit the information you share on social media.</li>
+      <li>Enable two-factor authentication on your accounts.</li>
+      <li>Be cautious of sharing personal data on unverified websites.</li>
     </ul>
     <p><strong>Summary:</strong> Safeguarding personal information is crucial to maintaining privacy and security online.</p>
-
-    <div class="quiz-section">
-      <h4>Quiz: Protecting Personal Information</h4>
-      <p><strong>1. Which of these is the best practice to protect personal information?</strong></p>
-      <button class="btn btn-outline-primary" onclick="checkAnswer(3, 'correct')">A. Enable two-factor authentication</button>
-      <button class="btn btn-outline-primary" onclick="checkAnswer(3, 'incorrect')">B. Share your passwords with trusted friends</button>
-      <div id="feedback-3" class="feedback alert" role="alert" aria-live="polite"></div>
-    </div>
-    <div class="nav-buttons">
-      <a href="#chapter-2" class="btn btn-secondary">Previous</a>
-      <a href="#chapter-4" class="btn btn-primary">Next</a>
-    </div>
   </div>
-</div>
 
-<div id="chapter-4" class="ebook-container mt-5">
-  <header class="chapter-header">
+  <div id="chapter-4" class="chapter">
     <h1>Chapter 4: Cyberbullying and Online Etiquette</h1>
-  </header>
-  <div class="chapter-content">
     <p><strong>Introduction:</strong> Understanding cyberbullying and maintaining proper online etiquette are essential to a positive digital experience.</p>
     <ul>
-      <li><i class="bi bi-chat-dots-fill list-icon"></i>Report and block users who engage in cyberbullying.</li>
-      <li><i class="bi bi-heart-fill list-icon"></i>Be respectful and empathetic when communicating online.</li>
-      <li><i class="bi bi-shield-fill list-icon"></i>Familiarize yourself with platform guidelines and policies.</li>
+      <li>Report and block users who engage in cyberbullying.</li>
+      <li>Be respectful and empathetic when communicating online.</li>
+      <li>Familiarize yourself with platform guidelines and policies.</li>
     </ul>
     <p><strong>Summary:</strong> By addressing cyberbullying and practising good etiquette, you contribute to a safer online community.</p>
-
-    <div class="quiz-section">
-      <h4>Quiz: Cyberbullying and Online Etiquette</h4>
-      <p><strong>1. What should you do if you experience cyberbullying?</strong></p>
-      <button class="btn btn-outline-primary" onclick="checkAnswer(4, 'correct')">A. Report and block the user</button>
-      <button class="btn btn-outline-primary" onclick="checkAnswer(4, 'incorrect')">B. Retaliate with similar messages</button>
-      <div id="feedback-4" class="feedback alert" role="alert" aria-live="polite"></div>
-    </div>
-    <div class="nav-buttons">
-      <a href="#chapter-3" class="btn btn-secondary">Previous</a>
-      <a href="#feedback" class="btn btn-primary">Give Feedback</a>
-    </div>
-  </div>
-</div>
-
-<div id="feedback" class="ebook-container mt-5">
-  <header class="chapter-header">
-    <h1>Feedback</h1>
-  </header>
-  <div class="chapter-content">
-    <form>
-      <div class="mb-3">
-        <label for="feedbackText" class="form-label">What did you think of this eBook?</label>
-        <textarea class="form-control" id="feedbackText" rows="3"></textarea>
-      </div>
-      <button type="submit" class="btn btn-primary">Submit Feedback</button>
-    </form>
   </div>
 </div>
 
 <script>
-  function checkAnswer(questionNumber, status) {
-    const feedback = document.getElementById(`feedback-${questionNumber}`);
-    if (status === 'correct') {
-      feedback.className = 'feedback alert alert-success';
-      feedback.innerText = 'Correct! Great job!';
-    } else {
-      feedback.className = 'feedback alert alert-danger';
-      feedback.innerText = 'Incorrect. Please review the chapter and try again.';
-    }
+  function showChapter(chapterId) {
+    document.querySelectorAll('.chapter').forEach(chapter => {
+      chapter.classList.remove('active');
+    });
+    document.getElementById(chapterId).classList.add('active');
+
+    document.querySelectorAll('.nav-link').forEach(link => {
+      link.classList.remove('active');
+    });
+    event.target.classList.add('active');
+  }
+
+  function showFeedback(isCorrect) {
+    const feedback = document.getElementById('feedback');
     feedback.style.display = 'block';
+    feedback.style.color = isCorrect ? 'green' : 'red';
+    feedback.textContent = isCorrect ? 'Correct! Well done.' : 'Incorrect. Please try again.';
   }
 </script>
 
