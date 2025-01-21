@@ -55,6 +55,11 @@
     .list-icon {
       margin-right: 10px;
     }
+    .nav-buttons {
+      display: flex;
+      justify-content: space-between;
+      margin-top: 20px;
+    }
   </style>
 </head>
 <body>
@@ -69,8 +74,6 @@
       <li class="list-group-item"><a href="#chapter-2">Chapter 2: Identifying Fake News</a></li>
       <li class="list-group-item"><a href="#chapter-3">Chapter 3: Protecting Personal Information</a></li>
       <li class="list-group-item"><a href="#chapter-4">Chapter 4: Cyberbullying and Online Etiquette</a></li>
-      <li class="list-group-item"><a href="#progress">Track Progress</a></li>
-      <li class="list-group-item"><a href="#feedback">Give Feedback</a></li>
     </ul>
   </div>
 </div>
@@ -96,6 +99,10 @@
       <button class="btn btn-outline-primary" onclick="checkAnswer(1, 'incorrect')">C. 10 characters</button>
       <div id="feedback-1" class="feedback alert" role="alert" aria-live="polite"></div>
     </div>
+    <div class="nav-buttons">
+      <button class="btn btn-secondary" disabled>Previous</button>
+      <a href="#chapter-2" class="btn btn-primary">Next</a>
+    </div>
   </div>
 </div>
 
@@ -118,6 +125,10 @@
       <button class="btn btn-outline-primary" onclick="checkAnswer(2, 'correct')">A. Verify the source</button>
       <button class="btn btn-outline-primary" onclick="checkAnswer(2, 'incorrect')">B. Share it immediately</button>
       <div id="feedback-2" class="feedback alert" role="alert" aria-live="polite"></div>
+    </div>
+    <div class="nav-buttons">
+      <a href="#chapter-1" class="btn btn-secondary">Previous</a>
+      <a href="#chapter-3" class="btn btn-primary">Next</a>
     </div>
   </div>
 </div>
@@ -142,6 +153,10 @@
       <button class="btn btn-outline-primary" onclick="checkAnswer(3, 'incorrect')">B. Share your passwords with trusted friends</button>
       <div id="feedback-3" class="feedback alert" role="alert" aria-live="polite"></div>
     </div>
+    <div class="nav-buttons">
+      <a href="#chapter-2" class="btn btn-secondary">Previous</a>
+      <a href="#chapter-4" class="btn btn-primary">Next</a>
+    </div>
   </div>
 </div>
 
@@ -165,7 +180,42 @@
       <button class="btn btn-outline-primary" onclick="checkAnswer(4, 'incorrect')">B. Retaliate with similar messages</button>
       <div id="feedback-4" class="feedback alert" role="alert" aria-live="polite"></div>
     </div>
+    <div class="nav-buttons">
+      <a href="#chapter-3" class="btn btn-secondary">Previous</a>
+      <a href="#feedback" class="btn btn-primary">Give Feedback</a>
+    </div>
   </div>
 </div>
 
-<div id="progress
+<div id="feedback" class="ebook-container mt-5">
+  <header class="chapter-header">
+    <h1>Feedback</h1>
+  </header>
+  <div class="chapter-content">
+    <form>
+      <div class="mb-3">
+        <label for="feedbackText" class="form-label">What did you think of this eBook?</label>
+        <textarea class="form-control" id="feedbackText" rows="3"></textarea>
+      </div>
+      <button type="submit" class="btn btn-primary">Submit Feedback</button>
+    </form>
+  </div>
+</div>
+
+<script>
+  function checkAnswer(questionNumber, status) {
+    const feedback = document.getElementById(`feedback-${questionNumber}`);
+    if (status === 'correct') {
+      feedback.className = 'feedback alert alert-success';
+      feedback.innerText = 'Correct! Great job!';
+    } else {
+      feedback.className = 'feedback alert alert-danger';
+      feedback.innerText = 'Incorrect. Please review the chapter and try again.';
+    }
+    feedback.style.display = 'block';
+  }
+</script>
+
+<script src="https://cdn.jsdelivr.net/npm/bootstrap@5.3.0/dist/js/bootstrap.bundle.min.js"></script>
+</body>
+</html>
