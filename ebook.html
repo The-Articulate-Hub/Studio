@@ -65,6 +65,30 @@
     .quiz-section button {
       margin: 5px 0;
     }
+    .progress-container {
+      margin-top: 20px;
+    }
+    .progress {
+      height: 20px;
+      background-color: #e9ecef;
+      border-radius: 10px;
+    }
+    .progress-bar {
+      background-color: #004c97;
+      width: 0%;
+      height: 100%;
+      border-radius: 10px;
+      transition: width 0.3s;
+    }
+    .note-section {
+      margin-top: 20px;
+    }
+    .note-section textarea {
+      width: 100%;
+      border: 1px solid #ccc;
+      border-radius: 5px;
+      padding: 10px;
+    }
   </style>
 </head>
 <body>
@@ -75,6 +99,9 @@
   <a href="#" class="nav-link" onclick="showChapter('chapter-2')">Chapter 2: Identifying Fake News</a>
   <a href="#" class="nav-link" onclick="showChapter('chapter-3')">Chapter 3: Protecting Personal Information</a>
   <a href="#" class="nav-link" onclick="showChapter('chapter-4')">Chapter 4: Cyberbullying and Online Etiquette</a>
+  <a href="#" class="nav-link" onclick="showChapter('chapter-5')">Chapter 5: Privacy Settings on Social Media</a>
+  <a href="#" class="nav-link" onclick="showChapter('chapter-6')">Chapter 6: Recognising and Avoiding Phishing Scams</a>
+  <a href="#" class="nav-link" onclick="showChapter('chapter-7')">Chapter 7: Online Shopping Safety</a>
 </div>
 
 <div class="content">
@@ -87,14 +114,6 @@
       <li>Don’t use personal information like your name or birthdate.</li>
     </ul>
     <p><strong>Summary:</strong> Strong passwords are the foundation of your online safety. Always use unique and complex passwords.</p>
-    <div class="quiz-section">
-      <h4>Quiz: How much do you know about strong passwords?</h4>
-      <p>What is the recommended minimum length for a strong password?</p>
-      <button class="btn btn-primary" onclick="showFeedback(true)">A. 16 characters</button>
-      <button class="btn btn-primary" onclick="showFeedback(false)">B. 8 characters</button>
-      <button class="btn btn-primary" onclick="showFeedback(false)">C. 10 characters</button>
-      <p id="feedback" style="display:none; color: green;">Correct! Well done.</p>
-    </div>
   </div>
 
   <div id="chapter-2" class="chapter">
@@ -129,6 +148,39 @@
     </ul>
     <p><strong>Summary:</strong> By addressing cyberbullying and practising good etiquette, you contribute to a safer online community.</p>
   </div>
+
+  <div id="chapter-5" class="chapter">
+    <h1>Chapter 5: Privacy Settings on Social Media</h1>
+    <p><strong>Introduction:</strong> Social media platforms collect a lot of personal data. This chapter teaches how to adjust privacy settings to protect your information.</p>
+    <ul>
+      <li>Set your profile to private.</li>
+      <li>Limit who can see your posts and personal details.</li>
+      <li>Turn off location sharing.</li>
+    </ul>
+    <p><strong>Summary:</strong> Customising privacy settings helps you stay in control of your online presence.</p>
+  </div>
+
+  <div id="chapter-6" class="chapter">
+    <h1>Chapter 6: Recognising and Avoiding Phishing Scams</h1>
+    <p><strong>Introduction:</strong> Phishing scams trick users into revealing sensitive information. Learn how to spot and avoid them.</p>
+    <ul>
+      <li>Check email addresses carefully for typos.</li>
+      <li>Avoid clicking on suspicious links.</li>
+      <li>Never share personal information through email or messages.</li>
+    </ul>
+    <p><strong>Summary:</strong> Being vigilant against phishing scams can save you from identity theft and financial loss.</p>
+  </div>
+
+  <div id="chapter-7" class="chapter">
+    <h1>Chapter 7: Online Shopping Safety</h1>
+    <p><strong>Introduction:</strong> Online shopping is convenient but comes with risks. Learn how to shop safely online.</p>
+    <ul>
+      <li>Only shop on trusted websites with HTTPS encryption.</li>
+      <li>Use secure payment methods like credit cards or PayPal.</li>
+      <li>Avoid public Wi-Fi when making transactions.</li>
+    </ul>
+    <p><strong>Summary:</strong> Following these steps ensures your personal and financial information stays safe while shopping online.</p>
+  </div>
 </div>
 
 <script>
@@ -142,13 +194,6 @@
       link.classList.remove('active');
     });
     event.target.classList.add('active');
-  }
-
-  function showFeedback(isCorrect) {
-    const feedback = document.getElementById('feedback');
-    feedback.style.display = 'block';
-    feedback.style.color = isCorrect ? 'green' : 'red';
-    feedback.textContent = isCorrect ? 'Correct! Well done.' : 'Incorrect. Please try again.';
   }
 </script>
 
