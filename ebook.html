@@ -14,6 +14,7 @@
       min-height: 100vh;
       margin: 0;
       background-color: #f4f4f9;
+      color: #333;
     }
     .sidebar {
       background-color: #004c97;
@@ -25,6 +26,7 @@
       position: fixed;
       top: 0;
       bottom: 0;
+      overflow-y: auto;
     }
     .sidebar h2 {
       font-size: 1.5rem;
@@ -58,21 +60,6 @@
       from { opacity: 0; }
       to { opacity: 1; }
     }
-    .quiz-section {
-      background-color: #f1f9ff;
-      padding: 15px;
-      border: 1px solid #d1e7f3;
-      border-radius: 8px;
-      margin-top: 20px;
-    }
-    .quiz-section button {
-      margin: 5px 0;
-    }
-    .nav-buttons {
-      margin-top: 20px;
-      display: flex;
-      justify-content: space-between;
-    }
     .progress-container {
       margin-top: 20px;
     }
@@ -88,14 +75,25 @@
       border-radius: 10px;
       transition: width 0.3s;
     }
-    .note-section {
+    .nav-buttons {
       margin-top: 20px;
+      display: flex;
+      justify-content: space-between;
     }
-    .note-section textarea {
-      width: 100%;
-      border: 1px solid #ccc;
-      border-radius: 5px;
-      padding: 10px;
+    /* Accessibility Enhancements */
+    :focus {
+      outline: 3px solid #ffbf47; /* Highlight focused elements */
+      outline-offset: 2px;
+    }
+    .sr-only {
+      position: absolute;
+      width: 1px;
+      height: 1px;
+      padding: 0;
+      margin: -1px;
+      overflow: hidden;
+      clip: rect(0, 0, 0, 0);
+      border: 0;
     }
   </style>
 </head>
@@ -103,74 +101,73 @@
 
 <div class="sidebar">
   <h2>Table of Contents</h2>
-  <a href="#" class="nav-link" onclick="showChapter('welcome')">Welcome</a>
-  <a href="#" class="nav-link" onclick="showChapter('chapter-1')">Chapter 1: Strong Passwords</a>
-  <a href="#" class="nav-link" onclick="showChapter('chapter-2')">Chapter 2: Identifying Fake News</a>
-  <a href="#" class="nav-link" onclick="showChapter('chapter-3')">Chapter 3: Protecting Personal Information</a>
-  <a href="#" class="nav-link" onclick="showChapter('chapter-4')">Chapter 4: Cyberbullying and Online Etiquette</a>
-  <a href="#" class="nav-link" onclick="showChapter('chapter-5')">Chapter 5: Privacy Settings on Social Media</a>
-  <a href="#" class="nav-link" onclick="showChapter('chapter-6')">Chapter 6: Recognising and Avoiding Phishing Scams</a>
-  <a href="#" class="nav-link" onclick="showChapter('chapter-7')">Chapter 7: Online Shopping Safety</a>
+  <a href="#" class="nav-link" onclick="showChapter('welcome', this)">Welcome</a>
+  <a href="#" class="nav-link" onclick="showChapter('chapter-1', this)">Chapter 1: Strong Passwords</a>
+  <a href="#" class="nav-link" onclick="showChapter('chapter-2', this)">Chapter 2: Identifying Fake News</a>
+  <a href="#" class="nav-link" onclick="showChapter('chapter-3', this)">Chapter 3: Protecting Personal Information</a>
+  <a href="#" class="nav-link" onclick="showChapter('chapter-4', this)">Chapter 4: Cyberbullying and Online Etiquette</a>
+  <a href="#" class="nav-link" onclick="showChapter('chapter-5', this)">Chapter 5: Privacy Settings on Social Media</a>
+  <a href="#" class="nav-link" onclick="showChapter('chapter-6', this)">Chapter 6: Recognising and Avoiding Phishing Scams</a>
+  <a href="#" class="nav-link" onclick="showChapter('chapter-7', this)">Chapter 7: Online Shopping Safety</a>
 </div>
 
 <div class="content">
   <!-- Welcome Page -->
-  <div id="welcome" class="chapter active">
+  <div id="welcome" class="chapter active" tabindex="0">
     <h1>Welcome to the Online Safety eBook</h1>
-    <p>This eBook is your comprehensive guide to navigating the digital world safely. Learn how to create strong passwords, identify fake news, protect personal information, and much more.</p>
-    <p><strong>What You Will Learn:</strong></p>
-    <ul>
-      <li>How to safeguard your online presence.</li>
-      <li>Tips to identify scams and protect personal data.</li>
-      <li>Best practices for secure online interactions.</li>
-    </ul>
-    <p>Get started by clicking "Next" below or selecting a chapter from the sidebar.</p>
+    <p>This eBook is your guide to navigating the digital world safely.</p>
     <div class="nav-buttons">
       <button class="btn btn-secondary" disabled>Previous</button>
-      <button class="btn btn-primary" onclick="showChapter('chapter-1')">Next</button>
+      <button class="btn btn-primary" onclick="showChapter('chapter-1', this)">Next</button>
     </div>
   </div>
 
   <!-- Chapter 1 -->
-  <div id="chapter-1" class="chapter">
+  <div id="chapter-1" class="chapter" tabindex="0">
     <h1>Chapter 1: Strong Passwords</h1>
     <div class="progress-container">
       <div class="progress">
-        <div class="progress-bar" id="progress-bar" style="width: 14%;"></div> <!-- Progress starts at 14% -->
+        <div class="progress-bar" id="progress-bar"></div>
       </div>
     </div>
-    <p><strong>Introduction:</strong> Learn the importance of strong passwords and how to create one to secure your online accounts.</p>
-    <ul>
-      <li>Use at least 16 characters.</li>
-      <li>Include uppercase, lowercase, numbers, and special characters.</li>
-      <li>Don’t use personal information like your name or birthdate.</li>
-    </ul>
-    <p><strong>Summary:</strong> Strong passwords are the foundation of your online safety. Always use unique and complex passwords.</p>
+    <p>Learn the importance of strong passwords and how to create one to secure your online accounts.</p>
     <div class="nav-buttons">
-      <button class="btn btn-secondary" onclick="showChapter('welcome')">Previous</button>
-      <button class="btn btn-primary" onclick="showChapter('chapter-2')">Next</button>
+      <button class="btn btn-secondary" onclick="showChapter('welcome', this)">Previous</button>
+      <button class="btn btn-primary" onclick="showChapter('chapter-2', this)">Next</button>
     </div>
   </div>
 
-  <!-- Remaining Chapters Follow... -->
+  <!-- Chapter 2 -->
+  <div id="chapter-2" class="chapter" tabindex="0">
+    <h1>Chapter 2: Identifying Fake News</h1>
+    <p>Fake news can mislead and harm. Learn how to differentiate credible information from misinformation.</p>
+    <div class="nav-buttons">
+      <button class="btn btn-secondary" onclick="showChapter('chapter-1', this)">Previous</button>
+      <button class="btn btn-primary" onclick="showChapter('chapter-3', this)">Next</button>
+    </div>
+  </div>
 
+  <!-- Additional Chapters Follow -->
 </div>
 
 <script>
-  function showChapter(chapterId) {
+  function showChapter(chapterId, link) {
+    // Hide all chapters
     document.querySelectorAll('.chapter').forEach(chapter => {
       chapter.classList.remove('active');
+      chapter.setAttribute('tabindex', '-1'); // Remove from focus order
     });
-    document.getElementById(chapterId).classList.add('active');
+    const currentChapter = document.getElementById(chapterId);
+    currentChapter.classList.add('active');
+    currentChapter.setAttribute('tabindex', '0'); // Make the active chapter focusable
 
-    document.querySelectorAll('.nav-link').forEach(link => {
-      link.classList.remove('active');
-    });
-    event.target.classList.add('active');
+    // Highlight active link in sidebar
+    document.querySelectorAll('.nav-link').forEach(navLink => navLink.classList.remove('active'));
+    link.classList.add('active');
 
-    // Update progress bar based on chapter
+    // Update progress bar
     const progressBar = document.getElementById('progress-bar');
-    const chapterProgress = {
+    const progressMap = {
       'welcome': 0,
       'chapter-1': 14,
       'chapter-2': 28,
@@ -180,7 +177,7 @@
       'chapter-6': 84,
       'chapter-7': 100
     };
-    progressBar.style.width = `${chapterProgress[chapterId]}%`;
+    progressBar.style.width = `${progressMap[chapterId]}%`;
   }
 </script>
 
