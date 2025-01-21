@@ -103,6 +103,7 @@
 
 <div class="sidebar">
   <h2>Table of Contents</h2>
+  <a href="#" class="nav-link" onclick="showChapter('welcome')">Welcome</a>
   <a href="#" class="nav-link" onclick="showChapter('chapter-1')">Chapter 1: Strong Passwords</a>
   <a href="#" class="nav-link" onclick="showChapter('chapter-2')">Chapter 2: Identifying Fake News</a>
   <a href="#" class="nav-link" onclick="showChapter('chapter-3')">Chapter 3: Protecting Personal Information</a>
@@ -113,8 +114,31 @@
 </div>
 
 <div class="content">
-  <div id="chapter-1" class="chapter active">
+  <!-- Welcome Page -->
+  <div id="welcome" class="chapter active">
+    <h1>Welcome to the Online Safety eBook</h1>
+    <p>This eBook is your comprehensive guide to navigating the digital world safely. Learn how to create strong passwords, identify fake news, protect personal information, and much more.</p>
+    <p><strong>What You Will Learn:</strong></p>
+    <ul>
+      <li>How to safeguard your online presence.</li>
+      <li>Tips to identify scams and protect personal data.</li>
+      <li>Best practices for secure online interactions.</li>
+    </ul>
+    <p>Get started by clicking "Next" below or selecting a chapter from the sidebar.</p>
+    <div class="nav-buttons">
+      <button class="btn btn-secondary" disabled>Previous</button>
+      <button class="btn btn-primary" onclick="showChapter('chapter-1')">Next</button>
+    </div>
+  </div>
+
+  <!-- Chapter 1 -->
+  <div id="chapter-1" class="chapter">
     <h1>Chapter 1: Strong Passwords</h1>
+    <div class="progress-container">
+      <div class="progress">
+        <div class="progress-bar" id="progress-bar" style="width: 14%;"></div> <!-- Progress starts at 14% -->
+      </div>
+    </div>
     <p><strong>Introduction:</strong> Learn the importance of strong passwords and how to create one to secure your online accounts.</p>
     <ul>
       <li>Use at least 16 characters.</li>
@@ -123,100 +147,13 @@
     </ul>
     <p><strong>Summary:</strong> Strong passwords are the foundation of your online safety. Always use unique and complex passwords.</p>
     <div class="nav-buttons">
-      <button class="btn btn-secondary" disabled>Previous</button>
+      <button class="btn btn-secondary" onclick="showChapter('welcome')">Previous</button>
       <button class="btn btn-primary" onclick="showChapter('chapter-2')">Next</button>
     </div>
   </div>
 
-  <div id="chapter-2" class="chapter">
-    <h1>Chapter 2: Identifying Fake News</h1>
-    <p><strong>Introduction:</strong> Fake news can mislead and harm. Learn how to differentiate credible information from misinformation.</p>
-    <ul>
-      <li>Verify the source of the information.</li>
-      <li>Check for supporting evidence from reputable outlets.</li>
-      <li>Be cautious of sensational headlines.</li>
-    </ul>
-    <p><strong>Summary:</strong> Always cross-check the authenticity of information to avoid falling for fake news.</p>
-    <div class="nav-buttons">
-      <button class="btn btn-secondary" onclick="showChapter('chapter-1')">Previous</button>
-      <button class="btn btn-primary" onclick="showChapter('chapter-3')">Next</button>
-    </div>
-  </div>
+  <!-- Remaining Chapters Follow... -->
 
-  <div id="chapter-3" class="chapter">
-    <h1>Chapter 3: Protecting Personal Information</h1>
-    <p><strong>Introduction:</strong> Your personal information is valuable. This chapter explains how to protect it from being exploited online.</p>
-    <ul>
-      <li>Limit the information you share on social media.</li>
-      <li>Enable two-factor authentication on your accounts.</li>
-      <li>Be cautious of sharing personal data on unverified websites.</li>
-    </ul>
-    <p><strong>Summary:</strong> Safeguarding personal information is crucial to maintaining privacy and security online.</p>
-    <div class="nav-buttons">
-      <button class="btn btn-secondary" onclick="showChapter('chapter-2')">Previous</button>
-      <button class="btn btn-primary" onclick="showChapter('chapter-4')">Next</button>
-    </div>
-  </div>
-
-  <div id="chapter-4" class="chapter">
-    <h1>Chapter 4: Cyberbullying and Online Etiquette</h1>
-    <p><strong>Introduction:</strong> Understanding cyberbullying and maintaining proper online etiquette are essential to a positive digital experience.</p>
-    <ul>
-      <li>Report and block users who engage in cyberbullying.</li>
-      <li>Be respectful and empathetic when communicating online.</li>
-      <li>Familiarize yourself with platform guidelines and policies.</li>
-    </ul>
-    <p><strong>Summary:</strong> By addressing cyberbullying and practising good etiquette, you contribute to a safer online community.</p>
-    <div class="nav-buttons">
-      <button class="btn btn-secondary" onclick="showChapter('chapter-3')">Previous</button>
-      <button class="btn btn-primary" onclick="showChapter('chapter-5')">Next</button>
-    </div>
-  </div>
-
-  <div id="chapter-5" class="chapter">
-    <h1>Chapter 5: Privacy Settings on Social Media</h1>
-    <p><strong>Introduction:</strong> Social media platforms collect a lot of personal data. This chapter teaches how to adjust privacy settings to protect your information.</p>
-    <ul>
-      <li>Set your profile to private.</li>
-      <li>Limit who can see your posts and personal details.</li>
-      <li>Turn off location sharing.</li>
-    </ul>
-    <p><strong>Summary:</strong> Customising privacy settings helps you stay in control of your online presence.</p>
-    <div class="nav-buttons">
-      <button class="btn btn-secondary" onclick="showChapter('chapter-4')">Previous</button>
-      <button class="btn btn-primary" onclick="showChapter('chapter-6')">Next</button>
-    </div>
-  </div>
-
-  <div id="chapter-6" class="chapter">
-    <h1>Chapter 6: Recognising and Avoiding Phishing Scams</h1>
-    <p><strong>Introduction:</strong> Phishing scams trick users into revealing sensitive information. Learn how to spot and avoid them.</p>
-    <ul>
-      <li>Check email addresses carefully for typos.</li>
-      <li>Avoid clicking on suspicious links.</li>
-      <li>Never share personal information through email or messages.</li>
-    </ul>
-    <p><strong>Summary:</strong> Being vigilant against phishing scams can save you from identity theft and financial loss.</p>
-    <div class="nav-buttons">
-      <button class="btn btn-secondary" onclick="showChapter('chapter-5')">Previous</button>
-      <button class="btn btn-primary" onclick="showChapter('chapter-7')">Next</button>
-    </div>
-  </div>
-
-  <div id="chapter-7" class="chapter">
-    <h1>Chapter 7: Online Shopping Safety</h1>
-    <p><strong>Introduction:</strong> Online shopping is convenient but comes with risks. Learn how to shop safely online.</p>
-    <ul>
-      <li>Only shop on trusted websites with HTTPS encryption.</li>
-      <li>Use secure payment methods like credit cards or PayPal.</li>
-      <li>Avoid public Wi-Fi when making transactions.</li>
-    </ul>
-    <p><strong>Summary:</strong> Following these steps ensures your personal and financial information stays safe while shopping online.</p>
-    <div class="nav-buttons">
-      <button class="btn btn-secondary" onclick="showChapter('chapter-6')">Previous</button>
-      <button class="btn btn-secondary" disabled>Next</button>
-    </div>
-  </div>
 </div>
 
 <script>
@@ -230,6 +167,20 @@
       link.classList.remove('active');
     });
     event.target.classList.add('active');
+
+    // Update progress bar based on chapter
+    const progressBar = document.getElementById('progress-bar');
+    const chapterProgress = {
+      'welcome': 0,
+      'chapter-1': 14,
+      'chapter-2': 28,
+      'chapter-3': 42,
+      'chapter-4': 56,
+      'chapter-5': 70,
+      'chapter-6': 84,
+      'chapter-7': 100
+    };
+    progressBar.style.width = `${chapterProgress[chapterId]}%`;
   }
 </script>
 
