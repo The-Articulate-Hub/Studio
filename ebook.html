@@ -45,6 +45,16 @@
       margin-top: 20px;
       height: 20px;
     }
+    .badge {
+      display: inline-block;
+      padding: 10px;
+      background-color: #ffc107;
+      border-radius: 5px;
+      margin-top: 10px;
+    }
+    .list-icon {
+      margin-right: 10px;
+    }
   </style>
 </head>
 <body>
@@ -57,7 +67,10 @@
     <ul class="list-group">
       <li class="list-group-item"><a href="#chapter-1">Chapter 1: Strong Passwords</a></li>
       <li class="list-group-item"><a href="#chapter-2">Chapter 2: Identifying Fake News</a></li>
-      <!-- Add future chapters here -->
+      <li class="list-group-item"><a href="#chapter-3">Chapter 3: Protecting Personal Information</a></li>
+      <li class="list-group-item"><a href="#chapter-4">Chapter 4: Cyberbullying and Online Etiquette</a></li>
+      <li class="list-group-item"><a href="#progress">Track Progress</a></li>
+      <li class="list-group-item"><a href="#feedback">Give Feedback</a></li>
     </ul>
   </div>
 </div>
@@ -69,9 +82,9 @@
   <div class="chapter-content">
     <p><strong>Introduction:</strong> Learn the importance of strong passwords and how to create one to secure your online accounts.</p>
     <ul>
-      <li>Use at least 16 characters.</li>
-      <li>Include uppercase, lowercase, numbers, and special characters.</li>
-      <li>Don’t use personal information like your name or birthdate.</li>
+      <li><i class="bi bi-shield-lock list-icon"></i>Use at least 16 characters.</li>
+      <li><i class="bi bi-fonts list-icon"></i>Include uppercase, lowercase, numbers, and special characters.</li>
+      <li><i class="bi bi-person-x list-icon"></i>Don’t use personal information like your name or birthdate.</li>
     </ul>
     <p><strong>Summary:</strong> Strong passwords are the foundation of your online safety. Always use unique and complex passwords.</p>
 
@@ -93,9 +106,9 @@
   <div class="chapter-content">
     <p><strong>Introduction:</strong> Fake news can mislead and harm. Learn how to differentiate credible information from misinformation.</p>
     <ul>
-      <li>Verify the source of the information.</li>
-      <li>Check for supporting evidence from reputable outlets.</li>
-      <li>Be cautious of sensational headlines.</li>
+      <li><i class="bi bi-search list-icon"></i>Verify the source of the information.</li>
+      <li><i class="bi bi-bookmark-check list-icon"></i>Check for supporting evidence from reputable outlets.</li>
+      <li><i class="bi bi-exclamation-circle list-icon"></i>Be cautious of sensational headlines.</li>
     </ul>
     <p><strong>Summary:</strong> Always cross-check the authenticity of information to avoid falling for fake news.</p>
 
@@ -109,35 +122,50 @@
   </div>
 </div>
 
-<div class="ebook-container mt-5">
+<div id="chapter-3" class="ebook-container mt-5">
   <header class="chapter-header">
-    <h1>Feedback</h1>
+    <h1>Chapter 3: Protecting Personal Information</h1>
   </header>
   <div class="chapter-content">
-    <form>
-      <div class="mb-3">
-        <label for="feedbackText" class="form-label">What did you think of this eBook?</label>
-        <textarea class="form-control" id="feedbackText" rows="3"></textarea>
-      </div>
-      <button type="submit" class="btn btn-primary">Submit Feedback</button>
-    </form>
+    <p><strong>Introduction:</strong> Your personal information is valuable. This chapter explains how to protect it from being exploited online.</p>
+    <ul>
+      <li><i class="bi bi-shield-lock list-icon"></i>Limit the information you share on social media.</li>
+      <li><i class="bi bi-lock-fill list-icon"></i>Enable two-factor authentication on your accounts.</li>
+      <li><i class="bi bi-eye-slash list-icon"></i>Be cautious of sharing personal data on unverified websites.</li>
+    </ul>
+    <p><strong>Summary:</strong> Safeguarding personal information is crucial to maintaining privacy and security online.</p>
+
+    <div class="quiz-section">
+      <h4>Quiz: Protecting Personal Information</h4>
+      <p><strong>1. Which of these is the best practice to protect personal information?</strong></p>
+      <button class="btn btn-outline-primary" onclick="checkAnswer(3, 'correct')">A. Enable two-factor authentication</button>
+      <button class="btn btn-outline-primary" onclick="checkAnswer(3, 'incorrect')">B. Share your passwords with trusted friends</button>
+      <div id="feedback-3" class="feedback alert" role="alert" aria-live="polite"></div>
+    </div>
   </div>
 </div>
 
-<script>
-  function checkAnswer(questionNumber, status) {
-    const feedback = document.getElementById(`feedback-${questionNumber}`);
-    if (status === 'correct') {
-      feedback.className = 'feedback alert alert-success';
-      feedback.innerText = 'Correct! Great job!';
-    } else {
-      feedback.className = 'feedback alert alert-danger';
-      feedback.innerText = 'Incorrect. Please review the chapter and try again.';
-    }
-    feedback.style.display = 'block';
-  }
-</script>
+<div id="chapter-4" class="ebook-container mt-5">
+  <header class="chapter-header">
+    <h1>Chapter 4: Cyberbullying and Online Etiquette</h1>
+  </header>
+  <div class="chapter-content">
+    <p><strong>Introduction:</strong> Understanding cyberbullying and maintaining proper online etiquette are essential to a positive digital experience.</p>
+    <ul>
+      <li><i class="bi bi-chat-dots-fill list-icon"></i>Report and block users who engage in cyberbullying.</li>
+      <li><i class="bi bi-heart-fill list-icon"></i>Be respectful and empathetic when communicating online.</li>
+      <li><i class="bi bi-shield-fill list-icon"></i>Familiarize yourself with platform guidelines and policies.</li>
+    </ul>
+    <p><strong>Summary:</strong> By addressing cyberbullying and practising good etiquette, you contribute to a safer online community.</p>
 
-<script src="https://cdn.jsdelivr.net/npm/bootstrap@5.3.0/dist/js/bootstrap.bundle.min.js"></script>
-</body>
-</html>
+    <div class="quiz-section">
+      <h4>Quiz: Cyberbullying and Online Etiquette</h4>
+      <p><strong>1. What should you do if you experience cyberbullying?</strong></p>
+      <button class="btn btn-outline-primary" onclick="checkAnswer(4, 'correct')">A. Report and block the user</button>
+      <button class="btn btn-outline-primary" onclick="checkAnswer(4, 'incorrect')">B. Retaliate with similar messages</button>
+      <div id="feedback-4" class="feedback alert" role="alert" aria-live="polite"></div>
+    </div>
+  </div>
+</div>
+
+<div id="progress
