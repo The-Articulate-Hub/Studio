@@ -14,7 +14,6 @@
       min-height: 100vh;
       margin: 0;
       background-color: #f4f4f9;
-      color: #333;
     }
     .sidebar {
       background-color: #004c97;
@@ -26,7 +25,6 @@
       position: fixed;
       top: 0;
       bottom: 0;
-      overflow-y: auto;
     }
     .sidebar h2 {
       font-size: 1.5rem;
@@ -80,21 +78,6 @@
       display: flex;
       justify-content: space-between;
     }
-    /* Accessibility Enhancements */
-    :focus {
-      outline: 3px solid #ffbf47; /* Highlight focused elements */
-      outline-offset: 2px;
-    }
-    .sr-only {
-      position: absolute;
-      width: 1px;
-      height: 1px;
-      padding: 0;
-      margin: -1px;
-      overflow: hidden;
-      clip: rect(0, 0, 0, 0);
-      border: 0;
-    }
   </style>
 </head>
 <body>
@@ -112,38 +95,26 @@
 </div>
 
 <div class="content">
-  <!-- Welcome Page -->
-  <div id="welcome" class="chapter active" tabindex="0">
+  <div id="welcome" class="chapter active">
     <h1>Welcome to the Online Safety eBook</h1>
-    <p>This eBook is your guide to navigating the digital world safely.</p>
+    <p>This eBook is your comprehensive guide to navigating the digital world safely.</p>
     <div class="nav-buttons">
       <button class="btn btn-secondary" disabled>Previous</button>
       <button class="btn btn-primary" onclick="showChapter('chapter-1', this)">Next</button>
     </div>
   </div>
 
-  <!-- Chapter 1 -->
-  <div id="chapter-1" class="chapter" tabindex="0">
+  <div id="chapter-1" class="chapter">
     <h1>Chapter 1: Strong Passwords</h1>
     <div class="progress-container">
       <div class="progress">
         <div class="progress-bar" id="progress-bar"></div>
       </div>
     </div>
-    <p>Learn the importance of strong passwords and how to create one to secure your online accounts.</p>
+    <p><strong>Introduction:</strong> Learn the importance of strong passwords.</p>
     <div class="nav-buttons">
       <button class="btn btn-secondary" onclick="showChapter('welcome', this)">Previous</button>
       <button class="btn btn-primary" onclick="showChapter('chapter-2', this)">Next</button>
-    </div>
-  </div>
-
-  <!-- Chapter 2 -->
-  <div id="chapter-2" class="chapter" tabindex="0">
-    <h1>Chapter 2: Identifying Fake News</h1>
-    <p>Fake news can mislead and harm. Learn how to differentiate credible information from misinformation.</p>
-    <div class="nav-buttons">
-      <button class="btn btn-secondary" onclick="showChapter('chapter-1', this)">Previous</button>
-      <button class="btn btn-primary" onclick="showChapter('chapter-3', this)">Next</button>
     </div>
   </div>
 
@@ -153,13 +124,8 @@
 <script>
   function showChapter(chapterId, link) {
     // Hide all chapters
-    document.querySelectorAll('.chapter').forEach(chapter => {
-      chapter.classList.remove('active');
-      chapter.setAttribute('tabindex', '-1'); // Remove from focus order
-    });
-    const currentChapter = document.getElementById(chapterId);
-    currentChapter.classList.add('active');
-    currentChapter.setAttribute('tabindex', '0'); // Make the active chapter focusable
+    document.querySelectorAll('.chapter').forEach(chapter => chapter.classList.remove('active'));
+    document.getElementById(chapterId).classList.add('active');
 
     // Highlight active link in sidebar
     document.querySelectorAll('.nav-link').forEach(navLink => navLink.classList.remove('active'));
@@ -177,7 +143,7 @@
       'chapter-6': 84,
       'chapter-7': 100
     };
-    progressBar.style.width = `${progressMap[chapterId]}%`;
+    progressBar.style.width = progressMap[chapterId] + '%';
   }
 </script>
 
