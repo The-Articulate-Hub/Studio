@@ -3,243 +3,141 @@
 <head>
   <meta charset="UTF-8">
   <meta name="viewport" content="width=device-width, initial-scale=1.0">
-  <title>Accessible Online Safety eBook</title>
-  <!-- Bootstrap and Accessibility Widget -->
+  <title>Online Safety eBook</title>
   <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.3.0/dist/css/bootstrap.min.css" rel="stylesheet">
-  <link href="https://fonts.googleapis.com/css2?family=Rubik:wght@400;500;700&display=swap" rel="stylesheet">
-  <script src="https://website-widgets.pages.dev/dist/sienna.min.js" defer></script>
   <style>
     body {
-      font-family: 'Rubik', sans-serif;
-      background-color: #f4f7fb;
-      transition: background-color 0.3s ease;
+      font-family: Arial, sans-serif;
+      background-color: #f8f9fa;
     }
     .ebook-container {
-      max-width: 1000px;
-      margin: 40px auto;
-      background-color: white;
-      border-radius: 12px;
-      box-shadow: 0 10px 20px rgba(0, 0, 0, 0.1);
+      max-width: 900px;
+      margin: 20px auto;
+      background: #fff;
+      border-radius: 10px;
+      box-shadow: 0 4px 10px rgba(0, 0, 0, 0.1);
     }
-    .sidebar {
-      background-color: #004c97;
+    .chapter-header {
+      background-color: #007bff;
       color: white;
+      padding: 15px;
+      border-radius: 10px 10px 0 0;
+    }
+    .chapter-content {
       padding: 20px;
-      border-radius: 12px 0 0 12px;
-      width: 280px;
-      display: flex;
-      flex-direction: column;
     }
-    .sidebar h3 {
-      font-size: 22px;
-      font-weight: bold;
-      margin-bottom: 20px;
+    .quiz-section {
+      background-color: #e9ecef;
+      padding: 15px;
+      border-radius: 10px;
+      margin-top: 20px;
     }
-    .nav-link {
-      padding: 10px 15px;
-      color: white;
-      border-radius: 8px;
-      margin-bottom: 10px;
-      cursor: pointer;
-      transition: background-color 0.3s ease;
-      font-weight: 500;
-      text-align: left;
-    }
-    .nav-link.active, .nav-link:hover {
-      background-color: #2566b3;
-    }
-    .content {
-      padding: 40px;
-      flex-grow: 1;
-    }
-    .header {
-      display: flex;
-      justify-content: space-between;
-      align-items: center;
-    }
-    .progress-bar-container {
-      margin: 20px 0;
-    }
-    .progress-bar {
-      height: 12px;
-      background-color: #f1f1f1;
-      border-radius: 6px;
-    }
-    .progress-bar-inner {
-      background-color: #004c97;
-      width: 0%;
-      height: 100%;
-      border-radius: 6px;
-      transition: width 0.4s;
-    }
-    .page-content {
+    .feedback {
       display: none;
-      animation: fadeIn 0.5s ease-in-out;
+      margin-top: 10px;
     }
-    .page-content.active {
-      display: block;
+    .hint-text {
+      font-size: 0.9em;
+      color: #6c757d;
+      margin-top: 5px;
     }
-    @keyframes fadeIn {
-      from { opacity: 0; transform: translateY(20px); }
-      to { opacity: 1; transform: translateY(0); }
-    }
-    .badge-container {
-      text-align: center;
-      margin: 20px 0;
-    }
-    .reflection-box {
-      margin-top: 30px;
+    .progress {
+      margin-top: 20px;
+      height: 20px;
     }
   </style>
 </head>
 <body>
-  <div class="container-fluid d-flex">
-    <!-- Sidebar -->
-    <div class="sidebar">
-      <h3>Online Safety eBook</h3>
-      <a class="nav-link active" href="#0" onclick="showPage(0)">Introduction</a>
-      <a class="nav-link" href="#1" onclick="showPage(1)">Social Media Safety</a>
-      <a class="nav-link" href="#2" onclick="showPage(2)">Identifying Scams</a>
-      <a class="nav-link" href="#3" onclick="showPage(3)">Protecting Personal Information</a>
-      <a class="nav-link" href="#4" onclick="showPage(4)">Responding to Cyberbullying</a>
-      <a class="nav-link" href="#5" onclick="showPage(5)">Support Resources</a>
-    </div>
 
-    <!-- Main Content -->
-    <div class="content">
-      <div class="header">
-        <h1 id="moduleTitle">Introduction to Online Safety</h1>
-        <div>
-          <button class="btn btn-outline-dark" onclick="toggleDarkMode()">Toggle Dark Mode</button>
-          <button class="btn btn-secondary" onclick="readAloud()">🔊 Read Aloud</button>
-          <button class="btn btn-outline-primary" onclick="adjustFontSize(1)">A+</button>
-          <button class="btn btn-outline-primary" onclick="adjustFontSize(-1)">A-</button>
-        </div>
-      </div>
+<div class="ebook-container">
+  <header class="chapter-header">
+    <h1>Table of Contents</h1>
+  </header>
+  <div class="chapter-content">
+    <ul class="list-group">
+      <li class="list-group-item"><a href="#chapter-1">Chapter 1: Strong Passwords</a></li>
+      <li class="list-group-item"><a href="#chapter-2">Chapter 2: Identifying Fake News</a></li>
+      <!-- Add future chapters here -->
+    </ul>
+  </div>
+</div>
 
-      <!-- Progress Bar -->
-      <div class="progress-bar-container">
-        <div class="progress-bar">
-          <div class="progress-bar-inner" id="progressBar"></div>
-        </div>
-      </div>
+<div id="chapter-1" class="ebook-container mt-5">
+  <header class="chapter-header">
+    <h1>Chapter 1: Strong Passwords</h1>
+  </header>
+  <div class="chapter-content">
+    <p><strong>Introduction:</strong> Learn the importance of strong passwords and how to create one to secure your online accounts.</p>
+    <ul>
+      <li>Use at least 16 characters.</li>
+      <li>Include uppercase, lowercase, numbers, and special characters.</li>
+      <li>Don’t use personal information like your name or birthdate.</li>
+    </ul>
+    <p><strong>Summary:</strong> Strong passwords are the foundation of your online safety. Always use unique and complex passwords.</p>
 
-      <!-- Pages -->
-      <div class="page-content active" id="page-0">
-        <h2>Introduction</h2>
-        <p>Welcome to the Online Safety eBook. Learn how to navigate the internet safely, recognise scams, and protect your personal data.</p>
-        <div class="badge-container">
-          <p>You’ve earned <span id="points">0</span> points!</p>
-          <div id="badge" class="badge bg-success" style="display: none;">Security Pro 🏆</div>
-        </div>
-        <div class="reflection-box">
-          <h4>Reflection Prompt:</h4>
-          <textarea class="form-control" id="userNotes" rows="4" placeholder="Write your reflection here..."></textarea>
-          <button class="btn btn-primary mt-2" onclick="saveNotes()">Save Notes</button>
-        </div>
-      </div>
-
-      <!-- Example Quiz Page -->
-      <div class="page-content" id="page-1">
-        <h2>Social Media Safety</h2>
-        <p>Follow these tips to stay safe on social platforms:</p>
-        <ul>
-          <li>Adjust privacy settings to limit who can see your posts.</li>
-          <li>Avoid sharing your location publicly.</li>
-          <li>Think before clicking any unknown links.</li>
-        </ul>
-        <h4>Quiz:</h4>
-        <p>What should you do if you receive a suspicious link?</p>
-        <button class="btn btn-secondary" onclick="checkAnswer(true)">A. Ignore and delete it</button>
-        <button class="btn btn-secondary" onclick="checkAnswer(false)">B. Click to see if it works</button>
-      </div>
-
-      <!-- Other Content Sections... -->
-
-      <!-- Navigation Buttons -->
-      <div class="navigation">
-        <button id="prevBtn" onclick="prevPage()" disabled>Previous</button>
-        <button id="nextBtn" onclick="nextPage()">Next</button>
-      </div>
+    <div class="quiz-section">
+      <h4>Quiz: How much do you know about strong passwords?</h4>
+      <p><strong>1. What is the recommended minimum length for a strong password?</strong></p>
+      <button class="btn btn-outline-primary" onclick="checkAnswer(1, 'correct')">A. 16 characters</button>
+      <button class="btn btn-outline-primary" onclick="checkAnswer(1, 'incorrect')">B. 8 characters</button>
+      <button class="btn btn-outline-primary" onclick="checkAnswer(1, 'incorrect')">C. 10 characters</button>
+      <div id="feedback-1" class="feedback alert" role="alert" aria-live="polite"></div>
     </div>
   </div>
+</div>
 
-  <script>
-    const pages = document.querySelectorAll('.page-content');
-    const navLinks = document.querySelectorAll('.nav-link');
-    let currentPage = localStorage.getItem('currentPage') ? parseInt(localStorage.getItem('currentPage')) : 0;
-    let points = 0;
+<div id="chapter-2" class="ebook-container mt-5">
+  <header class="chapter-header">
+    <h1>Chapter 2: Identifying Fake News</h1>
+  </header>
+  <div class="chapter-content">
+    <p><strong>Introduction:</strong> Fake news can mislead and harm. Learn how to differentiate credible information from misinformation.</p>
+    <ul>
+      <li>Verify the source of the information.</li>
+      <li>Check for supporting evidence from reputable outlets.</li>
+      <li>Be cautious of sensational headlines.</li>
+    </ul>
+    <p><strong>Summary:</strong> Always cross-check the authenticity of information to avoid falling for fake news.</p>
 
-    function showPage(index) {
-      pages.forEach((page, i) => {
-        page.classList.toggle('active', i === index);
-        navLinks[i].classList.toggle('active', i === index);
-      });
-      currentPage = index;
-      localStorage.setItem('currentPage', currentPage);
-      updateProgress();
-      updateNavButtons();
-      document.getElementById('moduleTitle').innerText = navLinks[index].innerText;
+    <div class="quiz-section">
+      <h4>Quiz: Spotting Fake News</h4>
+      <p><strong>1. What’s the first step in verifying if news is fake?</strong></p>
+      <button class="btn btn-outline-primary" onclick="checkAnswer(2, 'correct')">A. Verify the source</button>
+      <button class="btn btn-outline-primary" onclick="checkAnswer(2, 'incorrect')">B. Share it immediately</button>
+      <div id="feedback-2" class="feedback alert" role="alert" aria-live="polite"></div>
+    </div>
+  </div>
+</div>
+
+<div class="ebook-container mt-5">
+  <header class="chapter-header">
+    <h1>Feedback</h1>
+  </header>
+  <div class="chapter-content">
+    <form>
+      <div class="mb-3">
+        <label for="feedbackText" class="form-label">What did you think of this eBook?</label>
+        <textarea class="form-control" id="feedbackText" rows="3"></textarea>
+      </div>
+      <button type="submit" class="btn btn-primary">Submit Feedback</button>
+    </form>
+  </div>
+</div>
+
+<script>
+  function checkAnswer(questionNumber, status) {
+    const feedback = document.getElementById(`feedback-${questionNumber}`);
+    if (status === 'correct') {
+      feedback.className = 'feedback alert alert-success';
+      feedback.innerText = 'Correct! Great job!';
+    } else {
+      feedback.className = 'feedback alert alert-danger';
+      feedback.innerText = 'Incorrect. Please review the chapter and try again.';
     }
+    feedback.style.display = 'block';
+  }
+</script>
 
-    function updateProgress() {
-      const progress = ((currentPage + 1) / pages.length) * 100;
-      document.getElementById('progressBar').style.width = `${progress}%`;
-    }
-
-    function updateNavButtons() {
-      document.getElementById('prevBtn').disabled = currentPage === 0;
-      document.getElementById('nextBtn').disabled = currentPage === pages.length - 1;
-    }
-
-    function nextPage() {
-      if (currentPage < pages.length - 1) showPage(currentPage + 1);
-    }
-
-    function prevPage() {
-      if (currentPage > 0) showPage(currentPage - 1);
-    }
-
-    function toggleDarkMode() {
-      document.body.classList.toggle('dark-mode');
-    }
-
-    function readAloud() {
-      const speech = new SpeechSynthesisUtterance(document.querySelector('.active').innerText);
-      window.speechSynthesis.speak(speech);
-    }
-
-    function adjustFontSize(change) {
-      document.body.style.fontSize = `${parseInt(getComputedStyle(document.body).fontSize) + change}px`;
-    }
-
-    function saveNotes() {
-      const notes = document.getElementById('userNotes').value;
-      localStorage.setItem('userNotes', notes);
-      alert('Notes saved!');
-    }
-
-    function checkAnswer(correct) {
-      if (correct) {
-        alert('Correct! Well done!');
-        awardPoints(10);
-      } else {
-        alert('Oops! The answer is incorrect.');
-      }
-    }
-
-    function awardPoints(amount) {
-      points += amount;
-      document.getElementById('points').innerText = points;
-      if (points >= 100) {
-        document.getElementById('badge').style.display = 'inline';
-      }
-    }
-
-    window.onload = function() {
-      showPage(currentPage);
-      document.getElementById('userNotes').value = localStorage.getItem('userNotes') || '';
-    }
-  </script>
+<script src="https://cdn.jsdelivr.net/npm/bootstrap@5.3.0/dist/js/bootstrap.bundle.min.js"></script>
 </body>
 </html>
