@@ -5,9 +5,11 @@
   <meta name="viewport" content="width=device-width, initial-scale=1.0">
   <title>Online Safety eBook</title>
   <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.3.0/dist/css/bootstrap.min.css" rel="stylesheet">
+  <link href="https://fonts.googleapis.com/css2?family=Rubik:wght@300;400;500;700&display=swap" rel="stylesheet">
+  <script src="https://website-widgets.pages.dev/dist/sienna.min.js" defer></script>
   <style>
     body {
-      font-family: Arial, sans-serif;
+      font-family: 'Rubik', sans-serif;
       display: flex;
       min-height: 100vh;
       margin: 0;
@@ -26,6 +28,7 @@
     }
     .sidebar h2 {
       font-size: 1.5rem;
+      font-weight: 700;
       margin-bottom: 1rem;
     }
     .sidebar a {
@@ -64,6 +67,11 @@
     }
     .quiz-section button {
       margin: 5px 0;
+    }
+    .nav-buttons {
+      margin-top: 20px;
+      display: flex;
+      justify-content: space-between;
     }
     .progress-container {
       margin-top: 20px;
@@ -114,6 +122,10 @@
       <li>Don’t use personal information like your name or birthdate.</li>
     </ul>
     <p><strong>Summary:</strong> Strong passwords are the foundation of your online safety. Always use unique and complex passwords.</p>
+    <div class="nav-buttons">
+      <button class="btn btn-secondary" disabled>Previous</button>
+      <button class="btn btn-primary" onclick="showChapter('chapter-2')">Next</button>
+    </div>
   </div>
 
   <div id="chapter-2" class="chapter">
@@ -125,6 +137,10 @@
       <li>Be cautious of sensational headlines.</li>
     </ul>
     <p><strong>Summary:</strong> Always cross-check the authenticity of information to avoid falling for fake news.</p>
+    <div class="nav-buttons">
+      <button class="btn btn-secondary" onclick="showChapter('chapter-1')">Previous</button>
+      <button class="btn btn-primary" onclick="showChapter('chapter-3')">Next</button>
+    </div>
   </div>
 
   <div id="chapter-3" class="chapter">
@@ -136,6 +152,10 @@
       <li>Be cautious of sharing personal data on unverified websites.</li>
     </ul>
     <p><strong>Summary:</strong> Safeguarding personal information is crucial to maintaining privacy and security online.</p>
+    <div class="nav-buttons">
+      <button class="btn btn-secondary" onclick="showChapter('chapter-2')">Previous</button>
+      <button class="btn btn-primary" onclick="showChapter('chapter-4')">Next</button>
+    </div>
   </div>
 
   <div id="chapter-4" class="chapter">
@@ -147,6 +167,10 @@
       <li>Familiarize yourself with platform guidelines and policies.</li>
     </ul>
     <p><strong>Summary:</strong> By addressing cyberbullying and practising good etiquette, you contribute to a safer online community.</p>
+    <div class="nav-buttons">
+      <button class="btn btn-secondary" onclick="showChapter('chapter-3')">Previous</button>
+      <button class="btn btn-primary" onclick="showChapter('chapter-5')">Next</button>
+    </div>
   </div>
 
   <div id="chapter-5" class="chapter">
@@ -158,6 +182,10 @@
       <li>Turn off location sharing.</li>
     </ul>
     <p><strong>Summary:</strong> Customising privacy settings helps you stay in control of your online presence.</p>
+    <div class="nav-buttons">
+      <button class="btn btn-secondary" onclick="showChapter('chapter-4')">Previous</button>
+      <button class="btn btn-primary" onclick="showChapter('chapter-6')">Next</button>
+    </div>
   </div>
 
   <div id="chapter-6" class="chapter">
@@ -169,6 +197,10 @@
       <li>Never share personal information through email or messages.</li>
     </ul>
     <p><strong>Summary:</strong> Being vigilant against phishing scams can save you from identity theft and financial loss.</p>
+    <div class="nav-buttons">
+      <button class="btn btn-secondary" onclick="showChapter('chapter-5')">Previous</button>
+      <button class="btn btn-primary" onclick="showChapter('chapter-7')">Next</button>
+    </div>
   </div>
 
   <div id="chapter-7" class="chapter">
@@ -180,6 +212,10 @@
       <li>Avoid public Wi-Fi when making transactions.</li>
     </ul>
     <p><strong>Summary:</strong> Following these steps ensures your personal and financial information stays safe while shopping online.</p>
+    <div class="nav-buttons">
+      <button class="btn btn-secondary" onclick="showChapter('chapter-6')">Previous</button>
+      <button class="btn btn-secondary" disabled>Next</button>
+    </div>
   </div>
 </div>
 
