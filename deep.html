@@ -25,13 +25,12 @@
       margin: 0;
     }
 
-    #contrast-toggle, #dark-mode-toggle {
+    #contrast-toggle {
       background: #fff;
       color: #333;
       border: none;
       padding: 0.5rem 1rem;
       cursor: pointer;
-      margin: 0.5rem;
     }
 
     nav {
@@ -53,11 +52,6 @@
     nav ul li a {
       color: #fff;
       text-decoration: none;
-    }
-
-    nav ul li a.active {
-      font-weight: bold;
-      text-decoration: underline;
     }
 
     main {
@@ -98,54 +92,20 @@
       background-color: #111;
     }
 
-    .dark-mode {
-      background-color: #121212;
-      color: #ffffff;
-    }
-
-    .dark-mode header,
-    .dark-mode nav,
-    .dark-mode footer {
-      background-color: #1f1f1f;
-    }
-
-    #progress-bar {
-      width: 100%;
-      height: 10px;
-      background-color: #ddd;
-      position: fixed;
-      top: 0;
-      left: 0;
-    }
-
-    #progress-fill {
-      height: 100%;
-      background-color: #4CAF50;
-      width: 0%;
-    }
-
-    .glossary {
-      text-decoration: underline;
-      cursor: pointer;
-    }
-
-    #search {
-      width: 100%;
-      padding: 0.5rem;
+    .quiz-question {
       margin-bottom: 1rem;
+    }
+
+    .quiz-question button {
+      margin-top: 0.5rem;
     }
   </style>
 </head>
 <body>
   <header>
-    <h1>Social Media & Digital Skills: A Guide to Online Safety</h1>
+    <h1>Online Safety eBook</h1>
     <button id="contrast-toggle">Toggle High Contrast</button>
-    <button id="dark-mode-toggle">Toggle Dark Mode</button>
   </header>
-
-  <div id="progress-bar">
-    <div id="progress-fill"></div>
-  </div>
 
   <nav>
     <ul>
@@ -155,8 +115,6 @@
       <li><a href="#quiz-section">Quizzes</a></li>
     </ul>
   </nav>
-
-  <input type="text" id="search" placeholder="Search...">
 
   <main>
     <section id="welcome">
@@ -171,8 +129,6 @@
         <li>Use a mix of letters, numbers, and symbols.</li>
         <li>Avoid using common words or phrases.</li>
       </ul>
-      <p>Watch this video for more tips:</p>
-      <iframe width="560" height="315" src="https://www.youtube.com/embed/VIDEO_ID" frameborder="0" allowfullscreen></iframe>
     </section>
 
     <section id="chapter2">
@@ -182,40 +138,23 @@
         <li>Check the source of the information.</li>
         <li>Look for corroborating evidence.</li>
       </ul>
-      <div id="scenario">
-        <p>You receive an email claiming you’ve won a prize. What do you do?</p>
-        <button onclick="handleChoice('ignore')">Ignore it</button>
-        <button onclick="handleChoice('click')">Click the link</button>
-        <p id="scenario-result"></p>
-      </div>
     </section>
 
     <section id="quiz-section">
       <h2>Quizzes</h2>
-      <div id="quiz1">
-        <h3>Quiz 1: Strong Passwords</h3>
-        <p>1. What’s the minimum recommended password length?</p>
-        <input type="text" id="q1-answer">
-        <p>2. True or False: Reusing passwords across accounts is safe.</p>
-        <input type="text" id="q2-answer">
-        <button onclick="checkQuiz1()">Submit</button>
-        <p id="quiz1-result"></p>
+      <div class="quiz-question">
+        <p>1. What’s the best way to create a strong password?</p>
+        <input type="radio" name="q1" value="personal"> Use personal information like your birthday<br>
+        <input type="radio" name="q1" value="random"> Combine random words with numbers and symbols<br>
+        <input type="radio" name="q1" value="same"> Use the same password across all accounts<br>
+        <button onclick="checkAnswer('q1', 'random')">Submit</button>
+        <p id="q1-result"></p>
       </div>
-    </section>
-
-    <section id="feedback">
-      <h2>Feedback</h2>
-      <form id="feedback-form">
-        <label for="feedback">Your Feedback:</label>
-        <textarea id="feedback" rows="4" cols="50"></textarea>
-        <button type="submit">Submit</button>
-      </form>
     </section>
   </main>
 
   <footer>
     <p>Progress: <span id="progress">0%</span></p>
-    <p>Points: <span id="points">0</span></p>
     <button onclick="prevChapter()">Previous</button>
     <button onclick="nextChapter()">Next</button>
   </footer>
@@ -229,28 +168,18 @@
       body.classList.toggle('high-contrast');
     });
 
-    // Dark Mode Toggle
-    const darkModeToggle = document.getElementById('dark-mode-toggle');
-    darkModeToggle.addEventListener('click', () => {
-      body.classList.toggle('dark-mode');
-    });
-
     // Quiz Functionality
-    function checkQuiz1() {
-      const q1Answer = document.getElementById('q1-answer').value.toLowerCase();
-      const q2Answer = document.getElementById('q2-answer').value.toLowerCase();
-      let score = 0;
+    function checkAnswer(questionId, correctAnswer) {
+      const selectedAnswer = document.querySelector(`input[name=${questionId}]:checked`);
+      const resultElement = document.getElementById(`${questionId}-result`);
 
-      if (q1Answer.includes('12') || q1Answer.includes('twelve')) {
-        score++;
+      if (selectedAnswer && selectedAnswer.value === correctAnswer) {
+        resultElement.innerText = 'Correct!';
+        resultElement.style.color = 'green';
+      } else {
+        resultElement.innerText = 'Incorrect. Try again!';
+        resultElement.style.color = 'red';
       }
-      if (q2Answer === 'false') {
-        score++;
-      }
-
-      const result = `You scored ${score}/2!`;
-      document.getElementById('quiz1-result').innerText = result;
-      awardPoints(score * 10); // Award points
     }
 
     // Progress Tracking
@@ -260,7 +189,6 @@
     function updateProgress() {
       const progress = ((currentChapter + 1) / chapters.length) * 100;
       document.getElementById('progress').innerText = `${progress}%`;
-      document.getElementById('progress-fill').style.width = `${progress}%`;
     }
 
     function nextChapter() {
@@ -268,7 +196,6 @@
         currentChapter++;
         document.getElementById(chapters[currentChapter]).scrollIntoView();
         updateProgress();
-        localStorage.setItem('currentChapter', currentChapter);
       }
     }
 
@@ -277,16 +204,7 @@
         currentChapter--;
         document.getElementById(chapters[currentChapter]).scrollIntoView();
         updateProgress();
-        localStorage.setItem('currentChapter', currentChapter);
       }
-    }
-
-    // Load saved progress
-    const savedChapter = localStorage.getItem('currentChapter');
-    if (savedChapter) {
-      currentChapter = parseInt(savedChapter);
-      document.getElementById(chapters[currentChapter]).scrollIntoView();
-      updateProgress();
     }
 
     // Keyboard Navigation
@@ -296,64 +214,6 @@
       } else if (event.key === 'ArrowLeft') {
         prevChapter();
       }
-    });
-
-    // Scroll Spy for Table of Contents
-    const sections = document.querySelectorAll('section');
-    const navLinks = document.querySelectorAll('nav ul li a');
-
-    window.addEventListener('scroll', () => {
-      let current = '';
-      sections.forEach(section => {
-        const sectionTop = section.offsetTop;
-        const sectionHeight = section.clientHeight;
-        if (pageYOffset >= sectionTop - sectionHeight / 3) {
-          current = section.getAttribute('id');
-        }
-      });
-
-      navLinks.forEach(link => {
-        link.classList.remove('active');
-        if (link.getAttribute('href').includes(current)) {
-          link.classList.add('active');
-        }
-      });
-    });
-
-    // Interactive Scenario
-    function handleChoice(choice) {
-      const result = choice === 'ignore' ? 'Good choice! It’s likely a scam.' : 'Oops! You might have fallen for a phishing scam.';
-      document.getElementById('scenario-result').innerText = result;
-    }
-
-    // Glossary Popups
-    document.querySelectorAll('.glossary').forEach(term => {
-      term.addEventListener('click', () => {
-        alert(term.getAttribute('data-definition'));
-      });
-    });
-
-    // Feedback Form
-    document.getElementById('feedback-form').addEventListener('submit', (e) => {
-      e.preventDefault();
-      alert('Thank you for your feedback!');
-    });
-
-    // Gamification (Points System)
-    let points = 0;
-    function awardPoints(amount) {
-      points += amount;
-      document.getElementById('points').innerText = points;
-    }
-
-    // Search Functionality
-    document.getElementById('search').addEventListener('input', (e) => {
-      const query = e.target.value.toLowerCase();
-      const sections = document.querySelectorAll('section');
-      sections.forEach(section => {
-        const text = section.innerText.toLowerCase();
-        section.style.display = text.includes(query) ? 'block' : 'none';
-      });
     });
   </script>
 </body>
