@@ -3,218 +3,160 @@
 <head>
   <meta charset="UTF-8">
   <meta name="viewport" content="width=device-width, initial-scale=1.0">
-  <title>Online Safety eBook</title>
+  <title>Articulate App Demo</title>
+  <link href="https://fonts.googleapis.com/css2?family=Rubik:wght@300;400;500;700&display=swap" rel="stylesheet">
   <style>
+    :root {
+      /* Primary Colors */
+      --black: #1c1c1b;
+      --white: #ffffff;
+      --health: #ef9a5c;
+      --enterprise: #53aec9;
+      --places: #aac056;
+      --connectivity: #776cca;
+      --artivism: #e5608e;
+    }
+
     body {
-      font-family: Arial, sans-serif;
+      font-family: 'Rubik', sans-serif;
+      margin: 0;
+      background: linear-gradient(145deg, var(--connectivity) 0%, var(--artivism) 100%);
+      min-height: 100vh;
+      position: relative;
+    }
+
+    /* Header */
+    .app-header {
+      padding: 2rem;
+      background: var(--white);
+      display: flex;
+      align-items: center;
+      box-shadow: 0 4px 12px rgba(0,0,0,0.1);
+    }
+
+    .logo {
+      width: 120px;
+      margin-right: 2rem;
+    }
+
+    /* Main Content */
+    .content-wrapper {
+      padding: 2rem;
+      position: relative;
+      overflow: hidden;
+    }
+
+    .organic-shape {
+      position: absolute;
+      opacity: 0.1;
+      pointer-events: none;
+    }
+
+    /* Cards */
+    .pillar-card {
+      background: var(--white);
+      border-radius: 20px;
+      padding: 1.5rem;
+      margin-bottom: 1.5rem;
+      box-shadow: 0 4px 12px rgba(0,0,0,0.1);
+    }
+
+    /* Buttons */
+    .articulate-btn {
+      background: var(--black);
+      color: var(--white);
+      border: none;
+      border-radius: 8px;
+      padding: 1rem 2rem;
+      font-family: 'Rubik', sans-serif;
+      font-weight: 700;
+      display: flex;
+      align-items: center;
+      gap: 0.5rem;
+      cursor: pointer;
+      transition: transform 0.2s;
+    }
+
+    .articulate-btn::after {
+      content: '→';
+      font-weight: 700;
+    }
+
+    /* Icons */
+    .icon-grid {
+      display: grid;
+      grid-template-columns: repeat(4, 1fr);
+      gap: 1rem;
+      padding: 2rem 0;
+    }
+
+    .icon-wrapper {
+      background: var(--white);
+      border-radius: 12px;
+      padding: 1rem;
+      text-align: center;
+    }
+
+    /* Typography */
+    h1 {
+      font-weight: 700;
+      color: var(--black);
+      font-size: 2.5rem;
+      margin: 0 0 1rem 0;
+    }
+
+    h2 {
+      font-weight: 500;
+      color: var(--enterprise);
+      font-size: 1.5rem;
+    }
+
+    p {
+      font-weight: 300;
       line-height: 1.6;
-      margin: 0;
-      padding: 0;
-      background-color: #f4f4f4;
-      color: #333;
-    }
-
-    header {
-      background: #333;
-      color: #fff;
-      padding: 1rem 0;
-      text-align: center;
-    }
-
-    header h1 {
-      margin: 0;
-    }
-
-    #contrast-toggle {
-      background: #fff;
-      color: #333;
-      border: none;
-      padding: 0.5rem 1rem;
-      cursor: pointer;
-    }
-
-    nav {
-      background: #444;
-      color: #fff;
-      padding: 1rem;
-    }
-
-    nav ul {
-      list-style: none;
-      padding: 0;
-    }
-
-    nav ul li {
-      display: inline;
-      margin-right: 1rem;
-    }
-
-    nav ul li a {
-      color: #fff;
-      text-decoration: none;
-    }
-
-    main {
-      padding: 1rem;
-    }
-
-    section {
-      margin-bottom: 2rem;
-    }
-
-    footer {
-      background: #333;
-      color: #fff;
-      text-align: center;
-      padding: 1rem 0;
-      position: fixed;
-      width: 100%;
-      bottom: 0;
-    }
-
-    footer button {
-      background: #fff;
-      color: #333;
-      border: none;
-      padding: 0.5rem 1rem;
-      cursor: pointer;
-      margin: 0 0.5rem;
-    }
-
-    .high-contrast {
-      background-color: #000;
-      color: #fff;
-    }
-
-    .high-contrast header,
-    .high-contrast nav,
-    .high-contrast footer {
-      background-color: #111;
-    }
-
-    .quiz-question {
-      margin-bottom: 1rem;
-    }
-
-    .quiz-question button {
-      margin-top: 0.5rem;
+      color: var(--black);
     }
   </style>
 </head>
 <body>
-  <header>
-    <h1>Online Safety eBook</h1>
-    <button id="contrast-toggle">Toggle High Contrast</button>
+  <header class="app-header">
+    <img src="articulate-core-marque.svg" alt="Articulate Logo" class="logo">
+    <h1>Community Hub</h1>
   </header>
 
-  <nav>
-    <ul>
-      <li><a href="#welcome">Welcome</a></li>
-      <li><a href="#chapter1">Chapter 1: Strong Passwords</a></li>
-      <li><a href="#chapter2">Chapter 2: Spotting Fake News</a></li>
-      <li><a href="#quiz-section">Quizzes</a></li>
-    </ul>
-  </nav>
+  <div class="content-wrapper">
+    <div class="organic-shape" style="top: -50px; right: -30px; width: 200px; height: 200px; background: var(--health); border-radius: 40%"></div>
+    
+    <div class="pillar-card">
+      <h2>Health & Wellbeing</h2>
+      <p>Join our weekly mindfulness sessions and community health workshops.</p>
+      <button class="articulate-btn">View Schedule</button>
+    </div>
 
-  <main>
-    <section id="welcome">
-      <h2>Welcome to Your Digital Safety Journey</h2>
-      <p>This eBook is your guide to navigating the digital world safely. Learn how to protect yourself online with practical tips and interactive quizzes.</p>
-    </section>
+    <div class="pillar-card">
+      <h2>Creative Spaces</h2>
+      <p>Explore our network of artist studios and collaborative workspaces.</p>
+      <button class="articulate-btn">Find Locations</button>
+    </div>
 
-    <section id="chapter1">
-      <h2>Chapter 1: Creating Strong Passwords</h2>
-      <p>Learn how to create and manage strong passwords to protect your online accounts.</p>
-      <ul>
-        <li>Use a mix of letters, numbers, and symbols.</li>
-        <li>Avoid using common words or phrases.</li>
-      </ul>
-    </section>
-
-    <section id="chapter2">
-      <h2>Chapter 2: Spotting Fake News</h2>
-      <p>Understand the techniques to identify and avoid fake news and misinformation online.</p>
-      <ul>
-        <li>Check the source of the information.</li>
-        <li>Look for corroborating evidence.</li>
-      </ul>
-    </section>
-
-    <section id="quiz-section">
-      <h2>Quizzes</h2>
-      <div class="quiz-question">
-        <p>1. What’s the best way to create a strong password?</p>
-        <input type="radio" name="q1" value="personal"> Use personal information like your birthday<br>
-        <input type="radio" name="q1" value="random"> Combine random words with numbers and symbols<br>
-        <input type="radio" name="q1" value="same"> Use the same password across all accounts<br>
-        <button onclick="checkAnswer('q1', 'random')">Submit</button>
-        <p id="q1-result"></p>
+    <div class="icon-grid">
+      <div class="icon-wrapper">
+        <img src="upload-icon.svg" alt="Upload" style="width: 40px">
+        <p>Upload</p>
       </div>
-    </section>
-  </main>
-
-  <footer>
-    <p>Progress: <span id="progress">0%</span></p>
-    <button onclick="prevChapter()">Previous</button>
-    <button onclick="nextChapter()">Next</button>
-  </footer>
-
-  <script>
-    // High Contrast Toggle
-    const contrastToggle = document.getElementById('contrast-toggle');
-    const body = document.body;
-
-    contrastToggle.addEventListener('click', () => {
-      body.classList.toggle('high-contrast');
-    });
-
-    // Quiz Functionality
-    function checkAnswer(questionId, correctAnswer) {
-      const selectedAnswer = document.querySelector(`input[name=${questionId}]:checked`);
-      const resultElement = document.getElementById(`${questionId}-result`);
-
-      if (selectedAnswer && selectedAnswer.value === correctAnswer) {
-        resultElement.innerText = 'Correct!';
-        resultElement.style.color = 'green';
-      } else {
-        resultElement.innerText = 'Incorrect. Try again!';
-        resultElement.style.color = 'red';
-      }
-    }
-
-    // Progress Tracking
-    let currentChapter = 0;
-    const chapters = ['welcome', 'chapter1', 'chapter2', 'quiz-section'];
-
-    function updateProgress() {
-      const progress = ((currentChapter + 1) / chapters.length) * 100;
-      document.getElementById('progress').innerText = `${progress}%`;
-    }
-
-    function nextChapter() {
-      if (currentChapter < chapters.length - 1) {
-        currentChapter++;
-        document.getElementById(chapters[currentChapter]).scrollIntoView();
-        updateProgress();
-      }
-    }
-
-    function prevChapter() {
-      if (currentChapter > 0) {
-        currentChapter--;
-        document.getElementById(chapters[currentChapter]).scrollIntoView();
-        updateProgress();
-      }
-    }
-
-    // Keyboard Navigation
-    document.addEventListener('keydown', (event) => {
-      if (event.key === 'ArrowRight') {
-        nextChapter();
-      } else if (event.key === 'ArrowLeft') {
-        prevChapter();
-      }
-    });
-  </script>
+      <div class="icon-wrapper">
+        <img src="search-icon.svg" alt="Search" style="width: 40px">
+        <p>Search</p>
+      </div>
+      <div class="icon-wrapper">
+        <img src="profile-icon.svg" alt="Profile" style="width: 40px">
+        <p>Profile</p>
+      </div>
+      <div class="icon-wrapper">
+        <img src="collaborate-icon.svg" alt="Collaborate" style="width: 40px">
+        <p>Collaborate</p>
+      </div>
+    </div>
+  </div>
 </body>
 </html>
