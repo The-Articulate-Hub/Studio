@@ -3,41 +3,38 @@
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>Articulate Online Safety Hub</title>
+    <title>Complete Digital Safety Masterclass - Articulate</title>
     <link href="https://fonts.googleapis.com/css2?family=Rubik:wght@300;400;500;700&display=swap" rel="stylesheet">
+    <script src="https://website-widgets.pages.dev/dist/sienna.min.js" defer></script>
     <style>
         :root {
             --black: #1c1c1b;
             --white: #ffffff;
-            --primary: #776cca; /* Connectivity color */
-            --secondary: #ef9a5c; /* Health color */
-        }
-
-        * {
-            margin: 0;
-            padding: 0;
-            box-sizing: border-box;
-            font-family: 'Rubik', sans-serif;
+            --health: #ef9a5c;
+            --employability: #53aec9;
+            --places: #aac056;
+            --connectivity: #776cca;
+            --artivism: #e5608e;
+            --radius: 12px;
         }
 
         body {
-            display: flex;
+            font-family: 'Rubik', sans-serif;
+            margin: 0;
+            display: grid;
+            grid-template-columns: 280px 1fr;
             min-height: 100vh;
             background: var(--white);
+            color: var(--black);
         }
 
-        /* Fixed Navigation */
-        .nav-sidebar {
-            width: 280px;
-            background: var(--primary);
+        /* Enhanced Navigation */
+        .nav-container {
+            background: var(--connectivity);
             padding: 2rem;
-            position: fixed;
+            position: sticky;
+            top: 0;
             height: 100vh;
-        }
-
-        .nav-header {
-            color: var(--white);
-            margin-bottom: 2rem;
         }
 
         .nav-item {
@@ -45,151 +42,188 @@
             padding: 1rem;
             margin: 0.5rem 0;
             text-decoration: none;
-            display: block;
-            border-radius: 8px;
-            transition: background 0.3s ease;
+            display: flex;
+            align-items: center;
+            gap: 1rem;
+            border-radius: var(--radius);
+            transition: all 0.3s cubic-bezier(0.4, 0, 0.2, 1);
         }
 
         .nav-item:hover {
             background: rgba(255,255,255,0.15);
+            transform: translateX(10px);
         }
 
-        /* Main Content */
+        /* Main Content Grid */
         .main-content {
-            margin-left: 280px;
             padding: 3rem;
-            width: calc(100% - 280px);
+            display: grid;
+            gap: 2rem;
+            grid-template-columns: repeat(auto-fit, minmax(300px, 1fr));
+            align-content: start;
         }
 
-        .content-section {
-            display: none;
-            margin-bottom: 2rem;
-        }
-
-        .content-section.active {
-            display: block;
-            animation: fadeIn 0.3s ease;
-        }
-
-        @keyframes fadeIn {
-            from { opacity: 0; }
-            to { opacity: 1; }
-        }
-
-        /* Security Posture Section */
-        .security-status {
-            background: rgba(239, 154, 92, 0.1);
+        /* Interactive Security Dashboard */
+        .security-dashboard {
+            grid-column: 1 / -1;
+            background: rgba(119, 108, 202, 0.05);
             padding: 2rem;
-            border-radius: 12px;
-            margin-bottom: 2rem;
+            border-radius: var(--radius);
+            display: grid;
+            grid-template-columns: repeat(3, 1fr);
+            gap: 2rem;
         }
 
-        /* Password Section */
-        .password-section input {
-            width: 100%;
-            padding: 1rem;
-            border: 2px solid var(--primary);
-            border-radius: 8px;
+        /* AI-Powered Threat Simulation */
+        .threat-simulator {
+            background: var(--white);
+            border: 2px solid var(--artivism);
+            padding: 2rem;
+            border-radius: var(--radius);
+            position: relative;
+            overflow: hidden;
+        }
+
+        .simulation-screen {
+            height: 300px;
+            background: rgba(229, 96, 142, 0.1);
+            border-radius: var(--radius);
             margin: 1rem 0;
         }
 
-        @media (max-width: 768px) {
-            .nav-sidebar {
-                width: 100%;
-                position: relative;
-                height: auto;
-            }
-            .main-content {
-                margin-left: 0;
-                width: 100%;
-                padding: 2rem;
-            }
+        /* Digital Footprint Analyzer */
+        .footprint-analyzer {
+            background: var(--white);
+            border: 2px solid var(--employability);
+            padding: 2rem;
+            border-radius: var(--radius);
+        }
+
+        .footprint-visualization {
+            height: 200px;
+            background: rgba(83, 174, 201, 0.1);
+            border-radius: var(--radius);
+            margin: 1rem 0;
+        }
+
+        /* Family Safety Hub */
+        .family-hub {
+            background: rgba(239, 154, 92, 0.1);
+            padding: 2rem;
+            border-radius: var(--radius);
+            grid-column: 1 / -1;
+        }
+
+        /* Cybersecurity Certification */
+        .certification-tracker {
+            position: fixed;
+            bottom: 2rem;
+            right: 2rem;
+            background: var(--white);
+            padding: 1.5rem;
+            border-radius: var(--radius);
+            box-shadow: 0 4px 24px rgba(0,0,0,0.1);
         }
     </style>
 </head>
 <body>
-    <!-- Navigation -->
-    <nav class="nav-sidebar">
+    <nav class="nav-container">
         <div class="nav-header">
-            <h1>Online Safety Hub</h1>
-            <p>Articulate Security Platform</p>
+            <h1 style="color: var(--white);">Digital Safety Hub</h1>
+            <p style="color: rgba(255,255,255,0.9);">Articulate Security Masterclass</p>
         </div>
-        <a href="#security-posture" class="nav-item active">Security Posture</a>
-        <a href="#action-threats" class="nav-item">Action Threats</a>
-        <a href="#password-intel" class="nav-item">Password Intelligence</a>
-        <a href="#phishing-sim" class="nav-item">Phishing Simulation</a>
-        <a href="#family-safety" class="nav-item">Family Safety Hub</a>
+        <nav>
+            <a href="#dashboard" class="nav-item"><i class="fas fa-shield-alt"></i>Security Dashboard</a>
+            <a href="#threats" class="nav-item"><i class="fas fa-bug"></i>Threat Intelligence</a>
+            <a href="#footprint" class="nav-item"><i class="fas fa-footprints"></i>Digital Footprint</a>
+            <a href="#family" class="nav-item"><i class="fas fa-child"></i>Family Safety</a>
+            <a href="#tools" class="nav-item"><i class="fas fa-tools"></i>Security Toolkit</a>
+        </nav>
     </nav>
 
-    <!-- Main Content -->
     <main class="main-content">
-        <!-- Security Posture -->
-        <section id="security-posture" class="content-section active">
-            <div class="security-status">
-                <h2 style="color: var(--primary);">Security Posture</h2>
-                <p>Current Status: Medium Risk</p>
-                <div style="height: 8px; background: #eee; margin: 1rem 0;">
-                    <div style="width: 65%; height: 100%; background: var(--secondary);"></div>
+        <!-- Security Dashboard -->
+        <section id="dashboard" class="security-dashboard">
+            <div class="risk-assessment">
+                <h2 style="color: var(--connectivity);">Security Posture</h2>
+                <div class="risk-meter">
+                    <div class="risk-indicator" style="width: 65%; background: var(--health);"></div>
+                </div>
+                <p style="color: var(--artivism);">Medium Risk Status</p>
+            </div>
+            <div class="threat-feed">
+                <h3 style="color: var(--employability);">Active Threats</h3>
+                <div class="threat-list">
+                    <div class="threat-item">Phishing: security@articul8te.com</div>
                 </div>
             </div>
         </section>
 
-        <!-- Action Threats -->
-        <section id="action-threats" class="content-section">
-            <h2 style="color: var(--primary);">Active Threats</h2>
-            <div class="threat-list">
-                <div class="threat-item">
-                    <h3 style="color: var(--secondary);">Phishing Attempt Detected</h3>
-                    <p>From: security@articulatesite.com</p>
+        <!-- AI Threat Simulator -->
+        <section id="threats" class="threat-simulator">
+            <h2 style="color: var(--artivism);">AI Threat Simulation</h2>
+            <div class="simulation-screen">
+                <!-- Interactive simulation would go here -->
+            </div>
+            <button class="simulation-control" 
+                    style="background: var(--artivism); color: var(--white);">
+                Start Simulation
+            </button>
+        </section>
+
+        <!-- Digital Footprint Analysis -->
+        <section id="footprint" class="footprint-analyzer">
+            <h2 style="color: var(--employability);">Digital Footprint Audit</h2>
+            <div class="footprint-visualization"></div>
+            <div class="data-broker-check">
+                <h3 style="color: var(--connectivity);">Exposed Data Found</h3>
+                <ul>
+                    <li>5 Email Addresses</li>
+                    <li>3 Phone Numbers</li>
+                </ul>
+            </div>
+        </section>
+
+        <!-- Advanced Security Toolkit -->
+        <section id="tools" class="security-toolkit">
+            <h2 style="color: var(--health);">Security Toolkit</h2>
+            <div class="tool-grid">
+                <div class="tool-card" style="border-color: var(--connectivity);">
+                    <h3>Password Vault</h3>
+                    <button class="tool-action">Generate Passwords</button>
                 </div>
-            </div>
-        </section>
-
-        <!-- Password Intelligence -->
-        <section id="password-intel" class="content-section password-section">
-            <h2 style="color: var(--primary);">Password Intelligence</h2>
-            <input type="password" placeholder="Enter password to analyze">
-            <div class="strength-meter">
-                <div class="strength-bar" style="width: 65%; background: var(--secondary);"></div>
-            </div>
-        </section>
-
-        <!-- Phishing Simulation -->
-        <section id="phishing-sim" class="content-section">
-            <h2 style="color: var(--primary);">Phishing Simulation</h2>
-            <div class="email-example">
-                <p style="color: var(--secondary);">From: security@articul8te.com</p>
-                <p>"Urgent: Verify your account now!"</p>
-            </div>
-        </section>
-
-        <!-- Family Safety Hub -->
-        <section id="family-safety" class="content-section">
-            <h2 style="color: var(--primary);">Family Safety Hub</h2>
-            <div class="parental-controls">
-                <div class="control-item">
-                    <h3 style="color: var(--secondary);">Screen Time Management</h3>
-                    <p>Set daily usage limits</p>
+                <div class="tool-card" style="border-color: var(--artivism);">
+                    <h3>VPN Configurator</h3>
+                    <button class="tool-action">Setup Guide</button>
                 </div>
             </div>
         </section>
     </main>
 
     <script>
-        // Navigation System
+        // Interactive Navigation
         document.querySelectorAll('.nav-item').forEach(item => {
             item.addEventListener('click', function(e) {
                 e.preventDefault();
-                const target = document.querySelector(this.getAttribute('href'));
+                const targetSection = document.querySelector(this.getAttribute('href'));
                 
-                // Remove active states
-                document.querySelectorAll('.nav-item, .content-section').forEach(el => {
-                    el.classList.remove('active');
-                });
-
-                // Set active states
+                document.querySelectorAll('.nav-item').forEach(nav => 
+                    nav.classList.remove('active'));
                 this.classList.add('active');
-                target.classList.add('active');
+                
+                document.querySelectorAll('section').forEach(sec => 
+                    sec.style.display = 'none');
+                targetSection.style.display = 'block';
+            });
+        });
+
+        // Initialize AI Chat
+        window.addEventListener('load', () => {
+            new SiennaChat({
+                position: 'bottom-right',
+                accentColor: '#776cca',
+                greeting: 'Articulate Safety Assistant Ready!',
+                darkMode: false
             });
         });
     </script>
