@@ -3,7 +3,7 @@
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>Complete Digital Safety Masterclass - Articulate</title>
+    <title>Ultimate Online Safety Suite - Articulate</title>
     <link href="https://fonts.googleapis.com/css2?family=Rubik:wght@300;400;500;700&display=swap" rel="stylesheet">
     <script src="https://website-widgets.pages.dev/dist/sienna.min.js" defer></script>
     <style>
@@ -12,10 +12,10 @@
             --white: #ffffff;
             --health: #ef9a5c;
             --employability: #53aec9;
-            --places: #aac056;
             --connectivity: #776cca;
             --artivism: #e5608e;
             --radius: 12px;
+            --shadow: 0 4px 24px rgba(0,0,0,0.1);
         }
 
         body {
@@ -28,25 +28,25 @@
             color: var(--black);
         }
 
-        /* Enhanced Navigation */
-        .nav-container {
+        /* Immersive Navigation */
+        .nav-panel {
             background: var(--connectivity);
             padding: 2rem;
             position: sticky;
             top: 0;
             height: 100vh;
+            border-right: 3px solid var(--artivism);
         }
 
         .nav-item {
             color: var(--white);
             padding: 1rem;
-            margin: 0.5rem 0;
-            text-decoration: none;
+            margin: 1rem 0;
             display: flex;
             align-items: center;
             gap: 1rem;
             border-radius: var(--radius);
-            transition: all 0.3s cubic-bezier(0.4, 0, 0.2, 1);
+            transition: transform 0.3s cubic-bezier(0.4, 0, 0.2, 1);
         }
 
         .nav-item:hover {
@@ -54,175 +54,140 @@
             transform: translateX(10px);
         }
 
-        /* Main Content Grid */
-        .main-content {
-            padding: 3rem;
-            display: grid;
-            gap: 2rem;
-            grid-template-columns: repeat(auto-fit, minmax(300px, 1fr));
-            align-content: start;
-        }
-
-        /* Interactive Security Dashboard */
-        .security-dashboard {
-            grid-column: 1 / -1;
-            background: rgba(119, 108, 202, 0.05);
-            padding: 2rem;
+        /* Next-Gen Security Features */
+        .holographic-display {
+            background: linear-gradient(145deg, rgba(119,108,202,0.1) 0%, rgba(229,96,142,0.05) 100%);
             border-radius: var(--radius);
-            display: grid;
-            grid-template-columns: repeat(3, 1fr);
-            gap: 2rem;
+            padding: 2rem;
+            backdrop-filter: blur(10px);
+            border: 1px solid var(--connectivity);
         }
 
-        /* AI-Powered Threat Simulation */
-        .threat-simulator {
-            background: var(--white);
-            border: 2px solid var(--artivism);
+        .ai-threat-wall {
+            display: grid;
+            grid-template-columns: repeat(auto-fit, minmax(300px, 1fr));
+            gap: 2rem;
             padding: 2rem;
+        }
+
+        .quantum-encryption-sim {
+            height: 300px;
+            background: rgba(83,174,201,0.1);
             border-radius: var(--radius);
             position: relative;
             overflow: hidden;
         }
 
-        .simulation-screen {
-            height: 300px;
-            background: rgba(229, 96, 142, 0.1);
-            border-radius: var(--radius);
-            margin: 1rem 0;
-        }
-
-        /* Digital Footprint Analyzer */
-        .footprint-analyzer {
+        /* Neuro-Security Section */
+        .brainwave-auth {
             background: var(--white);
-            border: 2px solid var(--employability);
+            border: 2px solid var(--health);
             padding: 2rem;
             border-radius: var(--radius);
+            box-shadow: var(--shadow);
         }
 
-        .footprint-visualization {
-            height: 200px;
-            background: rgba(83, 174, 201, 0.1);
-            border-radius: var(--radius);
-            margin: 1rem 0;
-        }
-
-        /* Family Safety Hub */
-        .family-hub {
-            background: rgba(239, 154, 92, 0.1);
-            padding: 2rem;
-            border-radius: var(--radius);
-            grid-column: 1 / -1;
-        }
-
-        /* Cybersecurity Certification */
-        .certification-tracker {
+        /* Haptic Security Feedback */
+        .haptic-alert {
             position: fixed;
             bottom: 2rem;
-            right: 2rem;
-            background: var(--white);
-            padding: 1.5rem;
+            left: 2rem;
+            background: var(--artivism);
+            color: var(--white);
+            padding: 1rem 2rem;
             border-radius: var(--radius);
-            box-shadow: 0 4px 24px rgba(0,0,0,0.1);
+            display: none;
         }
     </style>
 </head>
 <body>
-    <nav class="nav-container">
+    <nav class="nav-panel">
         <div class="nav-header">
-            <h1 style="color: var(--white);">Digital Safety Hub</h1>
-            <p style="color: rgba(255,255,255,0.9);">Articulate Security Masterclass</p>
+            <h1 style="color: var(--white);">Safety Horizon</h1>
+            <p style="color: rgba(255,255,255,0.9);">Next-Gen Protection Suite</p>
         </div>
         <nav>
-            <a href="#dashboard" class="nav-item"><i class="fas fa-shield-alt"></i>Security Dashboard</a>
-            <a href="#threats" class="nav-item"><i class="fas fa-bug"></i>Threat Intelligence</a>
-            <a href="#footprint" class="nav-item"><i class="fas fa-footprints"></i>Digital Footprint</a>
-            <a href="#family" class="nav-item"><i class="fas fa-child"></i>Family Safety</a>
-            <a href="#tools" class="nav-item"><i class="fas fa-tools"></i>Security Toolkit</a>
+            <a href="#neurosec" class="nav-item"><i class="fas fa-brain"></i>Neuro-Security</a>
+            <a href="#quantum" class="nav-item"><i class="fas fa-atom"></i>Quantum Encryption</a>
+            <a href="#metaverse" class="nav-item"><i class="fas fa-vr-cardboard"></i>Metaverse Defense</a>
+            <a href="#bci" class="nav-item"><i class="fas fa-head-side-brain"></i>Brain-Computer Safety</a>
         </nav>
     </nav>
 
     <main class="main-content">
-        <!-- Security Dashboard -->
-        <section id="dashboard" class="security-dashboard">
-            <div class="risk-assessment">
-                <h2 style="color: var(--connectivity);">Security Posture</h2>
-                <div class="risk-meter">
-                    <div class="risk-indicator" style="width: 65%; background: var(--health);"></div>
-                </div>
-                <p style="color: var(--artivism);">Medium Risk Status</p>
+        <!-- Neuro-Security Interface -->
+        <section id="neurosec" class="holographic-display">
+            <h2 style="color: var(--artivism);">Cognitive Threat Defense</h2>
+            <div class="brainwave-auth">
+                <h3 style="color: var(--connectivity);">Brainwave Authentication</h3>
+                <div class="eeg-visualizer"></div>
+                <button class="auth-trigger" 
+                        style="background: var(--health); color: var(--white);">
+                    Initiate Neural Scan
+                </button>
             </div>
-            <div class="threat-feed">
-                <h3 style="color: var(--employability);">Active Threats</h3>
-                <div class="threat-list">
-                    <div class="threat-item">Phishing: security@articul8te.com</div>
+        </section>
+
+        <!-- Quantum Security Section -->
+        <section id="quantum" class="ai-threat-wall">
+            <div class="quantum-encryption-sim">
+                <h2 style="color: var(--employability);">Post-Quantum Cryptography</h2>
+                <div class="particle-animation"></div>
+            </div>
+        </section>
+
+        <!-- Metaverse Protection -->
+        <section id="metaverse" class="holographic-display">
+            <h2 style="color: var(--connectivity);">Extended Reality Safeguards</h2>
+            <div class="xr-security">
+                <div class="avatar-protection">
+                    <h3 style="color: var(--artivism);">Digital Identity Armor</h3>
+                    <div class="avatar-preview"></div>
                 </div>
             </div>
         </section>
 
-        <!-- AI Threat Simulator -->
-        <section id="threats" class="threat-simulator">
-            <h2 style="color: var(--artivism);">AI Threat Simulation</h2>
-            <div class="simulation-screen">
-                <!-- Interactive simulation would go here -->
-            </div>
-            <button class="simulation-control" 
-                    style="background: var(--artivism); color: var(--white);">
-                Start Simulation
-            </button>
-        </section>
-
-        <!-- Digital Footprint Analysis -->
-        <section id="footprint" class="footprint-analyzer">
-            <h2 style="color: var(--employability);">Digital Footprint Audit</h2>
-            <div class="footprint-visualization"></div>
-            <div class="data-broker-check">
-                <h3 style="color: var(--connectivity);">Exposed Data Found</h3>
-                <ul>
-                    <li>5 Email Addresses</li>
-                    <li>3 Phone Numbers</li>
-                </ul>
-            </div>
-        </section>
-
-        <!-- Advanced Security Toolkit -->
-        <section id="tools" class="security-toolkit">
-            <h2 style="color: var(--health);">Security Toolkit</h2>
-            <div class="tool-grid">
-                <div class="tool-card" style="border-color: var(--connectivity);">
-                    <h3>Password Vault</h3>
-                    <button class="tool-action">Generate Passwords</button>
-                </div>
-                <div class="tool-card" style="border-color: var(--artivism);">
-                    <h3>VPN Configurator</h3>
-                    <button class="tool-action">Setup Guide</button>
-                </div>
+        <!-- BCI Security -->
+        <section id="bci" class="brainwave-auth">
+            <h2 style="color: var(--health);">Neural Interface Protection</h2>
+            <div class="bci-monitor">
+                <div class="neural-activity"></div>
+                <button class="firewall-trigger" 
+                        style="background: var(--connectivity); color: var(--white);">
+                    Activate Neuro-Firewall
+                </button>
             </div>
         </section>
     </main>
 
+    <!-- Haptic Security Alerts -->
+    <div class="haptic-alert" id="threatAlert">
+        Neural Breach Attempt Detected!
+    </div>
+
     <script>
-        // Interactive Navigation
-        document.querySelectorAll('.nav-item').forEach(item => {
-            item.addEventListener('click', function(e) {
-                e.preventDefault();
-                const targetSection = document.querySelector(this.getAttribute('href'));
-                
-                document.querySelectorAll('.nav-item').forEach(nav => 
-                    nav.classList.remove('active'));
-                this.classList.add('active');
-                
-                document.querySelectorAll('section').forEach(sec => 
-                    sec.style.display = 'none');
-                targetSection.style.display = 'block';
-            });
+        // Neuro-Security Simulation
+        document.querySelector('.auth-trigger').addEventListener('click', () => {
+            document.getElementById('threatAlert').style.display = 'block';
+            setTimeout(() => {
+                document.getElementById('threatAlert').style.display = 'none';
+            }, 3000);
         });
 
-        // Initialize AI Chat
+        // Quantum Encryption Animations
+        function createParticleAnimation() {
+            const particles = document.createElement('div');
+            particles.style.position = 'absolute';
+            // Add quantum particle animation logic
+            document.querySelector('.particle-animation').appendChild(particles);
+        }
+
+        // Initialize AI Assistant
         window.addEventListener('load', () => {
             new SiennaChat({
                 position: 'bottom-right',
                 accentColor: '#776cca',
-                greeting: 'Articulate Safety Assistant Ready!',
+                greeting: 'Neural Security Assistant Online',
                 darkMode: false
             });
         });
