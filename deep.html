@@ -4,228 +4,349 @@
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <title>Articulate Online Safety Masterclass</title>
-    <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.3.0/dist/css/bootstrap.min.css" rel="stylesheet">
     <link href="https://fonts.googleapis.com/css2?family=Rubik:wght@300;400;500;700&display=swap" rel="stylesheet">
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.0.0/css/all.min.css">
     <script src="https://website-widgets.pages.dev/dist/sienna.min.js" defer></script>
     <style>
         :root {
-            --articulate-black: #1c1c1b;
-            --articulate-white: #ffffff;
+            --black: #1c1c1b;
+            --white: #ffffff;
             --health: #ef9a5c;
             --employability: #53aec9;
             --places: #aac056;
             --connectivity: #776cca;
             --artivism: #e5608e;
+            --radius-md: 12px;
+            --shadow: 0 4px 24px rgba(0,0,0,0.1);
+        }
+
+        * {
+            margin: 0;
+            padding: 0;
+            box-sizing: border-box;
+            font-family: 'Rubik', sans-serif;
         }
 
         body {
-            font-family: 'Rubik', sans-serif;
-            background: var(--articulate-white);
-            color: var(--articulate-black);
+            display: grid;
+            grid-template-columns: 280px 1fr;
             min-height: 100vh;
-            overflow-x: hidden;
+            background: var(--white);
+            color: var(--black);
         }
 
         /* Brand Compliant Navigation */
         .ebook-nav {
-            width: 280px;
             background: var(--connectivity);
-            color: var(--articulate-white);
-            position: fixed;
-            height: 100vh;
             padding: 2rem;
-            border-right: 3px solid var(--artivism);
+            position: sticky;
+            top: 0;
+            height: 100vh;
+            display: flex;
+            flex-direction: column;
+            gap: 1.5rem;
+        }
+
+        .nav-header h1 {
+            color: var(--white);
+            font-weight: 700;
+            margin-bottom: 0.5rem;
+        }
+
+        .nav-header p {
+            color: rgba(255,255,255,0.9);
+            font-weight: 300;
+        }
+
+        .chapter-list {
+            list-style: none;
+            display: grid;
+            gap: 0.75rem;
         }
 
         .chapter-link {
-            color: var(--articulate-white);
+            color: var(--white);
             padding: 1rem;
-            border-radius: 8px;
-            margin: 0.5rem 0;
-            display: block;
-            transition: all 0.3s ease;
+            border-radius: var(--radius-md);
+            display: flex;
+            align-items: center;
+            gap: 1rem;
             text-decoration: none;
+            transition: all 0.3s cubic-bezier(0.4, 0, 0.2, 1);
         }
 
         .chapter-link:hover {
             background: rgba(255,255,255,0.15);
+            transform: translateX(8px);
         }
 
-        /* Main Content Area */
+        .chapter-link.active {
+            background: var(--artivism);
+            box-shadow: var(--shadow);
+        }
+
+        /* Main Content Grid */
         .ebook-content {
-            margin-left: 280px;
             padding: 3rem;
-            position: relative;
+            display: grid;
+            gap: 2rem;
+            align-content: start;
         }
 
-        /* Page Transitions */
-        .chapter-page {
-            display: none;
-            position: absolute;
-            width: calc(100% - 4rem);
-            opacity: 0;
-            transform: translateX(100px);
-            transition: all 0.4s cubic-bezier(0.4, 0, 0.2, 1);
+        /* Interactive Security Dashboard */
+        .security-dashboard {
+            display: grid;
+            grid-template-columns: repeat(auto-fit, minmax(300px, 1fr));
+            gap: 2rem;
+            padding: 2rem;
+            background: rgba(119, 108, 202, 0.05);
+            border-radius: var(--radius-md);
         }
 
-        .chapter-page.active {
-            display: block;
-            opacity: 1;
-            transform: translateX(0);
-        }
-
-        /* Password Strength Checker */
-        .password-meter {
+        .risk-indicator {
             height: 8px;
             background: rgba(0,0,0,0.1);
             border-radius: 4px;
-            margin: 1rem 0;
+            overflow: hidden;
         }
 
-        .password-strength {
+        .risk-progress {
             height: 100%;
-            border-radius: 4px;
+            width: 65%;
+            background: linear-gradient(90deg, var(--health), var(--artivism));
             transition: width 0.3s ease;
         }
 
-        /* Brand Compliant Components */
-        .articulate-card {
-            background: var(--articulate-white);
+        /* Advanced Password Center */
+        .password-center {
+            background: var(--white);
             border: 2px solid var(--connectivity);
-            border-radius: 12px;
+            border-radius: var(--radius-md);
             padding: 2rem;
-            margin: 2rem 0;
+            box-shadow: var(--shadow);
         }
 
-        .brand-button {
-            background: var(--artivism);
-            color: var(--articulate-white);
-            border: none;
-            padding: 1rem 2rem;
-            border-radius: 25px;
-            font-weight: 700;
+        .password-visualizer {
             position: relative;
+            height: 120px;
+            background: rgba(0,0,0,0.05);
+            border-radius: var(--radius-md);
+            overflow: hidden;
         }
 
-        .brand-button::after {
-            content: '→';
-            margin-left: 1rem;
+        .password-strength {
+            position: absolute;
+            bottom: 0;
+            left: 0;
+            right: 0;
+            height: 0;
+            background: var(--health);
+            transition: height 0.3s ease;
+        }
+
+        /* Phishing Simulation Lab */
+        .phishing-lab {
+            background: var(--white);
+            border: 2px solid var(--artivism);
+            border-radius: var(--radius-md);
+            padding: 2rem;
+            box-shadow: var(--shadow);
+        }
+
+        .email-simulator {
+            background: rgba(229, 96, 142, 0.1);
+            padding: 1.5rem;
+            border-radius: var(--radius-md);
+            cursor: pointer;
+            transition: transform 0.3s ease;
+        }
+
+        .email-simulator:hover {
+            transform: translateY(-5px);
+        }
+
+        /* Parental Control Center */
+        .parental-controls {
+            background: rgba(239, 154, 92, 0.1);
+            padding: 2rem;
+            border-radius: var(--radius-md);
+            display: grid;
+            gap: 1.5rem;
+        }
+
+        .age-selector {
+            display: grid;
+            grid-template-columns: repeat(3, 1fr);
+            gap: 1rem;
+        }
+
+        .age-option {
+            padding: 1rem;
+            border: 2px solid var(--health);
+            border-radius: var(--radius-md);
+            text-align: center;
+            cursor: pointer;
+            transition: all 0.3s ease;
+        }
+
+        .age-option.active {
+            background: var(--health);
+            color: var(--white);
+        }
+
+        /* Certification Progress */
+        .certification-tracker {
+            position: fixed;
+            bottom: 2rem;
+            right: 2rem;
+            background: var(--white);
+            padding: 1.5rem;
+            border-radius: var(--radius-md);
+            box-shadow: var(--shadow);
+            display: grid;
+            place-items: center;
+        }
+
+        .progress-circle {
+            width: 80px;
+            height: 80px;
+            border-radius: 50%;
+            background: conic-gradient(var(--connectivity) 65%, #eee 0);
+            display: grid;
+            place-items: center;
         }
 
         @media (max-width: 768px) {
+            body {
+                grid-template-columns: 1fr;
+            }
             .ebook-nav {
-                width: 100%;
                 position: relative;
                 height: auto;
             }
-            .ebook-content {
-                margin-left: 0;
+            .certification-tracker {
+                display: none;
             }
         }
     </style>
 </head>
 <body>
     <nav class="ebook-nav">
-        <h2>Online Safety Guide</h2>
-        <div class="nav-links">
-            <a href="#welcome" class="chapter-link active">Welcome</a>
-            <a href="#passwords" class="chapter-link">Password Security</a>
-            <a href="#phishing" class="chapter-link">Phishing Defense</a>
-            <a href="#privacy" class="chapter-link">Privacy Management</a>
+        <div class="nav-header">
+            <h1>Online Safety Hub</h1>
+            <p>Articulate Security Masterclass</p>
         </div>
+        <ul class="chapter-list">
+            <li><a href="#dashboard" class="chapter-link active"><i class="fas fa-shield-alt"></i>Dashboard</a></li>
+            <li><a href="#passwords" class="chapter-link"><i class="fas fa-lock"></i>Passwords</a></li>
+            <li><a href="#phishing" class="chapter-link"><i class="fas fa-fish"></i>Phishing Lab</a></li>
+            <li><a href="#parental" class="chapter-link"><i class="fas fa-child"></i>Parental Controls</a></li>
+        </ul>
     </nav>
 
     <main class="ebook-content">
-        <!-- Welcome Page -->
-        <div id="welcome" class="chapter-page active">
-            <div class="articulate-card">
-                <h1 style="color: var(--connectivity);">Welcome to Online Safety</h1>
-                <div class="risk-meter" style="background: rgba(0,0,0,0.1);">
-                    <div class="risk-indicator" style="width: 65%; background: var(--health); height: 8px;"></div>
+        <!-- Security Dashboard -->
+        <section id="dashboard" class="security-dashboard">
+            <div class="security-status">
+                <h2 style="color: var(--connectivity);">Security Posture</h2>
+                <div class="risk-indicator">
+                    <div class="risk-progress"></div>
                 </div>
-                <p>Current Security Status: <strong>Medium Risk</strong></p>
+                <p style="color: var(--artivism);">Medium Risk Detected</p>
             </div>
-        </div>
+            <div class="threat-feed">
+                <h3 style="color: var(--health);">Active Threats</h3>
+                <div class="threat-visualization"></div>
+            </div>
+        </section>
 
-        <!-- Password Security Page -->
-        <div id="passwords" class="chapter-page">
-            <div class="articulate-card">
-                <h2 style="color: var(--connectivity);">Password Security</h2>
-                
-                <div class="password-checker">
-                    <input type="password" id="passwordInput" class="form-control" 
-                           placeholder="Test your password strength" 
-                           style="font-family: 'Rubik', sans-serif;">
-                    <div class="password-meter">
-                        <div class="password-strength" id="passwordStrength"></div>
-                    </div>
-                    <p id="passwordFeedback" class="mt-2"></p>
+        <!-- Password Security Center -->
+        <section id="passwords" class="password-center">
+            <h2 style="color: var(--connectivity);">Password Intelligence</h2>
+            <div class="password-visualizer">
+                <div class="password-strength"></div>
+            </div>
+            <input type="password" id="passwordInput" 
+                   placeholder="Enter password to analyze" 
+                   class="form-control"
+                   style="margin: 1.5rem 0; padding: 1rem; border: 2px solid var(--connectivity); border-radius: var(--radius-md);">
+            <div class="password-metrics">
+                <div class="metric" data-metric="length">
+                    <h4 style="color: var(--artivism);">Length Strength</h4>
+                    <div class="metric-bar"></div>
                 </div>
+            </div>
+        </section>
 
-                <h3 style="color: var(--artivism);">Best Practices</h3>
-                <ul class="list-unstyled">
-                    <li><span style="color: var(--health);">✓</span> Minimum 12 characters</li>
-                    <li><span style="color: var(--health);">✓</span> Mix of uppercase & lowercase</li>
-                    <li><span style="color: var(--health);">✓</span> Include numbers & symbols</li>
+        <!-- Phishing Simulation Lab -->
+        <section id="phishing" class="phishing-lab">
+            <h2 style="color: var(--artivism);">Phishing Simulation</h2>
+            <div class="email-simulator">
+                <p style="color: var(--connectivity);">From: security@articul8te.com</p>
+                <p>"Urgent: Verify your account now!"</p>
+                <button class="analyze-btn" 
+                        style="background: var(--artivism); color: var(--white); padding: 0.5rem 1rem; border: none; border-radius: var(--radius-md); margin-top: 1rem;">
+                    Analyze Email
+                </button>
+            </div>
+        </section>
+
+        <!-- Parental Control Center -->
+        <section id="parental" class="parental-controls">
+            <h2 style="color: var(--health);">Family Safety Hub</h2>
+            <div class="age-selector">
+                <div class="age-option active">Under 5</div>
+                <div class="age-option">6-12</div>
+                <div class="age-option">13+</div>
+            </div>
+            <div class="recommendations">
+                <h3 style="color: var(--employability);">Recommended Protections</h3>
+                <ul>
+                    <li>Content Filtering</li>
+                    <li>Screen Time Limits</li>
+                    <li>Purchase Approvals</li>
                 </ul>
             </div>
-        </div>
-
-        <!-- Phishing Defense Page -->
-        <div id="phishing" class="chapter-page">
-            <div class="articulate-card">
-                <h2 style="color: var(--artivism);">Phishing Defense</h2>
-                <div class="phishing-example">
-                    <h3>Spot the Fake:</h3>
-                    <div style="background: rgba(239, 154, 92, 0.1); padding: 1rem; border-radius: 8px;">
-                        <p>From: <span style="color: var(--artivism);">security@articul8te.com</span></p>
-                        <p>"Urgent: Your account will be suspended!"</p>
-                        <button class="brand-button">Analyze Email</button>
-                    </div>
-                </div>
-            </div>
-        </div>
+        </section>
     </main>
 
-    <script>
-        // Page Transition Logic
-        document.querySelectorAll('.chapter-link').forEach(link => {
-            link.addEventListener('click', function(e) {
-                e.preventDefault();
-                const targetId = this.getAttribute('href');
-                
-                // Remove active states
-                document.querySelectorAll('.chapter-link, .chapter-page').forEach(el => {
-                    el.classList.remove('active');
-                });
+    <!-- Certification Progress -->
+    <div class="certification-tracker">
+        <h4>Certification Progress</h4>
+        <div class="progress-circle">65%</div>
+    </div>
 
-                // Add active states
-                this.classList.add('active');
-                document.querySelector(targetId).classList.add('active');
+    <script>
+        // Password Strength Analyzer
+        const passwordInput = document.getElementById('passwordInput');
+        const strengthBar = document.querySelector('.password-strength');
+        
+        passwordInput.addEventListener('input', (e) => {
+            const password = e.target.value;
+            const strength = Math.min(password.length * 5, 100);
+            strengthBar.style.height = `${strength}%`;
+            strengthBar.style.backgroundColor = 
+                strength < 50 ? 'var(--artivism)' : 
+                strength < 75 ? 'var(--health)' : 'var(--places)';
+        });
+
+        // Age Selector Interactions
+        document.querySelectorAll('.age-option').forEach(option => {
+            option.addEventListener('click', () => {
+                document.querySelectorAll('.age-option').forEach(opt => 
+                    opt.classList.remove('active'));
+                option.classList.add('active');
             });
         });
 
-        // Password Strength Checker
-        document.getElementById('passwordInput').addEventListener('input', function(e) {
-            const password = e.target.value;
-            const strengthBar = document.getElementById('passwordStrength');
-            const feedback = document.getElementById('passwordFeedback');
-            
-            let strength = 0;
-            if (password.length >= 12) strength += 25;
-            if (/[A-Z]/.test(password)) strength += 25;
-            if (/\d/.test(password)) strength += 25;
-            if (/[^A-Za-z0-9]/.test(password)) strength += 25;
-
-            strengthBar.style.width = strength + '%';
-            strengthBar.style.backgroundColor = 
-                strength < 50 ? var(--artivism) : 
-                strength < 75 ? var(--health) : var(--places);
-
-            feedback.textContent = 
-                strength < 50 ? 'Weak - Needs improvement' : 
-                strength < 75 ? 'Moderate - Keep going!' : 'Strong - Great job!';
-            feedback.style.color = strength < 50 ? var(--artivism) : var(--connectivity);
+        // Chapter Navigation
+        document.querySelectorAll('.chapter-link').forEach(link => {
+            link.addEventListener('click', function(e) {
+                e.preventDefault();
+                document.querySelectorAll('.chapter-link').forEach(l => 
+                    l.classList.remove('active'));
+                this.classList.add('active');
+            });
         });
 
         // Initialize Sienna Chat
@@ -233,7 +354,7 @@
             new SiennaChat({
                 position: 'bottom-right',
                 accentColor: '#776cca',
-                greeting: 'Need online safety help? Ask me!'
+                greeting: 'Articulate Safety Assistant: Ask me anything!'
             });
         });
     </script>
