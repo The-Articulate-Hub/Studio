@@ -1,292 +1,360 @@
 <!DOCTYPE html>
 <html lang="en">
 <head>
-    <meta charset="UTF-8">
-    <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>Accessible Online Safety Quiz - Articulate</title>
-    <link href="https://fonts.googleapis.com/css2?family=Rubik:wght@300;400;500;700&display=swap" rel="stylesheet">
-    <style>
-        :root {
-            --black: #1c1c1b;
-            --white: #ffffff;
-            --health: #ef9a5c;
-            --employability: #53aec9;
-            --connectivity: #776cca;
-            --artivism: #e5608e;
-            --radius: 12px;
-            --shadow: 0 4px 24px rgba(0,0,0,0.1);
-        }
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>Online Safety eBook</title>
+  <style>
+    body {
+      font-family: Arial, sans-serif;
+      line-height: 1.6;
+      margin: 0;
+      padding: 0;
+      background-color: #f4f4f4;
+      color: #333;
+    }
 
-        body {
-            font-family: 'Rubik', sans-serif;
-            margin: 0;
-            padding: 2rem;
-            background: var(--white);
-            color: var(--black);
-            line-height: 1.6;
-        }
+    header {
+      background: #333;
+      color: #fff;
+      padding: 1rem 0;
+      text-align: center;
+    }
 
-        .quiz-container {
-            max-width: 800px;
-            margin: 0 auto;
-        }
+    header h1 {
+      margin: 0;
+    }
 
-        .question-card {
-            background: rgba(119, 108, 202, 0.1);
-            padding: 2rem;
-            border-radius: var(--radius);
-            margin-bottom: 2rem;
-        }
+    #contrast-toggle, #dark-mode-toggle {
+      background: #fff;
+      color: #333;
+      border: none;
+      padding: 0.5rem 1rem;
+      cursor: pointer;
+      margin: 0.5rem;
+    }
 
-        .question-card h2 {
-            color: var(--connectivity);
-            margin-bottom: 1rem;
-        }
+    nav {
+      background: #444;
+      color: #fff;
+      padding: 1rem;
+    }
 
-        .answer-option {
-            display: block;
-            padding: 1rem;
-            margin: 0.5rem 0;
-            border: 2px solid var(--connectivity);
-            border-radius: var(--radius);
-            cursor: pointer;
-            transition: all 0.3s ease;
-            background: var(--white);
-        }
+    nav ul {
+      list-style: none;
+      padding: 0;
+    }
 
-        .answer-option:hover {
-            background: rgba(119, 108, 202, 0.2);
-        }
+    nav ul li {
+      display: inline;
+      margin-right: 1rem;
+    }
 
-        .answer-option:focus {
-            outline: 3px solid var(--artivism);
-            outline-offset: 2px;
-        }
+    nav ul li a {
+      color: #fff;
+      text-decoration: none;
+    }
 
-        .answer-option.selected {
-            background: var(--connectivity);
-            color: var(--white);
-        }
+    nav ul li a.active {
+      font-weight: bold;
+      text-decoration: underline;
+    }
 
-        .quiz-navigation {
-            display: flex;
-            justify-content: space-between;
-            margin-top: 2rem;
-        }
+    main {
+      padding: 1rem;
+    }
 
-        .quiz-button {
-            background: var(--artivism);
-            color: var(--white);
-            padding: 1rem 2rem;
-            border: none;
-            border-radius: var(--radius);
-            cursor: pointer;
-            transition: background 0.3s ease;
-        }
+    section {
+      margin-bottom: 2rem;
+    }
 
-        .quiz-button:hover {
-            background: var(--health);
-        }
+    footer {
+      background: #333;
+      color: #fff;
+      text-align: center;
+      padding: 1rem 0;
+      position: fixed;
+      width: 100%;
+      bottom: 0;
+    }
 
-        .quiz-button:focus {
-            outline: 3px solid var(--connectivity);
-            outline-offset: 2px;
-        }
+    footer button {
+      background: #fff;
+      color: #333;
+      border: none;
+      padding: 0.5rem 1rem;
+      cursor: pointer;
+      margin: 0 0.5rem;
+    }
 
-        .quiz-results {
-            display: none;
-            background: rgba(239, 154, 92, 0.1);
-            padding: 2rem;
-            border-radius: var(--radius);
-            margin-top: 2rem;
-        }
+    .high-contrast {
+      background-color: #000;
+      color: #fff;
+    }
 
-        .quiz-results h2 {
-            color: var(--health);
-        }
+    .high-contrast header,
+    .high-contrast nav,
+    .high-contrast footer {
+      background-color: #111;
+    }
 
-        /* Accessibility Enhancements */
-        .sr-only {
-            position: absolute;
-            width: 1px;
-            height: 1px;
-            padding: 0;
-            margin: -1px;
-            overflow: hidden;
-            clip: rect(0, 0, 0, 0);
-            border: 0;
-        }
+    .dark-mode {
+      background-color: #121212;
+      color: #ffffff;
+    }
 
-        [role="radio"] {
-            display: block;
-            padding: 1rem;
-            margin: 0.5rem 0;
-            border: 2px solid var(--connectivity);
-            border-radius: var(--radius);
-            cursor: pointer;
-            transition: all 0.3s ease;
-        }
+    .dark-mode header,
+    .dark-mode nav,
+    .dark-mode footer {
+      background-color: #1f1f1f;
+    }
 
-        [role="radio"][aria-checked="true"] {
-            background: var(--connectivity);
-            color: var(--white);
-        }
+    #progress-bar {
+      width: 100%;
+      height: 10px;
+      background-color: #ddd;
+      position: fixed;
+      top: 0;
+      left: 0;
+    }
 
-        [role="radio"]:focus {
-            outline: 3px solid var(--artivism);
-            outline-offset: 2px;
-        }
-    </style>
+    #progress-fill {
+      height: 100%;
+      background-color: #4CAF50;
+      width: 0%;
+    }
+
+    .glossary {
+      text-decoration: underline;
+      cursor: pointer;
+    }
+
+    #search {
+      width: 100%;
+      padding: 0.5rem;
+      margin-bottom: 1rem;
+    }
+  </style>
 </head>
 <body>
-    <div class="quiz-container">
-        <!-- Question 1 -->
-        <div class="question-card" tabindex="0" role="group" aria-labelledby="question1">
-            <h2 id="question1">1. What's the best way to create a strong password?</h2>
-            <div class="answer-option" tabindex="0" role="radio" aria-checked="false" aria-labelledby="option1">
-                <span id="option1">Use personal information like your birthday</span>
-            </div>
-            <div class="answer-option" tabindex="0" role="radio" aria-checked="false" aria-labelledby="option2">
-                <span id="option2">Combine random words with numbers and symbols</span>
-            </div>
-            <div class="answer-option" tabindex="0" role="radio" aria-checked="false" aria-labelledby="option3">
-                <span id="option3">Use the same password across all accounts</span>
-            </div>
-        </div>
+  <header>
+    <h1>Social Media & Digital Skills: A Guide to Online Safety</h1>
+    <button id="contrast-toggle">Toggle High Contrast</button>
+    <button id="dark-mode-toggle">Toggle Dark Mode</button>
+  </header>
 
-        <!-- Question 2 -->
-        <div class="question-card" tabindex="0" role="group" aria-labelledby="question2">
-            <h2 id="question2">2. What should you do if you receive a suspicious email?</h2>
-            <div class="answer-option" tabindex="0" role="radio" aria-checked="false" aria-labelledby="option4">
-                <span id="option4">Click on links to verify the sender</span>
-            </div>
-            <div class="answer-option" tabindex="0" role="radio" aria-checked="false" aria-labelledby="option5">
-                <span id="option5">Delete it immediately</span>
-            </div>
-            <div class="answer-option" tabindex="0" role="radio" aria-checked="false" aria-labelledby="option6">
-                <span id="option6">Report it to your IT department</span>
-            </div>
-        </div>
+  <div id="progress-bar">
+    <div id="progress-fill"></div>
+  </div>
 
-        <!-- Navigation -->
-        <div class="quiz-navigation">
-            <button class="quiz-button" id="prevButton" disabled>Previous</button>
-            <button class="quiz-button" id="nextButton">Next</button>
-        </div>
+  <nav>
+    <ul>
+      <li><a href="#welcome">Welcome</a></li>
+      <li><a href="#chapter1">Chapter 1: Strong Passwords</a></li>
+      <li><a href="#chapter2">Chapter 2: Spotting Fake News</a></li>
+      <li><a href="#quiz-section">Quizzes</a></li>
+    </ul>
+  </nav>
 
-        <!-- Results -->
-        <div class="quiz-results" id="quizResults">
-            <h2>Quiz Results</h2>
-            <p>Your score: <span id="score">0</span>/2</p>
-        </div>
-    </div>
+  <input type="text" id="search" placeholder="Search...">
 
-    <script>
-        // Quiz State
-        let currentQuestion = 0;
-        const questions = document.querySelectorAll('.question-card');
-        const answerOptions = document.querySelectorAll('.answer-option');
-        const prevButton = document.getElementById('prevButton');
-        const nextButton = document.getElementById('nextButton');
-        const quizResults = document.getElementById('quizResults');
-        const scoreDisplay = document.getElementById('score');
-        let score = 0;
+  <main>
+    <section id="welcome">
+      <h2>Welcome to Your Digital Safety Journey</h2>
+      <p>This eBook is your guide to navigating the digital world safely. Learn how to protect yourself online with practical tips and interactive quizzes.</p>
+    </section>
 
-        // Keyboard Navigation
-        document.addEventListener('keydown', (e) => {
-            const activeElement = document.activeElement;
-            
-            // Arrow Down: Next Option
-            if (e.key === 'ArrowDown' && activeElement.classList.contains('answer-option')) {
-                const nextOption = activeElement.nextElementSibling;
-                if (nextOption && nextOption.classList.contains('answer-option')) {
-                    nextOption.focus();
-                }
-            }
+    <section id="chapter1">
+      <h2>Chapter 1: Creating Strong Passwords</h2>
+      <p>Learn how to create and manage strong passwords to protect your online accounts.</p>
+      <ul>
+        <li>Use a mix of letters, numbers, and symbols.</li>
+        <li>Avoid using common words or phrases.</li>
+      </ul>
+      <p>Watch this video for more tips:</p>
+      <iframe width="560" height="315" src="https://www.youtube.com/embed/VIDEO_ID" frameborder="0" allowfullscreen></iframe>
+    </section>
 
-            // Arrow Up: Previous Option
-            if (e.key === 'ArrowUp' && activeElement.classList.contains('answer-option')) {
-                const prevOption = activeElement.previousElementSibling;
-                if (prevOption && prevOption.classList.contains('answer-option')) {
-                    prevOption.focus();
-                }
-            }
+    <section id="chapter2">
+      <h2>Chapter 2: Spotting Fake News</h2>
+      <p>Understand the techniques to identify and avoid fake news and misinformation online.</p>
+      <ul>
+        <li>Check the source of the information.</li>
+        <li>Look for corroborating evidence.</li>
+      </ul>
+      <div id="scenario">
+        <p>You receive an email claiming you’ve won a prize. What do you do?</p>
+        <button onclick="handleChoice('ignore')">Ignore it</button>
+        <button onclick="handleChoice('click')">Click the link</button>
+        <p id="scenario-result"></p>
+      </div>
+    </section>
 
-            // Space/Enter: Select Option
-            if ((e.key === ' ' || e.key === 'Enter') && activeElement.classList.contains('answer-option')) {
-                selectAnswer(activeElement);
-            }
-        });
+    <section id="quiz-section">
+      <h2>Quizzes</h2>
+      <div id="quiz1">
+        <h3>Quiz 1: Strong Passwords</h3>
+        <p>1. What’s the minimum recommended password length?</p>
+        <input type="text" id="q1-answer">
+        <p>2. True or False: Reusing passwords across accounts is safe.</p>
+        <input type="text" id="q2-answer">
+        <button onclick="checkQuiz1()">Submit</button>
+        <p id="quiz1-result"></p>
+      </div>
+    </section>
 
-        // Answer Selection
-        function selectAnswer(option) {
-            // Deselect all options in current question
-            const currentQuestionCard = option.closest('.question-card');
-            currentQuestionCard.querySelectorAll('.answer-option').forEach(opt => {
-                opt.setAttribute('aria-checked', 'false');
-                opt.classList.remove('selected');
-            });
+    <section id="feedback">
+      <h2>Feedback</h2>
+      <form id="feedback-form">
+        <label for="feedback">Your Feedback:</label>
+        <textarea id="feedback" rows="4" cols="50"></textarea>
+        <button type="submit">Submit</button>
+      </form>
+    </section>
+  </main>
 
-            // Select clicked option
-            option.setAttribute('aria-checked', 'true');
-            option.classList.add('selected');
-            checkAnswer(option);
+  <footer>
+    <p>Progress: <span id="progress">0%</span></p>
+    <p>Points: <span id="points">0</span></p>
+    <button onclick="prevChapter()">Previous</button>
+    <button onclick="nextChapter()">Next</button>
+  </footer>
+
+  <script>
+    // High Contrast Toggle
+    const contrastToggle = document.getElementById('contrast-toggle');
+    const body = document.body;
+
+    contrastToggle.addEventListener('click', () => {
+      body.classList.toggle('high-contrast');
+    });
+
+    // Dark Mode Toggle
+    const darkModeToggle = document.getElementById('dark-mode-toggle');
+    darkModeToggle.addEventListener('click', () => {
+      body.classList.toggle('dark-mode');
+    });
+
+    // Quiz Functionality
+    function checkQuiz1() {
+      const q1Answer = document.getElementById('q1-answer').value.toLowerCase();
+      const q2Answer = document.getElementById('q2-answer').value.toLowerCase();
+      let score = 0;
+
+      if (q1Answer.includes('12') || q1Answer.includes('twelve')) {
+        score++;
+      }
+      if (q2Answer === 'false') {
+        score++;
+      }
+
+      const result = `You scored ${score}/2!`;
+      document.getElementById('quiz1-result').innerText = result;
+      awardPoints(score * 10); // Award points
+    }
+
+    // Progress Tracking
+    let currentChapter = 0;
+    const chapters = ['welcome', 'chapter1', 'chapter2', 'quiz-section'];
+
+    function updateProgress() {
+      const progress = ((currentChapter + 1) / chapters.length) * 100;
+      document.getElementById('progress').innerText = `${progress}%`;
+      document.getElementById('progress-fill').style.width = `${progress}%`;
+    }
+
+    function nextChapter() {
+      if (currentChapter < chapters.length - 1) {
+        currentChapter++;
+        document.getElementById(chapters[currentChapter]).scrollIntoView();
+        updateProgress();
+        localStorage.setItem('currentChapter', currentChapter);
+      }
+    }
+
+    function prevChapter() {
+      if (currentChapter > 0) {
+        currentChapter--;
+        document.getElementById(chapters[currentChapter]).scrollIntoView();
+        updateProgress();
+        localStorage.setItem('currentChapter', currentChapter);
+      }
+    }
+
+    // Load saved progress
+    const savedChapter = localStorage.getItem('currentChapter');
+    if (savedChapter) {
+      currentChapter = parseInt(savedChapter);
+      document.getElementById(chapters[currentChapter]).scrollIntoView();
+      updateProgress();
+    }
+
+    // Keyboard Navigation
+    document.addEventListener('keydown', (event) => {
+      if (event.key === 'ArrowRight') {
+        nextChapter();
+      } else if (event.key === 'ArrowLeft') {
+        prevChapter();
+      }
+    });
+
+    // Scroll Spy for Table of Contents
+    const sections = document.querySelectorAll('section');
+    const navLinks = document.querySelectorAll('nav ul li a');
+
+    window.addEventListener('scroll', () => {
+      let current = '';
+      sections.forEach(section => {
+        const sectionTop = section.offsetTop;
+        const sectionHeight = section.clientHeight;
+        if (pageYOffset >= sectionTop - sectionHeight / 3) {
+          current = section.getAttribute('id');
         }
+      });
 
-        // Answer Validation
-        function checkAnswer(selectedOption) {
-            const questionIndex = Array.from(questions).indexOf(selectedOption.closest('.question-card'));
-            const correctAnswers = [
-                'Combine random words with numbers and symbols',
-                'Report it to your IT department'
-            ];
-
-            if (selectedOption.textContent.trim() === correctAnswers[questionIndex]) {
-                score++;
-            }
+      navLinks.forEach(link => {
+        link.classList.remove('active');
+        if (link.getAttribute('href').includes(current)) {
+          link.classList.add('active');
         }
+      });
+    });
 
-        // Navigation Controls
-        nextButton.addEventListener('click', () => {
-            if (currentQuestion < questions.length - 1) {
-                questions[currentQuestion].style.display = 'none';
-                currentQuestion++;
-                questions[currentQuestion].style.display = 'block';
-                prevButton.disabled = false;
-                if (currentQuestion === questions.length - 1) {
-                    nextButton.textContent = 'Finish';
-                }
-            } else {
-                showResults();
-            }
-        });
+    // Interactive Scenario
+    function handleChoice(choice) {
+      const result = choice === 'ignore' ? 'Good choice! It’s likely a scam.' : 'Oops! You might have fallen for a phishing scam.';
+      document.getElementById('scenario-result').innerText = result;
+    }
 
-        prevButton.addEventListener('click', () => {
-            if (currentQuestion > 0) {
-                questions[currentQuestion].style.display = 'none';
-                currentQuestion--;
-                questions[currentQuestion].style.display = 'block';
-                nextButton.textContent = 'Next';
-                if (currentQuestion === 0) {
-                    prevButton.disabled = true;
-                }
-            }
-        });
+    // Glossary Popups
+    document.querySelectorAll('.glossary').forEach(term => {
+      term.addEventListener('click', () => {
+        alert(term.getAttribute('data-definition'));
+      });
+    });
 
-        // Show Results
-        function showResults() {
-            quizResults.style.display = 'block';
-            scoreDisplay.textContent = score;
-            nextButton.style.display = 'none';
-            prevButton.style.display = 'none';
-        }
+    // Feedback Form
+    document.getElementById('feedback-form').addEventListener('submit', (e) => {
+      e.preventDefault();
+      alert('Thank you for your feedback!');
+    });
 
-        // Initialize Quiz
-        questions.forEach((question, index) => {
-            if (index !== 0) {
-                question.style.display = 'none';
-            }
-        });
-    </script>
+    // Gamification (Points System)
+    let points = 0;
+    function awardPoints(amount) {
+      points += amount;
+      document.getElementById('points').innerText = points;
+    }
+
+    // Search Functionality
+    document.getElementById('search').addEventListener('input', (e) => {
+      const query = e.target.value.toLowerCase();
+      const sections = document.querySelectorAll('section');
+      sections.forEach(section => {
+        const text = section.innerText.toLowerCase();
+        section.style.display = text.includes(query) ? 'block' : 'none';
+      });
+    });
+  </script>
 </body>
 </html>
