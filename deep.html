@@ -3,52 +3,49 @@
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>Articulate Online Safety Guide</title>
+    <title>Articulate Online Safety Masterclass</title>
+    <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.3.0/dist/css/bootstrap.min.css" rel="stylesheet">
     <link href="https://fonts.googleapis.com/css2?family=Rubik:wght@300;400;500;700&display=swap" rel="stylesheet">
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.0.0/css/all.min.css">
+    <script src="https://website-widgets.pages.dev/dist/sienna.min.js" defer></script>
     <style>
         :root {
-            /* Primary Brand Colors */
-            --black: #1c1c1b;
-            --white: #ffffff;
+            --articulate-black: #1c1c1b;
+            --articulate-white: #ffffff;
             --health: #ef9a5c;
             --employability: #53aec9;
             --places: #aac056;
             --connectivity: #776cca;
             --artivism: #e5608e;
-            
-            /* Secondary Colors */
-            --secondary1: #eb8e75;
-            --secondary4: #6277b6;
+            --bg-gradient: linear-gradient(45deg, #1a1a1a 0%, #2d2d2d 100%);
         }
 
         body {
             font-family: 'Rubik', sans-serif;
-            margin: 0;
-            background: var(--white);
-            color: var(--black);
-            display: flex;
+            background: var(--bg-gradient);
+            color: var(--articulate-white);
             min-height: 100vh;
+            overflow-x: hidden;
         }
 
-        /* Brand Compliant Navigation */
+        /* Premium Navigation */
         .ebook-nav {
             width: 280px;
-            background: var(--connectivity);
-            padding: 2rem;
-            position: fixed;
+            background: rgba(40, 40, 40, 0.95);
+            backdrop-filter: blur(10px);
             height: 100vh;
+            position: fixed;
+            left: 0;
+            top: 0;
+            padding: 2rem;
+            border-right: 3px solid var(--connectivity);
+            z-index: 1000;
         }
 
         .nav-header {
-            border-bottom: 3px solid var(--artivism);
-            padding-bottom: 1rem;
+            border-bottom: 2px solid var(--artivism);
+            padding-bottom: 1.5rem;
             margin-bottom: 2rem;
-        }
-
-        .nav-header h1 {
-            font-weight: 700;
-            color: var(--white);
-            margin: 0;
         }
 
         .chapter-list {
@@ -58,175 +55,271 @@
 
         .chapter-item {
             margin: 1rem 0;
-        }
-
-        .chapter-link {
-            color: var(--white);
-            text-decoration: none;
-            padding: 1rem;
-            border-radius: 8px;
-            display: block;
-            transition: all 0.3s ease;
-            font-weight: 500;
-        }
-
-        .chapter-link:hover {
-            background: rgba(255,255,255,0.15);
-        }
-
-        /* Main Content Area */
-        .ebook-content {
-            margin-left: 280px;
-            padding: 3rem;
-            width: calc(100% - 280px);
-        }
-
-        /* Page Styling */
-        .page {
-            display: none;
-            background: var(--white);
-            border-radius: 8px;
-            padding: 2rem;
-            box-shadow: 0 4px 20px rgba(0,0,0,0.1);
-        }
-
-        .page.active {
-            display: block;
-            animation: fadeIn 0.4s ease;
-        }
-
-        @keyframes fadeIn {
-            from { opacity: 0; transform: translateY(20px); }
-            to { opacity: 1; transform: translateY(0); }
-        }
-
-        /* Brand Typography */
-        h1 { font-weight: 700; color: var(--connectivity); }
-        h2 { font-weight: 500; color: var(--artivism); }
-        .lead { font-weight: 300; }
-
-        /* Brand Buttons */
-        .btn-articulate {
-            background: var(--connectivity);
-            color: var(--white);
-            border: none;
-            padding: 12px 24px;
-            border-radius: 25px;
-            font-family: 'Rubik', sans-serif;
-            font-weight: 700;
             position: relative;
         }
 
-        .btn-articulate::after {
-            content: '→';
-            margin-left: 10px;
+        .chapter-link {
+            color: var(--articulate-white);
+            text-decoration: none;
+            padding: 1rem;
+            border-radius: 8px;
+            display: flex;
+            align-items: center;
+            transition: all 0.3s cubic-bezier(0.4, 0, 0.2, 1);
         }
 
-        /* Risk Meter */
+        .chapter-link:hover {
+            background: rgba(255,255,255,0.1);
+            transform: translateX(10px);
+        }
+
+        .chapter-link.active {
+            background: var(--connectivity);
+            box-shadow: 0 4px 15px rgba(119, 108, 202, 0.4);
+        }
+
+        /* Content Area */
+        .ebook-content {
+            margin-left: 280px;
+            padding: 3rem;
+            position: relative;
+        }
+
+        /* Page Transitions */
+        .chapter-page {
+            display: none;
+            position: absolute;
+            width: calc(100% - 4rem);
+            background: rgba(30, 30, 30, 0.95);
+            backdrop-filter: blur(20px);
+            border-radius: 15px;
+            padding: 2.5rem;
+            box-shadow: 0 10px 30px rgba(0,0,0,0.3);
+            transform-style: preserve-3d;
+            min-height: 80vh;
+        }
+
+        .chapter-page.active {
+            display: block;
+            animation: pageFlip 0.6s cubic-bezier(0.4, 0, 0.2, 1);
+        }
+
+        @keyframes pageFlip {
+            0% { opacity: 0; transform: rotateY(-20deg) translateX(100px); }
+            100% { opacity: 1; transform: rotateY(0) translateX(0); }
+        }
+
+        /* Interactive Elements */
         .risk-meter {
-            width: 200px;
+            width: 100%;
             height: 8px;
-            background: rgba(0,0,0,0.1);
+            background: rgba(255,255,255,0.1);
             border-radius: 4px;
             margin: 2rem 0;
         }
 
         .risk-indicator {
             height: 100%;
-            background: var(--health);
+            background: linear-gradient(90deg, var(--health), var(--artivism));
             border-radius: 4px;
             width: 65%;
+            transition: width 0.5s ease;
+        }
+
+        .security-card {
+            background: rgba(50, 50, 50, 0.6);
+            border-left: 4px solid var(--employability);
+            padding: 1.5rem;
+            margin: 2rem 0;
+            border-radius: 8px;
+            transition: transform 0.3s ease;
+        }
+
+        .security-card:hover {
+            transform: translateY(-5px);
+        }
+
+        /* Progress Tracker */
+        .progress-tracker {
+            position: fixed;
+            right: 2rem;
+            top: 50%;
+            transform: translateY(-50%);
+            background: rgba(40, 40, 40, 0.9);
+            padding: 1rem;
+            border-radius: 15px;
+        }
+
+        @media (max-width: 768px) {
+            .ebook-nav {
+                width: 100%;
+                height: auto;
+                position: relative;
+            }
+            .ebook-content {
+                margin-left: 0;
+            }
+            .progress-tracker {
+                display: none;
+            }
         }
     </style>
 </head>
 <body>
-    <nav class="ebook-nav">
-        <div class="nav-header">
-            <h1>Online Safety Essentials</h1>
-            <p style="color: var(--white);">Your Guide to Digital Security</p>
+
+<!-- Navigation -->
+<nav class="ebook-nav">
+    <div class="nav-header">
+        <h2 class="text-articulate">Online Safety Masterclass</h2>
+        <p class="text-muted">Articulate Security Series</p>
+    </div>
+    
+    <ul class="chapter-list">
+        <li class="chapter-item">
+            <a href="#welcome" class="chapter-link active">
+                <i class="fas fa-home me-3"></i>
+                Welcome
+            </a>
+        </li>
+        <li class="chapter-item">
+            <a href="#passwords" class="chapter-link">
+                <i class="fas fa-lock me-3"></i>
+                Password Security
+            </a>
+        </li>
+        <li class="chapter-item">
+            <a href="#phishing" class="chapter-link">
+                <i class="fas fa-fish me-3"></i>
+                Phishing Defense
+            </a>
+        </li>
+        <li class="chapter-item">
+            <a href="#privacy" class="chapter-link">
+                <i class="fas fa-user-secret me-3"></i>
+                Privacy Management
+            </a>
+        </li>
+    </ul>
+</nav>
+
+<!-- Progress Tracker -->
+<div class="progress-tracker">
+    <div class="progress-circle" data-chapter="1"></div>
+    <div class="progress-circle" data-chapter="2"></div>
+    <div class="progress-circle" data-chapter="3"></div>
+</div>
+
+<!-- Content Pages -->
+<main class="ebook-content">
+    <!-- Welcome Page -->
+    <div class="chapter-page active" id="welcome">
+        <h1 class="mb-4">Welcome to Digital Safety</h1>
+        <div class="risk-meter">
+            <div class="risk-indicator"></div>
         </div>
         
-        <ul class="chapter-list">
-            <li class="chapter-item">
-                <a href="#welcome" class="chapter-link active">Welcome</a>
-            </li>
-            <li class="chapter-item">
-                <a href="#passwords" class="chapter-link">Password Security</a>
-            </li>
-            <li class="chapter-item">
-                <a href="#privacy" class="chapter-link">Privacy Management</a>
-            </li>
-        </ul>
-    </nav>
+        <div class="security-card">
+            <h3><i class="fas fa-lightbulb text-artivism"></i> Critical Security Tip</h3>
+            <p>Always verify sender information before interacting with links or attachments</p>
+        </div>
 
-    <main class="ebook-content">
-        <!-- Welcome Page -->
-        <div class="page active" id="welcome">
-            <h1>Welcome to Online Safety</h1>
-            <p class="lead">Empowering digital security through our 5 pillars</p>
+        <div class="row g-4">
+            <div class="col-md-6">
+                <div class="security-card">
+                    <h4>Essential Practices</h4>
+                    <ul class="list-unstyled">
+                        <li><i class="fas fa-check text-success"></i> Enable 2FA</li>
+                        <li><i class="fas fa-check text-success"></i> Regular Updates</li>
+                        <li><i class="fas fa-check text-success"></i> Secure Backups</li>
+                    </ul>
+                </div>
+            </div>
+            <div class="col-md-6">
+                <div class="security-card">
+                    <h4>Threat Landscape</h4>
+                    <div class="progress mt-3">
+                        <div class="progress-bar bg-artivism" style="width: 65%">Phishing 65%</div>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </div>
+
+    <!-- Password Security Page -->
+    <div class="chapter-page" id="passwords">
+        <h1 class="mb-4">Advanced Password Protection</h1>
+        <div class="security-card">
+            <h3><i class="fas fa-shield-alt text-connectivity"></i> Password Essentials</h3>
+            <ul class="password-rules">
+                <li>Minimum 12 characters</li>
+                <li>Mix of uppercase/lowercase</li>
+                <li>Include special characters</li>
+            </ul>
+        </div>
+        
+        <div class="row g-4">
+            <div class="col-md-6">
+                <div class="security-card">
+                    <h4>Password Strength Test</h4>
+                    <input type="password" class="form-control mb-3" placeholder="Test your password">
+                    <div class="progress">
+                        <div class="progress-bar bg-health" style="width: 40%">Weak</div>
+                    </div>
+                </div>
+            </div>
+            <div class="col-md-6">
+                <div class="security-card">
+                    <h4>Manager Comparison</h4>
+                    <table class="table table-dark">
+                        <tr><th>Feature</th><th>LastPass</th><th>1Password</th></tr>
+                        <tr><td>2FA</td><td>✓</td><td>✓</td></tr>
+                    </table>
+                </div>
+            </div>
+        </div>
+    </div>
+
+    <!-- Additional Pages -->
+</main>
+
+<script src="https://cdn.jsdelivr.net/npm/bootstrap@5.3.0/dist/js/bootstrap.bundle.min.js"></script>
+<script>
+    // Enhanced Page Transitions
+    document.querySelectorAll('.chapter-link').forEach(link => {
+        link.addEventListener('click', function(e) {
+            e.preventDefault();
+            const targetId = this.getAttribute('href');
             
-            <div class="risk-meter">
-                <div class="risk-indicator"></div>
-            </div>
-            <p>Current Risk Level: Medium</p>
-
-            <div style="background: var(--employability); padding: 2rem; border-radius: 8px; color: var(--white); margin-top: 2rem;">
-                <h2>Quick Tip</h2>
-                <p>Always verify sender information before clicking links in emails</p>
-            </div>
-        </div>
-
-        <!-- Password Security Page -->
-        <div class="page" id="passwords">
-            <h1>Password Security</h1>
-            
-            <div style="border-left: 4px solid var(--health); padding-left: 1rem; margin: 2rem 0;">
-                <h2>Essential Practices</h2>
-                <ul style="list-style: none; padding: 0;">
-                    <li style="margin: 1rem 0;">
-                        <span style="color: var(--health);">✓</span>
-                        12+ characters with mixed types
-                    </li>
-                    <li style="margin: 1rem 0;">
-                        <span style="color: var(--health);">✓</span>
-                        Two-factor authentication (2FA)
-                    </li>
-                    <li style="margin: 1rem 0;">
-                        <span style="color: var(--health);">✓</span>
-                        Unique passwords per account
-                    </li>
-                </ul>
-            </div>
-
-            <button class="btn-articulate">Take Security Quiz</button>
-        </div>
-
-        <!-- Privacy Management Page -->
-        <div class="page" id="privacy">
-            <h1>Privacy Management</h1>
-            <!-- Add privacy content -->
-        </div>
-    </main>
-
-    <script>
-        document.querySelectorAll('.chapter-link').forEach(link => {
-            link.addEventListener('click', function(e) {
-                e.preventDefault();
-                
-                // Remove active class from all links
-                document.querySelectorAll('.chapter-link').forEach(l => l.classList.remove('active'));
-                
-                // Add active class to clicked link
-                this.classList.add('active');
-                
-                // Hide all pages
-                document.querySelectorAll('.page').forEach(page => page.classList.remove('active'));
-                
-                // Show target page
-                const targetId = this.getAttribute('href');
-                document.querySelector(targetId).classList.add('active');
+            // Remove active states
+            document.querySelectorAll('.chapter-link, .chapter-page').forEach(el => {
+                el.classList.remove('active');
             });
+
+            // Add new active states
+            this.classList.add('active');
+            document.querySelector(targetId).classList.add('active');
+
+            // Update progress tracker
+            updateProgress(targetId);
         });
-    </script>
+    });
+
+    function updateProgress(targetId) {
+        const chapters = ['#welcome', '#passwords', '#phishing', '#privacy'];
+        const currentIndex = chapters.indexOf(targetId);
+        const progress = (currentIndex / (chapters.length - 1)) * 100;
+        document.querySelector('.risk-indicator').style.width = `${progress}%`;
+    }
+
+    // Initialize Sienna Chat
+    window.addEventListener('load', () => {
+        new SiennaChat({
+            position: 'bottom-right',
+            accentColor: '#776cca',
+            greeting: 'Need help with online safety? Ask me!'
+        });
+    });
+</script>
+
 </body>
 </html>
