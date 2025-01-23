@@ -3,14 +3,14 @@
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>Complete Online Safety Guide - Articulate</title>
+    <title>Articulate Online Safety Masterclass</title>
     <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.3.0/dist/css/bootstrap.min.css" rel="stylesheet">
     <link href="https://fonts.googleapis.com/css2?family=Rubik:wght@300;400;500;700&display=swap" rel="stylesheet">
     <script src="https://website-widgets.pages.dev/dist/sienna.min.js" defer></script>
     <style>
         :root {
-            --black: #1c1c1b;
-            --white: #ffffff;
+            --articulate-black: #1c1c1b;
+            --articulate-white: #ffffff;
             --health: #ef9a5c;
             --employability: #53aec9;
             --places: #aac056;
@@ -20,38 +20,58 @@
 
         body {
             font-family: 'Rubik', sans-serif;
-            background: var(--white);
-            color: var(--black);
+            background: var(--articulate-white);
+            color: var(--articulate-black);
             min-height: 100vh;
+            overflow-x: hidden;
         }
 
         /* Brand Compliant Navigation */
         .ebook-nav {
             width: 280px;
             background: var(--connectivity);
-            color: var(--white);
+            color: var(--articulate-white);
             position: fixed;
             height: 100vh;
             padding: 2rem;
+            border-right: 3px solid var(--artivism);
         }
 
         .chapter-link {
-            color: var(--white);
+            color: var(--articulate-white);
             padding: 1rem;
             border-radius: 8px;
             margin: 0.5rem 0;
             display: block;
             transition: all 0.3s ease;
+            text-decoration: none;
         }
 
         .chapter-link:hover {
             background: rgba(255,255,255,0.15);
         }
 
-        /* Main Content */
+        /* Main Content Area */
         .ebook-content {
             margin-left: 280px;
             padding: 3rem;
+            position: relative;
+        }
+
+        /* Page Transitions */
+        .chapter-page {
+            display: none;
+            position: absolute;
+            width: calc(100% - 4rem);
+            opacity: 0;
+            transform: translateX(100px);
+            transition: all 0.4s cubic-bezier(0.4, 0, 0.2, 1);
+        }
+
+        .chapter-page.active {
+            display: block;
+            opacity: 1;
+            transform: translateX(0);
         }
 
         /* Password Strength Checker */
@@ -68,11 +88,39 @@
             transition: width 0.3s ease;
         }
 
-        /* Security Checklist */
-        .security-checklist {
-            border-left: 4px solid var(--health);
-            padding: 1rem 2rem;
+        /* Brand Compliant Components */
+        .articulate-card {
+            background: var(--articulate-white);
+            border: 2px solid var(--connectivity);
+            border-radius: 12px;
+            padding: 2rem;
             margin: 2rem 0;
+        }
+
+        .brand-button {
+            background: var(--artivism);
+            color: var(--articulate-white);
+            border: none;
+            padding: 1rem 2rem;
+            border-radius: 25px;
+            font-weight: 700;
+            position: relative;
+        }
+
+        .brand-button::after {
+            content: '→';
+            margin-left: 1rem;
+        }
+
+        @media (max-width: 768px) {
+            .ebook-nav {
+                width: 100%;
+                position: relative;
+                height: auto;
+            }
+            .ebook-content {
+                margin-left: 0;
+            }
         }
     </style>
 </head>
@@ -84,75 +132,55 @@
             <a href="#passwords" class="chapter-link">Password Security</a>
             <a href="#phishing" class="chapter-link">Phishing Defense</a>
             <a href="#privacy" class="chapter-link">Privacy Management</a>
-            <a href="#social" class="chapter-link">Social Media Safety</a>
         </div>
     </nav>
 
     <main class="ebook-content">
-        <!-- Password Security Section -->
-        <div id="passwords" class="chapter">
-            <h1 style="color: var(--connectivity);">Password Security Masterclass</h1>
-            
-            <div class="security-checklist">
-                <h3>Essential Requirements</h3>
-                <ul>
-                    <li data-check="length">Minimum 12 characters</li>
-                    <li data-check="uppercase">Uppercase letters</li>
-                    <li data-check="numbers">Numbers</li>
-                    <li data-check="special">Special characters</li>
+        <!-- Welcome Page -->
+        <div id="welcome" class="chapter-page active">
+            <div class="articulate-card">
+                <h1 style="color: var(--connectivity);">Welcome to Online Safety</h1>
+                <div class="risk-meter" style="background: rgba(0,0,0,0.1);">
+                    <div class="risk-indicator" style="width: 65%; background: var(--health); height: 8px;"></div>
+                </div>
+                <p>Current Security Status: <strong>Medium Risk</strong></p>
+            </div>
+        </div>
+
+        <!-- Password Security Page -->
+        <div id="passwords" class="chapter-page">
+            <div class="articulate-card">
+                <h2 style="color: var(--connectivity);">Password Security</h2>
+                
+                <div class="password-checker">
+                    <input type="password" id="passwordInput" class="form-control" 
+                           placeholder="Test your password strength" 
+                           style="font-family: 'Rubik', sans-serif;">
+                    <div class="password-meter">
+                        <div class="password-strength" id="passwordStrength"></div>
+                    </div>
+                    <p id="passwordFeedback" class="mt-2"></p>
+                </div>
+
+                <h3 style="color: var(--artivism);">Best Practices</h3>
+                <ul class="list-unstyled">
+                    <li><span style="color: var(--health);">✓</span> Minimum 12 characters</li>
+                    <li><span style="color: var(--health);">✓</span> Mix of uppercase & lowercase</li>
+                    <li><span style="color: var(--health);">✓</span> Include numbers & symbols</li>
                 </ul>
             </div>
+        </div>
 
-            <div class="password-checker">
-                <h3>Password Strength Analyzer</h3>
-                <input type="password" id="passwordInput" class="form-control" 
-                       placeholder="Enter password to test" 
-                       style="font-family: 'Rubik', sans-serif;">
-                <div class="password-meter">
-                    <div class="password-strength" id="passwordStrength"></div>
-                </div>
-                <p id="passwordFeedback" class="mt-2"></p>
-            </div>
-
-            <!-- Phishing Section -->
-            <div id="phishing" class="chapter">
-                <h2 style="color: var(--artivism);">Phishing Defense Strategies</h2>
-                <div class="phishing-example" 
-                     style="background: rgba(229, 96, 142, 0.1); padding: 1rem; border-radius: 8px;">
-                    <h4>Spot the Fake Email:</h4>
-                    <p>From: security@articul8te.com (notice the typo?)<br>
-                    Subject: Urgent: Account Suspension Notice</p>
-                    <button class="btn" 
-                            style="background: var(--artivism); color: white;">Analyze Email</button>
-                </div>
-            </div>
-
-            <!-- Expanded Safety Content -->
-            <div class="safety-grid mt-4">
-                <div class="row g-4">
-                    <div class="col-md-6">
-                        <div class="card" style="border-color: var(--employability);">
-                            <div class="card-body">
-                                <h5 style="color: var(--employability);">Secure Browsing</h5>
-                                <ul>
-                                    <li>HTTPS verification</li>
-                                    <li>Browser extensions</li>
-                                    <li>Cookie management</li>
-                                </ul>
-                            </div>
-                        </div>
-                    </div>
-                    <div class="col-md-6">
-                        <div class="card" style="border-color: var(--places);">
-                            <div class="card-body">
-                                <h5 style="color: var(--places);">Parental Controls</h5>
-                                <ul>
-                                    <li>Screen time limits</li>
-                                    <li>Content filtering</li>
-                                    <li>Activity monitoring</li>
-                                </ul>
-                            </div>
-                        </div>
+        <!-- Phishing Defense Page -->
+        <div id="phishing" class="chapter-page">
+            <div class="articulate-card">
+                <h2 style="color: var(--artivism);">Phishing Defense</h2>
+                <div class="phishing-example">
+                    <h3>Spot the Fake:</h3>
+                    <div style="background: rgba(239, 154, 92, 0.1); padding: 1rem; border-radius: 8px;">
+                        <p>From: <span style="color: var(--artivism);">security@articul8te.com</span></p>
+                        <p>"Urgent: Your account will be suspended!"</p>
+                        <button class="brand-button">Analyze Email</button>
                     </div>
                 </div>
             </div>
@@ -160,6 +188,23 @@
     </main>
 
     <script>
+        // Page Transition Logic
+        document.querySelectorAll('.chapter-link').forEach(link => {
+            link.addEventListener('click', function(e) {
+                e.preventDefault();
+                const targetId = this.getAttribute('href');
+                
+                // Remove active states
+                document.querySelectorAll('.chapter-link, .chapter-page').forEach(el => {
+                    el.classList.remove('active');
+                });
+
+                // Add active states
+                this.classList.add('active');
+                document.querySelector(targetId).classList.add('active');
+            });
+        });
+
         // Password Strength Checker
         document.getElementById('passwordInput').addEventListener('input', function(e) {
             const password = e.target.value;
@@ -167,40 +212,20 @@
             const feedback = document.getElementById('passwordFeedback');
             
             let strength = 0;
-            let messages = [];
-
-            // Length check
-            if (password.length >= 12) {
-                strength += 25;
-                document.querySelector('[data-check="length"]').style.color = 'var(--health)';
-            }
-
-            // Uppercase check
-            if (/[A-Z]/.test(password)) {
-                strength += 25;
-                document.querySelector('[data-check="uppercase"]').style.color = 'var(--health)';
-            }
-
-            // Numbers check
-            if (/\d/.test(password)) {
-                strength += 25;
-                document.querySelector('[data-check="numbers"]').style.color = 'var(--health)';
-            }
-
-            // Special chars check
-            if (/[^A-Za-z0-9]/.test(password)) {
-                strength += 25;
-                document.querySelector('[data-check="special"]').style.color = 'var(--health)';
-            }
+            if (password.length >= 12) strength += 25;
+            if (/[A-Z]/.test(password)) strength += 25;
+            if (/\d/.test(password)) strength += 25;
+            if (/[^A-Za-z0-9]/.test(password)) strength += 25;
 
             strengthBar.style.width = strength + '%';
             strengthBar.style.backgroundColor = 
-                strength < 50 ? 'var(--artivism)' : 
-                strength < 75 ? 'var(--health)' : 'var(--places)';
+                strength < 50 ? var(--artivism) : 
+                strength < 75 ? var(--health) : var(--places);
 
             feedback.textContent = 
                 strength < 50 ? 'Weak - Needs improvement' : 
                 strength < 75 ? 'Moderate - Keep going!' : 'Strong - Great job!';
+            feedback.style.color = strength < 50 ? var(--artivism) : var(--connectivity);
         });
 
         // Initialize Sienna Chat
@@ -208,7 +233,7 @@
             new SiennaChat({
                 position: 'bottom-right',
                 accentColor: '#776cca',
-                greeting: 'Need help with online safety? Ask me anything!'
+                greeting: 'Need online safety help? Ask me!'
             });
         });
     </script>
