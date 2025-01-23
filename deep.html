@@ -1,144 +1,227 @@
 <!DOCTYPE html>
-<html lang="en">
+<html lang="en" dir="ltr">
 <head>
   <meta charset="UTF-8">
   <meta name="viewport" content="width=device-width, initial-scale=1.0">
-  <title>Online Safety eBook</title>
+  <title>Accessible Online Safety eBook</title>
   <style>
-    /* Original navigation and accessibility styling */
+    :root {
+      --primary-color: #0056b3;
+      --text-color: #1a1a1a;
+      --background-color: #ffffff;
+      --nav-bg: #f8f9fa;
+    }
+
     body {
-      font-family: Arial, sans-serif;
       margin: 0;
       padding: 0;
-      background: #fff;
+      font-family: 'Segoe UI', system-ui;
+      color: var(--text-color);
+      background: var(--background-color);
+      line-height: 1.6;
     }
 
-    .accessibility-bar {
-      background: #333;
-      padding: 10px;
-      text-align: right;
+    .container {
+      display: grid;
+      grid-template-columns: 250px 1fr;
+      min-height: 100vh;
     }
 
-    .accessibility-btn {
-      background: #666;
-      color: white;
-      border: none;
-      padding: 8px 15px;
-      margin-left: 5px;
-      cursor: pointer;
-    }
-
+    /* Left Navigation */
     nav {
-      background: #f0f0f0;
+      background: var(--nav-bg);
       padding: 1rem;
-      box-shadow: 0 2px 5px rgba(0,0,0,0.1);
+      border-right: 1px solid #dee2e6;
     }
 
-    nav a {
-      color: #333;
+    .nav-list {
+      list-style: none;
+      padding: 0;
+      margin: 0;
+    }
+
+    .nav-item a {
+      display: block;
+      padding: 0.75rem 1rem;
+      color: var(--text-color);
       text-decoration: none;
-      padding: 0.5rem 1rem;
-      margin-right: 10px;
       border-radius: 4px;
+      transition: background-color 0.2s;
     }
 
-    nav a.active {
-      background: #007bff;
+    .nav-item a:hover,
+    .nav-item a:focus {
+      background: #e9ecef;
+      outline: 2px solid var(--primary-color);
+    }
+
+    .nav-item a[aria-current="page"] {
+      background: var(--primary-color);
       color: white;
     }
 
-    .content-section {
+    /* Main Content */
+    main {
       padding: 2rem;
       max-width: 800px;
       margin: 0 auto;
     }
 
-    .quiz-container {
-      background: #f8f9fa;
-      padding: 1.5rem;
-      border-radius: 8px;
-      margin-top: 1rem;
+    section {
+      margin-bottom: 3rem;
+    }
+
+    h1, h2 {
+      color: var(--primary-color);
+    }
+
+    /* Accessibility Controls */
+    .accessibility-bar {
+      background: #333;
+      padding: 0.5rem;
+      text-align: right;
+    }
+
+    .accessibility-btn {
+      background: none;
+      border: 1px solid white;
+      color: white;
+      padding: 0.5rem 1rem;
+      margin-left: 0.5rem;
+      cursor: pointer;
+    }
+
+    /* High Contrast Mode */
+    .high-contrast {
+      --text-color: #000000;
+      --background-color: #ffffff;
+      --nav-bg: #eeeeee;
+    }
+
+    /* Print Styles */
+    @media print {
+      .container {
+        display: block;
+      }
+      nav {
+        display: none;
+      }
     }
   </style>
 </head>
 <body>
-  <!-- Accessibility Bar -->
   <div class="accessibility-bar">
     <button class="accessibility-btn" onclick="toggleContrast()">High Contrast</button>
-    <button class="accessibility-btn" onclick="toggleTextSize()">A+</button>
+    <button class="accessibility-btn" onclick="increaseTextSize()">A+</button>
+    <button class="accessibility-btn" onclick="resetTextSize()">A-</button>
   </div>
 
-  <!-- Navigation -->
-  <nav>
-    <a href="#welcome" class="active">Welcome</a>
-    <a href="#chapter1">Strong Passwords</a>
-    <a href="#chapter2">Spotting Fake News</a>
-    <a href="#quizzes">Quizzes</a>
-  </nav>
+  <div class="container">
+    <nav aria-label="Table of Contents">
+      <ul class="nav-list">
+        <li class="nav-item"><a href="#welcome" aria-current="page">Welcome</a></li>
+        <li class="nav-item"><a href="#chapter1">Strong Passwords</a></li>
+        <li class="nav-item"><a href="#chapter2">Spotting Fake News</a></li>
+        <li class="nav-item"><a href="#quizzes">Quizzes</a></li>
+      </ul>
+    </nav>
 
-  <!-- Content Sections -->
-  <div class="content-section" id="welcome">
-    <h1>Welcome to Your Digital Safety Journey</h1>
-    <p>This eBook is your guide to navigating the digital world safely. Learn how to protect yourself online with practical tips and interactive quizzes.</p>
-  </div>
+    <main>
+      <section id="welcome" tabindex="-1" aria-labelledby="welcome-heading">
+        <h1 id="welcome-heading">Welcome to Your Digital Safety Journey</h1>
+        <p>This eBook is your guide to navigating the digital world safely. Learn how to protect yourself online with practical tips and interactive quizzes.</p>
+      </section>
 
-  <div class="content-section" id="chapter1" style="display: none;">
-    <h2>Creating Strong Passwords</h2>
-    <ul>
-      <li>Use a mix of letters, numbers, and symbols</li>
-      <li>Avoid using common words or phrases</li>
-    </ul>
-  </div>
+      <section id="chapter1" hidden tabindex="-1" aria-labelledby="chapter1-heading">
+        <h2 id="chapter1-heading">Creating Strong Passwords</h2>
+        <ul>
+          <li>Use a mix of letters, numbers, and symbols</li>
+          <li>Avoid using common words or phrases</li>
+          <li>Enable two-factor authentication</li>
+        </ul>
+      </section>
 
-  <div class="content-section" id="chapter2" style="display: none;">
-    <h2>Spotting Fake News</h2>
-    <ul>
-      <li>Check the source of the information</li>
-      <li>Look for corroborating evidence</li>
-    </ul>
-  </div>
+      <section id="chapter2" hidden tabindex="-1" aria-labelledby="chapter2-heading">
+        <h2 id="chapter2-heading">Spotting Fake News</h2>
+        <ul>
+          <li>Check the source credibility</li>
+          <li>Verify with multiple sources</li>
+          <li>Look for author credentials</li>
+        </ul>
+      </section>
 
-  <div class="content-section" id="quizzes" style="display: none;">
-    <div class="quiz-container">
-      <h3>Password Security Quiz</h3>
-      <p>What's the minimum recommended password length?</p>
-      <input type="text" id="password-length">
-      <button onclick="checkAnswer()">Check Answer</button>
-      <p id="quiz-result"></p>
-    </div>
+      <section id="quizzes" hidden tabindex="-1" aria-labelledby="quizzes-heading">
+        <h2 id="quizzes-heading">Security Quizzes</h2>
+        <div role="form" aria-labelledby="quiz1-question">
+          <p id="quiz1-question">What's the minimum recommended password length?</p>
+          <div role="radiogroup" aria-labelledby="quiz1-question">
+            <label>
+              <input type="radio" name="password-length" value="8"> 8 characters
+            </label>
+            <label>
+              <input type="radio" name="password-length" value="12"> 12 characters
+            </label>
+          </div>
+          <button onclick="checkQuiz()">Check Answer</button>
+          <p id="quiz-result" role="alert"></p>
+        </div>
+      </section>
+    </main>
   </div>
 
   <script>
-    // Original navigation logic
-    document.querySelectorAll('nav a').forEach(link => {
-      link.addEventListener('click', (e) => {
-        e.preventDefault();
-        document.querySelectorAll('.content-section').forEach(section => {
-          section.style.display = 'none';
-        });
-        document.querySelector(link.getAttribute('href')).style.display = 'block';
-        
-        document.querySelectorAll('nav a').forEach(a => a.classList.remove('active'));
-        link.classList.add('active');
-      });
-    });
-
-    // Original accessibility features
+    // Accessibility Features
     function toggleContrast() {
       document.body.classList.toggle('high-contrast');
     }
 
-    function toggleTextSize() {
-      document.body.style.fontSize = document.body.style.fontSize === '18px' ? '16px' : '18px';
+    function increaseTextSize() {
+      document.body.style.fontSize = '1.1em';
     }
 
-    // Quiz functionality
-    function checkAnswer() {
-      const answer = document.getElementById('password-length').value;
-      const result = document.getElementById('quiz-result');
-      result.textContent = answer >= 12 ? "✓ Correct!" : "✗ Try again!";
-      result.style.color = answer >= 12 ? "green" : "red";
+    function resetTextSize() {
+      document.body.style.fontSize = '1em';
     }
+
+    // Navigation Management
+    document.querySelectorAll('nav a').forEach(link => {
+      link.addEventListener('click', (e) => {
+        e.preventDefault();
+        const target = document.querySelector(link.hash);
+        
+        // Hide all sections
+        document.querySelectorAll('section').forEach(section => {
+          section.hidden = true;
+        });
+        
+        // Show target section
+        target.hidden = false;
+        target.focus();
+        
+        // Update ARIA current
+        document.querySelectorAll('nav a').forEach(a => {
+          a.setAttribute('aria-current', 'false');
+        });
+        link.setAttribute('aria-current', 'page');
+      });
+    });
+
+    // Quiz Functionality
+    function checkQuiz() {
+      const selected = document.querySelector('input[name="password-length"]:checked');
+      const result = document.getElementById('quiz-result');
+      
+      if (selected && selected.value === '12') {
+        result.textContent = "✓ Correct! 12 characters is the recommended minimum.";
+        result.style.color = "green";
+      } else {
+        result.textContent = "✗ Please try again. Remember, longer passwords are more secure!";
+        result.style.color = "red";
+      }
+    }
+
+    // Initialize first section
+    document.getElementById('welcome').hidden = false;
   </script>
 </body>
 </html>
