@@ -139,6 +139,7 @@
         <button class="btn btn-sm btn-secondary" onclick="toggleContrast()">🎨 Contrast</button>
         <button class="btn btn-sm btn-secondary" onclick="toggleFontSize()">A+</button>
         <button class="btn btn-sm btn-secondary" onclick="toggleDyslexic()">𝔻 Font</button>
+        <button class="btn btn-sm btn-secondary" onclick="toggleDarkMode()">🌙 Dark Mode</button>
     </div>
 
     <nav class="ebook-sidebar">
@@ -148,6 +149,10 @@
             <li class="chapter-item" onclick="showChapter(2)">2. Phishing Defense</li>
             <li class="chapter-item" onclick="showChapter(3)">3. Privacy Settings</li>
             <li class="chapter-item" onclick="showChapter(4)">4. Cyberbullying</li>
+            <li class="chapter-item" onclick="showChapter(5)">5. Social Media Safety</li>
+            <li class="chapter-item" onclick="showChapter(6)">6. Online Shopping Safety</li>
+            <li class="chapter-item" onclick="showChapter(7)">7. IoT Device Security</li>
+            <li class="chapter-item" onclick="showChapter(8)">8. Digital Footprint</li>
         </ul>
     </nav>
 
@@ -167,19 +172,44 @@
             </div>
         </section>
 
-        <section class="chapter" id="chapter2">
-            <h1>🎣 Phishing Defense</h1>
-            <p>Identify and avoid phishing attempts with practical tips and examples.</p>
-            <div class="interactive-card">
-                <h3>Email Simulation</h3>
-                <p>Can you spot the fake? Click the suspicious elements below:</p>
-                <ul>
-                    <li onclick="showFeedback('Incorrect, this is a generic subject line!')">"Urgent: Account Locked"</li>
-                    <li onclick="showFeedback('Correct! The email address is suspicious.')">"From: support@secureyourbank.com"</li>
-                    <li onclick="showFeedback('Correct! The URL is misleading.')"><a href="#">https://secure-yourbank-login.com</a></li>
-                </ul>
-                <p id="phishingFeedback" class="hidden"></p>
-            </div>
+        <section class="chapter" id="chapter5">
+            <h1>📱 Social Media Safety</h1>
+            <p>Protect yourself on social media platforms:</p>
+            <ul>
+                <li>Adjust privacy settings to limit who can see your posts.</li>
+                <li>Avoid sharing personal details like location or contact info.</li>
+                <li>Use two-factor authentication (2FA) to secure accounts.</li>
+            </ul>
+        </section>
+
+        <section class="chapter" id="chapter6">
+            <h1>🛒 Online Shopping Safety</h1>
+            <p>Ensure your online transactions are secure:</p>
+            <ul>
+                <li>Shop only on trusted websites with "https://" in the URL.</li>
+                <li>Use credit cards instead of debit cards for extra protection.</li>
+                <li>Watch for phishing scams disguised as order updates.</li>
+            </ul>
+        </section>
+
+        <section class="chapter" id="chapter7">
+            <h1>🔌 IoT Device Security</h1>
+            <p>Secure your smart devices:</p>
+            <ul>
+                <li>Change default passwords on all IoT devices.</li>
+                <li>Keep firmware updated to patch vulnerabilities.</li>
+                <li>Disable unused features to reduce attack surfaces.</li>
+            </ul>
+        </section>
+
+        <section class="chapter" id="chapter8">
+            <h1>🌍 Building a Positive Digital Footprint</h1>
+            <p>Maintain a professional and safe online presence:</p>
+            <ul>
+                <li>Think before you post; everything online leaves a trace.</li>
+                <li>Review old posts and remove any inappropriate content.</li>
+                <li>Engage positively to build a strong, professional reputation.</li>
+            </ul>
         </section>
 
         <div class="progress-container">
@@ -189,7 +219,7 @@
 
     <script>
         let currentChapter = 1;
-        const totalChapters = 4;
+        const totalChapters = 8;
 
         function showChapter(chapterNumber) {
             document.querySelectorAll('.chapter').forEach(chapter => {
@@ -243,11 +273,9 @@
             document.body.classList.toggle('dyslexia-mode');
         }
 
-        function showFeedback(message) {
-            const feedback = document.getElementById('phishingFeedback');
-            feedback.textContent = message;
-            feedback.classList.remove('hidden');
-            feedback.classList.add('visible');
+        function toggleDarkMode() {
+            const theme = document.documentElement.getAttribute('data-theme');
+            document.documentElement.setAttribute('data-theme', theme === 'dark' ? 'light' : 'dark');
         }
     </script>
 </body>
