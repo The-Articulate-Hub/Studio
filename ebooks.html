@@ -143,6 +143,14 @@
         .visible {
             display: block;
         }
+
+        .highlight {
+            background-color: var(--secondary-coral);
+            color: white;
+            font-weight: bold;
+            padding: 5px;
+            border-radius: 5px;
+        }
     </style>
 </head>
 <body>
@@ -299,6 +307,7 @@
         function showQuizFeedback(correct) {
             const feedback = document.getElementById('quizFeedback');
             feedback.textContent = correct ? 'Correct! Great job!' : 'Incorrect. The answer is 12 characters.';
+            feedback.classList.add('highlight');
         }
     </script>
 </body>
