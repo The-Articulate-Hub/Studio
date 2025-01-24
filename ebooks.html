@@ -31,6 +31,7 @@
             background-color: var(--page-bg);
             color: var(--primary-black);
             line-height: 1.6;
+            margin: 0;
         }
 
         .ebook-sidebar {
@@ -40,11 +41,13 @@
             color: white;
             height: 100vh;
             padding: 20px;
+            overflow-y: auto;
         }
 
         .chapter-list {
             list-style: none;
             padding: 0;
+            margin: 0;
         }
 
         .chapter-item {
@@ -55,13 +58,15 @@
             transition: all 0.3s;
         }
 
+        .chapter-item.active,
         .chapter-item:hover {
             background: var(--primary-blue);
+            color: white;
         }
 
         .ebook-content {
-            margin-left: 280px;
-            padding: 40px;
+            margin-left: 300px;
+            padding: 20px;
             max-width: 800px;
         }
 
@@ -84,9 +89,9 @@
 
         .progress-container {
             position: fixed;
-            bottom: 20px;
-            left: 280px;
-            right: 20px;
+            bottom: 0;
+            left: 0;
+            right: 0;
             height: 8px;
             background: #eee;
         }
@@ -96,6 +101,23 @@
             background: var(--primary-orange);
             width: 0%;
             transition: width 0.3s;
+        }
+
+        @media (max-width: 768px) {
+            .ebook-sidebar {
+                position: relative;
+                width: 100%;
+                height: auto;
+            }
+
+            .ebook-content {
+                margin-left: 0;
+                padding: 10px;
+            }
+
+            .progress-container {
+                height: 5px;
+            }
         }
 
         @keyframes fadeIn {
@@ -122,6 +144,11 @@
             <li class="chapter-item" onclick="showChapter(6)">6. Spotting Fake News</li>
             <li class="chapter-item" onclick="showChapter(7)">7. Digital Well-being</li>
             <li class="chapter-item" onclick="showChapter(8)">8. Digital Rights</li>
+            <li class="chapter-item" onclick="showChapter(9)">9. Online Gaming Safety</li>
+            <li class="chapter-item" onclick="showChapter(10)">10. Social Media Safety</li>
+            <li class="chapter-item" onclick="showChapter(11)">11. IoT Device Security</li>
+            <li class="chapter-item" onclick="showChapter(12)">12. Handling Cyber Threats</li>
+            <li class="chapter-item" onclick="showChapter(13)">13. Building a Positive Digital Footprint</li>
         </ul>
     </nav>
 
@@ -130,51 +157,75 @@
         <section class="chapter active" id="chapter1">
             <h1>🔒 Password Security Essentials</h1>
             <p>Learn how to create strong passwords and protect your accounts.</p>
+            <div class="interactive-card">
+                <h3>Password Strength Checker</h3>
+                <input type="password" class="form-control" placeholder="Test your password">
+                <div class="password-meter mt-2">
+                    <div class="progress">
+                        <div class="progress-bar" role="progressbar" style="width: 0%;"></div>
+                    </div>
+                </div>
+            </div>
         </section>
 
         <section class="chapter" id="chapter2">
             <h1>🎣 Phishing Defense</h1>
             <p>Identify and avoid phishing attempts with practical tips and examples.</p>
+            <div class="interactive-card">
+                <h3>Email Simulation</h3>
+                <p>Can you spot the fake? Click the suspicious elements below:</p>
+                <ul>
+                    <li>"Urgent: Account Locked"</li>
+                    <li>"From: support@secureyourbank.com"</li>
+                    <li><a href="#">https://secure-yourbank-login.com</a></li>
+                </ul>
+            </div>
         </section>
 
         <!-- New Chapters -->
-        <section class="chapter" id="chapter5">
-            <h1>📊 Data Privacy</h1>
-            <p>Understand how to manage your privacy settings and protect personal information.</p>
+        <section class="chapter" id="chapter9">
+            <h1>🎮 Online Gaming Safety</h1>
+            <p>Stay safe while gaming online.</p>
             <ul>
-                <li><strong>Resource:</strong> <a href="https://onlinesafetystuff.wordpress.com/data-privacy/">Managing Data Privacy</a></li>
-                <li><strong>Guide:</strong> How companies collect and use your data.</li>
-                <li><strong>Tool:</strong> Privacy settings simulator.</li>
+                <li><strong>Tip:</strong> Avoid sharing personal information in chats.</li>
+                <li><strong>Resource:</strong> <a href="https://onlinesafetystuff.wordpress.com/online-gaming/">Gaming Safety Tips</a></li>
             </ul>
         </section>
 
-        <section class="chapter" id="chapter6">
-            <h1>📰 Spotting Fake News</h1>
-            <p>Learn to identify fake news with practical tips and examples.</p>
+        <section class="chapter" id="chapter10">
+            <h1>📱 Social Media Safety</h1>
+            <p>Protect yourself and your privacy on social platforms.</p>
             <ul>
-                <li><strong>Resource:</strong> <a href="https://onlinesafetystuff.wordpress.com/fake-news/">Spotting Fake News</a></li>
-                <li><strong>Activity:</strong> Evaluate real vs. fake news headlines.</li>
-                <li><strong>Tip:</strong> Cross-check sources before sharing information.</li>
+                <li><strong>Checklist:</strong> Review your privacy settings regularly.</li>
+                <li><strong>Activity:</strong> Practice identifying suspicious profiles.</li>
+                <li><strong>Resource:</strong> <a href="https://onlinesafetystuff.wordpress.com/social-media/">Social Media Safety</a></li>
             </ul>
         </section>
 
-        <section class="chapter" id="chapter7">
-            <h1>🌱 Digital Well-being</h1>
-            <p>Explore ways to balance your online and offline life effectively.</p>
+        <section class="chapter" id="chapter11">
+            <h1>🔌 IoT Device Security</h1>
+            <p>Secure your smart devices to protect your home and data.</p>
             <ul>
-                <li><strong>Resource:</strong> <a href="https://onlinesafetystuff.wordpress.com/digital-wellbeing/">Digital Well-being Guide</a></li>
-                <li><strong>Checklist:</strong> Healthy screen time habits.</li>
-                <li><strong>Tool:</strong> Digital detox planner.</li>
+                <li><strong>Tip:</strong> Change default passwords on devices.</li>
+                <li><strong>Tool:</strong> IoT Security Checklist.</li>
             </ul>
         </section>
 
-        <section class="chapter" id="chapter8">
-            <h1>⚖️ Digital Rights</h1>
-            <p>Discover your rights in the digital space and how to protect them.</p>
+        <section class="chapter" id="chapter12">
+            <h1>🛡️ Handling Cyber Threats</h1>
+            <p>Learn how to respond to ransomware, malware, and other threats.</p>
             <ul>
-                <li><strong>Resource:</strong> <a href="https://onlinesafetystuff.wordpress.com/digital-rights/">Your Digital Rights</a></li>
-                <li><strong>Guide:</strong> Steps to take if your data is compromised.</li>
-                <li><strong>Scenario:</strong> Practice responding to a privacy breach.</li>
+                <li><strong>Resource:</strong> <a href="https://onlinesafetystuff.wordpress.com/cyber-threats/">Cyber Threats Guide</a></li>
+                <li><strong>Activity:</strong> Respond to a simulated ransomware attack.</li>
+            </ul>
+        </section>
+
+        <section class="chapter" id="chapter13">
+            <h1>🌍 Building a Positive Digital Footprint</h1>
+            <p>Maintain a professional and positive presence online.</p>
+            <ul>
+                <li><strong>Guide:</strong> Managing your online reputation.</li>
+                <li><strong>Activity:</strong> Clean up your digital footprint with our step-by-step guide.</li>
             </ul>
         </section>
 
@@ -185,7 +236,7 @@
 
     <script>
         let currentChapter = 1;
-        const totalChapters = 8;
+        const totalChapters = 13;
 
         function showChapter(chapterNumber) {
             document.querySelectorAll('.chapter').forEach(chapter => {
@@ -198,6 +249,7 @@
             });
             document.querySelector(`.chapter-item:nth-child(${chapterNumber})`).classList.add('active');
 
+            currentChapter = chapterNumber;
             updateProgress();
             window.scrollTo(0, 0);
         }
