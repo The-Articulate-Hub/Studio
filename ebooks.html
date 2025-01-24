@@ -87,6 +87,17 @@
             margin: 20px 0;
         }
 
+        .quiz-container {
+            margin: 20px 0;
+            padding: 20px;
+            border: 2px solid var(--primary-blue);
+            border-radius: 10px;
+        }
+
+        .quiz-container button {
+            margin-top: 10px;
+        }
+
         .progress-container {
             position: fixed;
             bottom: 0;
@@ -169,6 +180,13 @@
                     </div>
                 </div>
                 <p id="passwordFeedback" class="mt-2"></p>
+            </div>
+            <div class="quiz-container">
+                <h3>Quick Quiz</h3>
+                <p>What is the recommended minimum length for a strong password?</p>
+                <button class="btn btn-outline-primary" onclick="showQuizFeedback(true)">A) 12 Characters</button>
+                <button class="btn btn-outline-primary" onclick="showQuizFeedback(false)">B) 6 Characters</button>
+                <p id="quizFeedback" class="mt-2"></p>
             </div>
         </section>
 
@@ -276,6 +294,11 @@
         function toggleDarkMode() {
             const theme = document.documentElement.getAttribute('data-theme');
             document.documentElement.setAttribute('data-theme', theme === 'dark' ? 'light' : 'dark');
+        }
+
+        function showQuizFeedback(correct) {
+            const feedback = document.getElementById('quizFeedback');
+            feedback.textContent = correct ? 'Correct! Great job!' : 'Incorrect. The answer is 12 characters.';
         }
     </script>
 </body>
