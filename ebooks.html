@@ -124,6 +124,14 @@
             from { opacity: 0; transform: translateY(20px); }
             to { opacity: 1; transform: translateY(0); }
         }
+
+        .hidden {
+            display: none;
+        }
+
+        .visible {
+            display: block;
+        }
     </style>
 </head>
 <body>
@@ -140,31 +148,22 @@
             <li class="chapter-item" onclick="showChapter(2)">2. Phishing Defense</li>
             <li class="chapter-item" onclick="showChapter(3)">3. Privacy Settings</li>
             <li class="chapter-item" onclick="showChapter(4)">4. Cyberbullying</li>
-            <li class="chapter-item" onclick="showChapter(5)">5. Data Privacy</li>
-            <li class="chapter-item" onclick="showChapter(6)">6. Spotting Fake News</li>
-            <li class="chapter-item" onclick="showChapter(7)">7. Digital Well-being</li>
-            <li class="chapter-item" onclick="showChapter(8)">8. Digital Rights</li>
-            <li class="chapter-item" onclick="showChapter(9)">9. Online Gaming Safety</li>
-            <li class="chapter-item" onclick="showChapter(10)">10. Social Media Safety</li>
-            <li class="chapter-item" onclick="showChapter(11)">11. IoT Device Security</li>
-            <li class="chapter-item" onclick="showChapter(12)">12. Handling Cyber Threats</li>
-            <li class="chapter-item" onclick="showChapter(13)">13. Building a Positive Digital Footprint</li>
         </ul>
     </nav>
 
     <main class="ebook-content">
-        <!-- Original Chapters -->
         <section class="chapter active" id="chapter1">
             <h1>🔒 Password Security Essentials</h1>
             <p>Learn how to create strong passwords and protect your accounts.</p>
             <div class="interactive-card">
                 <h3>Password Strength Checker</h3>
-                <input type="password" class="form-control" placeholder="Test your password">
+                <input type="password" id="passwordInput" class="form-control" placeholder="Test your password">
                 <div class="password-meter mt-2">
                     <div class="progress">
-                        <div class="progress-bar" role="progressbar" style="width: 0%;"></div>
+                        <div id="passwordStrength" class="progress-bar" role="progressbar" style="width: 0%;"></div>
                     </div>
                 </div>
+                <p id="passwordFeedback" class="mt-2"></p>
             </div>
         </section>
 
@@ -175,68 +174,22 @@
                 <h3>Email Simulation</h3>
                 <p>Can you spot the fake? Click the suspicious elements below:</p>
                 <ul>
-                    <li>"Urgent: Account Locked"</li>
-                    <li>"From: support@secureyourbank.com"</li>
-                    <li><a href="#">https://secure-yourbank-login.com</a></li>
+                    <li onclick="showFeedback('Incorrect, this is a generic subject line!')">"Urgent: Account Locked"</li>
+                    <li onclick="showFeedback('Correct! The email address is suspicious.')">"From: support@secureyourbank.com"</li>
+                    <li onclick="showFeedback('Correct! The URL is misleading.')"><a href="#">https://secure-yourbank-login.com</a></li>
                 </ul>
+                <p id="phishingFeedback" class="hidden"></p>
             </div>
         </section>
 
-        <!-- New Chapters -->
-        <section class="chapter" id="chapter9">
-            <h1>🎮 Online Gaming Safety</h1>
-            <p>Stay safe while gaming online.</p>
-            <ul>
-                <li><strong>Tip:</strong> Avoid sharing personal information in chats.</li>
-                <li><strong>Resource:</strong> <a href="https://onlinesafetystuff.wordpress.com/online-gaming/">Gaming Safety Tips</a></li>
-            </ul>
-        </section>
-
-        <section class="chapter" id="chapter10">
-            <h1>📱 Social Media Safety</h1>
-            <p>Protect yourself and your privacy on social platforms.</p>
-            <ul>
-                <li><strong>Checklist:</strong> Review your privacy settings regularly.</li>
-                <li><strong>Activity:</strong> Practice identifying suspicious profiles.</li>
-                <li><strong>Resource:</strong> <a href="https://onlinesafetystuff.wordpress.com/social-media/">Social Media Safety</a></li>
-            </ul>
-        </section>
-
-        <section class="chapter" id="chapter11">
-            <h1>🔌 IoT Device Security</h1>
-            <p>Secure your smart devices to protect your home and data.</p>
-            <ul>
-                <li><strong>Tip:</strong> Change default passwords on devices.</li>
-                <li><strong>Tool:</strong> IoT Security Checklist.</li>
-            </ul>
-        </section>
-
-        <section class="chapter" id="chapter12">
-            <h1>🛡️ Handling Cyber Threats</h1>
-            <p>Learn how to respond to ransomware, malware, and other threats.</p>
-            <ul>
-                <li><strong>Resource:</strong> <a href="https://onlinesafetystuff.wordpress.com/cyber-threats/">Cyber Threats Guide</a></li>
-                <li><strong>Activity:</strong> Respond to a simulated ransomware attack.</li>
-            </ul>
-        </section>
-
-        <section class="chapter" id="chapter13">
-            <h1>🌍 Building a Positive Digital Footprint</h1>
-            <p>Maintain a professional and positive presence online.</p>
-            <ul>
-                <li><strong>Guide:</strong> Managing your online reputation.</li>
-                <li><strong>Activity:</strong> Clean up your digital footprint with our step-by-step guide.</li>
-            </ul>
-        </section>
-
         <div class="progress-container">
-            <div class="progress-bar" id="globalProgress"></div>
+            <div id="globalProgress" class="progress-bar"></div>
         </div>
     </main>
 
     <script>
         let currentChapter = 1;
-        const totalChapters = 13;
+        const totalChapters = 4;
 
         function showChapter(chapterNumber) {
             document.querySelectorAll('.chapter').forEach(chapter => {
@@ -251,13 +204,31 @@
 
             currentChapter = chapterNumber;
             updateProgress();
-            window.scrollTo(0, 0);
         }
 
         function updateProgress() {
             const progress = (currentChapter / totalChapters) * 100;
             document.getElementById('globalProgress').style.width = `${progress}%`;
         }
+
+        document.getElementById('passwordInput').addEventListener('input', function(e) {
+            const password = e.target.value;
+            let strength = 0;
+
+            if (password.length >= 12) strength += 25;
+            if (/[A-Z]/.test(password)) strength += 25;
+            if (/[0-9]/.test(password)) strength += 25;
+            if (/[^A-Za-z0-9]/.test(password)) strength += 25;
+
+            document.getElementById('passwordStrength').style.width = `${strength}%`;
+
+            let feedback;
+            if (strength < 50) feedback = 'Weak - Needs improvement!';
+            else if (strength < 75) feedback = 'Good - Could be stronger!';
+            else feedback = 'Excellent - Strong password!';
+
+            document.getElementById('passwordFeedback').textContent = feedback;
+        });
 
         function toggleContrast() {
             const theme = document.documentElement.getAttribute('data-theme');
@@ -271,9 +242,13 @@
         function toggleDyslexic() {
             document.body.classList.toggle('dyslexia-mode');
         }
-         
-        Log.cosnole 
+
+        function showFeedback(message) {
+            const feedback = document.getElementById('phishingFeedback');
+            feedback.textContent = message;
+            feedback.classList.remove('hidden');
+            feedback.classList.add('visible');
+        }
     </script>
 </body>
 </html>
- 
