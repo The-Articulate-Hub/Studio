@@ -1,4 +1,3 @@
-
 <!DOCTYPE html>
 <html lang="en" data-theme="light">
 <head>
@@ -16,7 +15,6 @@
             --page-bg: #ffffff;
         }
 
-        /* Accessibility Overrides */
         [data-theme="high-contrast"] {
             --primary-black: #000000;
             --page-bg: #ffffff;
@@ -35,7 +33,6 @@
             line-height: 1.6;
         }
 
-        /* Navigation */
         .ebook-sidebar {
             width: 280px;
             position: fixed;
@@ -62,7 +59,6 @@
             background: var(--primary-blue);
         }
 
-        /* Main Content */
         .ebook-content {
             margin-left: 280px;
             padding: 40px;
@@ -79,7 +75,6 @@
             animation: fadeIn 0.5s ease;
         }
 
-        /* Interactive Components */
         .interactive-card {
             border: 2px solid var(--primary-orange);
             border-radius: 15px;
@@ -87,29 +82,6 @@
             margin: 20px 0;
         }
 
-        .password-meter {
-            height: 8px;
-            background: #eee;
-            border-radius: 4px;
-            margin: 10px 0;
-        }
-
-        .meter-bar {
-            width: 0%;
-            height: 100%;
-            background: var(--primary-orange);
-            transition: width 0.3s;
-        }
-
-        /* Accessibility Toolbar */
-        .accessibility-toolbar {
-            position: fixed;
-            top: 20px;
-            right: 20px;
-            z-index: 1000;
-        }
-
-        /* Progress Tracking */
         .progress-container {
             position: fixed;
             bottom: 20px;
@@ -130,24 +102,15 @@
             from { opacity: 0; transform: translateY(20px); }
             to { opacity: 1; transform: translateY(0); }
         }
-
-        /* Dark Mode */
-        [data-theme="dark"] {
-            --page-bg: #2c2c2c;
-            --primary-black: #ffffff;
-        }
     </style>
 </head>
 <body>
-    <!-- Accessibility Toolbar -->
     <div class="accessibility-toolbar btn-group">
         <button class="btn btn-sm btn-secondary" onclick="toggleContrast()">🎨 Contrast</button>
         <button class="btn btn-sm btn-secondary" onclick="toggleFontSize()">A+</button>
         <button class="btn btn-sm btn-secondary" onclick="toggleDyslexic()">𝔻 Font</button>
-        <button class="btn btn-sm btn-secondary" onclick="readAloud()">🔊 Read</button>
     </div>
 
-    <!-- Navigation -->
     <nav class="ebook-sidebar">
         <h2>Online Safety Guide</h2>
         <ul class="chapter-list">
@@ -155,178 +118,107 @@
             <li class="chapter-item" onclick="showChapter(2)">2. Phishing Defense</li>
             <li class="chapter-item" onclick="showChapter(3)">3. Privacy Settings</li>
             <li class="chapter-item" onclick="showChapter(4)">4. Cyberbullying</li>
+            <li class="chapter-item" onclick="showChapter(5)">5. Data Privacy</li>
+            <li class="chapter-item" onclick="showChapter(6)">6. Spotting Fake News</li>
+            <li class="chapter-item" onclick="showChapter(7)">7. Digital Well-being</li>
+            <li class="chapter-item" onclick="showChapter(8)">8. Digital Rights</li>
         </ul>
     </nav>
 
-    <!-- Main Content -->
     <main class="ebook-content">
-        <!-- Chapter 1: Password Security -->
+        <!-- Original Chapters -->
         <section class="chapter active" id="chapter1">
             <h1>🔒 Password Security Essentials</h1>
-            
-            <div class="interactive-card">
-                <h3>Password Strength Checker</h3>
-                <input type="password" 
-                       class="form-control" 
-                       placeholder="Test your password"
-                       id="passwordInput"
-                       aria-label="Password strength tester">
-                <div class="password-meter">
-                    <div class="meter-bar" id="passwordStrength"></div>
-                </div>
-                <div id="passwordFeedback" class="mt-2 small"></div>
-            </div>
-
-            <div class="row mt-4">
-                <div class="col-md-6">
-                    <div class="alert alert-success">
-                        <h4>✓ Best Practices</h4>
-                        <ul>
-                            <li>Use 12+ characters</li>
-                            <li>Combine letters, numbers & symbols</li>
-                            <li>Use a password manager</li>
-                        </ul>
-                    </div>
-                </div>
-                <div class="col-md-6">
-                    <div class="alert alert-danger">
-                        <h4>✗ Common Mistakes</h4>
-                        <ul>
-                            <li>Reusing passwords</li>
-                            <li>Using personal information</li>
-                            <li>Writing passwords down</li>
-                        </ul>
-                    </div>
-                </div>
-            </div>
+            <p>Learn how to create strong passwords and protect your accounts.</p>
         </section>
 
-        <!-- Chapter 2: Phishing Defense -->
         <section class="chapter" id="chapter2">
-            <h1>🎣 Phishing Attack Prevention</h1>
-            
-            <div class="interactive-card">
-                <h3>Email Verification Challenge</h3>
-                <div class="email-simulation alert alert-warning">
-                    <h4>Urgent: Account Security Alert</h4>
-                    <p>From: security@yourbank.com</p>
-                    <hr>
-                    <p>Dear Customer,</p>
-                    <p>Click immediately to secure your account:</p>
-                    <button class="btn btn-link text-danger" 
-                            onclick="showPhishingTip()">
-                        https://secure-yourbank.com
-                    </button>
-                </div>
-                <div id="phishingFeedback" class="mt-3 alert alert-info" style="display: none;">
-                    <h5>⚠️ Red Flags Detected:</h5>
-                    <ul>
-                        <li>Suspicious domain name</li>
-                        <li>Urgent action demanded</li>
-                        <li>Generic greeting</li>
-                    </ul>
-                </div>
-            </div>
+            <h1>🎣 Phishing Defense</h1>
+            <p>Identify and avoid phishing attempts with practical tips and examples.</p>
         </section>
 
-        <!-- Progress Bar -->
+        <!-- New Chapters -->
+        <section class="chapter" id="chapter5">
+            <h1>📊 Data Privacy</h1>
+            <p>Understand how to manage your privacy settings and protect personal information.</p>
+            <ul>
+                <li><strong>Resource:</strong> <a href="https://onlinesafetystuff.wordpress.com/data-privacy/">Managing Data Privacy</a></li>
+                <li><strong>Guide:</strong> How companies collect and use your data.</li>
+                <li><strong>Tool:</strong> Privacy settings simulator.</li>
+            </ul>
+        </section>
+
+        <section class="chapter" id="chapter6">
+            <h1>📰 Spotting Fake News</h1>
+            <p>Learn to identify fake news with practical tips and examples.</p>
+            <ul>
+                <li><strong>Resource:</strong> <a href="https://onlinesafetystuff.wordpress.com/fake-news/">Spotting Fake News</a></li>
+                <li><strong>Activity:</strong> Evaluate real vs. fake news headlines.</li>
+                <li><strong>Tip:</strong> Cross-check sources before sharing information.</li>
+            </ul>
+        </section>
+
+        <section class="chapter" id="chapter7">
+            <h1>🌱 Digital Well-being</h1>
+            <p>Explore ways to balance your online and offline life effectively.</p>
+            <ul>
+                <li><strong>Resource:</strong> <a href="https://onlinesafetystuff.wordpress.com/digital-wellbeing/">Digital Well-being Guide</a></li>
+                <li><strong>Checklist:</strong> Healthy screen time habits.</li>
+                <li><strong>Tool:</strong> Digital detox planner.</li>
+            </ul>
+        </section>
+
+        <section class="chapter" id="chapter8">
+            <h1>⚖️ Digital Rights</h1>
+            <p>Discover your rights in the digital space and how to protect them.</p>
+            <ul>
+                <li><strong>Resource:</strong> <a href="https://onlinesafetystuff.wordpress.com/digital-rights/">Your Digital Rights</a></li>
+                <li><strong>Guide:</strong> Steps to take if your data is compromised.</li>
+                <li><strong>Scenario:</strong> Practice responding to a privacy breach.</li>
+            </ul>
+        </section>
+
         <div class="progress-container">
             <div class="progress-bar" id="globalProgress"></div>
         </div>
     </main>
 
     <script>
-        // Chapter Management
         let currentChapter = 1;
-        const totalChapters = 4;
+        const totalChapters = 8;
 
         function showChapter(chapterNumber) {
             document.querySelectorAll('.chapter').forEach(chapter => {
                 chapter.classList.remove('active');
             });
             document.getElementById(`chapter${chapterNumber}`).classList.add('active');
-            
+
             document.querySelectorAll('.chapter-item').forEach(item => {
                 item.classList.remove('active');
             });
             document.querySelector(`.chapter-item:nth-child(${chapterNumber})`).classList.add('active');
-            
+
             updateProgress();
             window.scrollTo(0, 0);
         }
 
-        // Password Strength Checker
-        document.getElementById('passwordInput').addEventListener('input', function(e) {
-            const password = e.target.value;
-            let strength = 0;
-            
-            if (password.length >= 12) strength += 25;
-            if (/[A-Z]/.test(password)) strength += 25;
-            if (/[0-9]/.test(password)) strength += 25;
-            if (/[^A-Za-z0-9]/.test(password)) strength += 25;
-            
-            const strengthBar = document.getElementById('passwordStrength');
-            strengthBar.style.width = `${strength}%`;
-            
-            const feedback = document.getElementById('passwordFeedback');
-            feedback.textContent = getStrengthFeedback(strength);
-            strengthBar.style.backgroundColor = getStrengthColor(strength);
-        });
-
-        function getStrengthFeedback(strength) {
-            if (strength < 50) return "Weak - Needs improvement!";
-            if (strength < 75) return "Good - Could be stronger!";
-            return "Excellent - Strong password!";
-        }
-
-        function getStrengthColor(strength) {
-            if (strength < 50) return "#eb8e75";
-            if (strength < 75) return "#ef9a5c";
-            return "#53aec9";
-        }
-
-        // Phishing Simulation
-        function showPhishingTip() {
-            const feedback = document.getElementById('phishingFeedback');
-            feedback.style.display = 'block';
-        }
-
-        // Accessibility Features
-        function toggleContrast() {
-            const theme = document.documentElement.getAttribute('data-theme');
-            document.documentElement.setAttribute('data-theme', 
-                theme === 'high-contrast' ? 'light' : 'high-contrast');
-        }
-
-        function toggleFontSize() {
-            document.body.style.fontSize = 
-                document.body.style.fontSize === '1.2em' ? '1em' : '1.2em';
-        }
-
-        function toggleDyslexic() {
-            document.body.classList.toggle('dyslexia-mode');
-        }
-
-        function readAloud() {
-            // Implementation would use speechSynthesis API
-            alert('Read aloud feature requires additional implementation');
-        }
-
-        // Progress Tracking
         function updateProgress() {
             const progress = (currentChapter / totalChapters) * 100;
             document.getElementById('globalProgress').style.width = `${progress}%`;
         }
 
-        // Keyboard Navigation
-        document.addEventListener('keydown', (e) => {
-            if (e.key === 'ArrowRight' && currentChapter < totalChapters) {
-                showChapter(++currentChapter);
-            }
-            if (e.key === 'ArrowLeft' && currentChapter > 1) {
-                showChapter(--currentChapter);
-            }
-        });
+        function toggleContrast() {
+            const theme = document.documentElement.getAttribute('data-theme');
+            document.documentElement.setAttribute('data-theme', theme === 'high-contrast' ? 'light' : 'high-contrast');
+        }
+
+        function toggleFontSize() {
+            document.body.style.fontSize = document.body.style.fontSize === '1.2em' ? '1em' : '1.2em';
+        }
+
+        function toggleDyslexic() {
+            document.body.classList.toggle('dyslexia-mode');
+        }
     </script>
 </body>
 </html>
