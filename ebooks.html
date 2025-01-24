@@ -1,9 +1,9 @@
 <!DOCTYPE html>
-<html lang="en" data-bs-theme="light">
+<html lang="en">
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>Articulate Online Safety Hub</title>
+    <title>Online Safety eBook - Articulate</title>
     <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.3.0/dist/css/bootstrap.min.css" rel="stylesheet">
     <link href="https://fonts.googleapis.com/css2?family=Rubik:wght@300;400;500;700&display=swap" rel="stylesheet">
     <style>
@@ -11,319 +11,297 @@
             --primary-black: #1c1c1b;
             --primary-orange: #ef9a5c;
             --primary-blue: #53aec9;
-            --secondary-coral: #eb8e75;
+            --page-bg: #f9f6f2;
         }
 
         body {
             font-family: 'Rubik', sans-serif;
-            margin: 0;
-            display: flex;
-            min-height: 100vh;
-            background: #f8f9fa;
+            background-color: var(--page-bg);
             color: var(--primary-black);
+            min-height: 100vh;
         }
 
-        .brand-sidebar {
-            width: 280px;
+        .ebook-container {
+            max-width: 900px;
+            margin: 2rem auto;
+            background: white;
+            box-shadow: 0 0 30px rgba(0,0,0,0.1);
+            border-radius: 10px;
+            position: relative;
+            min-height: 90vh;
+        }
+
+        .page-header {
             background: var(--primary-black);
             color: white;
-            padding: 20px;
-            position: fixed;
-            height: 100vh;
-            border-right: 3px solid var(--primary-orange);
-        }
-
-        .sidebar-header {
-            text-align: center;
-            margin-bottom: 2rem;
-        }
-
-        .brand-logo {
-            width: 80px;
-            margin-bottom: 1rem;
-        }
-
-        .chapters-list {
-            display: flex;
-            flex-direction: column;
-            gap: 1rem;
-        }
-
-        .nav-item {
-            color: white;
-            text-decoration: none;
-            padding: 1rem;
-            border-radius: 8px;
-            transition: all 0.3s;
-        }
-
-        .nav-item:hover {
-            background: var(--primary-blue);
-        }
-
-        .content-area {
-            margin-left: 280px;
             padding: 2rem;
-            flex-grow: 1;
+            border-radius: 10px 10px 0 0;
         }
 
-        .chapter {
+        .chapter-page {
+            padding: 2rem;
             display: none;
-            max-width: 800px;
-            margin: 0 auto;
-            animation: fadeIn 0.3s ease-in-out;
+            min-height: 80vh;
+        }
+
+        .chapter-page.active {
+            display: block;
+            animation: fadeIn 0.5s ease;
         }
 
         @keyframes fadeIn {
-            from { opacity: 0; transform: translateY(20px); }
-            to { opacity: 1; transform: translateY(0); }
+            from { opacity: 0; transform: translateX(20px); }
+            to { opacity: 1; transform: translateX(0); }
         }
 
-        .chapter.active {
-            display: block;
+        .page-number {
+            position: absolute;
+            bottom: 1rem;
+            right: 2rem;
+            color: var(--primary-orange);
         }
 
-        .interactive-card {
+        .ebook-nav {
+            display: flex;
+            justify-content: space-between;
+            padding: 1rem 2rem;
+            border-top: 2px solid #eee;
+        }
+
+        .toc-sidebar {
+            position: fixed;
+            left: -300px;
+            top: 0;
+            width: 300px;
+            height: 100vh;
             background: white;
-            border-radius: 15px;
+            box-shadow: 2px 0 10px rgba(0,0,0,0.1);
+            transition: 0.3s ease;
+            z-index: 1000;
             padding: 2rem;
-            box-shadow: 0 4px 20px rgba(0,0,0,0.1);
+        }
+
+        .toc-sidebar.active {
+            left: 0;
+        }
+
+        .toc-item {
+            padding: 0.5rem 0;
+            border-bottom: 1px solid #eee;
+            cursor: pointer;
+        }
+
+        .toc-toggle {
+            position: fixed;
+            left: 20px;
+            top: 20px;
+            z-index: 1001;
+        }
+
+        .interactive-box {
+            background: #f8f9fa;
+            border-left: 4px solid var(--primary-orange);
+            padding: 1.5rem;
             margin: 2rem 0;
         }
 
-        .password-checker {
-            margin-top: 2rem;
-        }
-
-        .strength-meter {
+        .password-meter {
             height: 8px;
-            background: #eee;
+            background: #ddd;
             border-radius: 4px;
             margin-top: 1rem;
         }
 
-        .strength-bar {
-            height: 100%;
+        .password-meter-bar {
             width: 0%;
-            border-radius: 4px;
-            transition: width 0.3s;
-        }
-
-        .phishing-simulator {
-            background: white;
-            border: 2px solid var(--primary-blue);
-            border-radius: 15px;
-            padding: 2rem;
-        }
-
-        .feedback-box {
-            margin-top: 1rem;
-            padding: 1rem;
-            border-radius: 8px;
-            display: none;
-        }
-
-        .progress-container {
-            position: fixed;
-            bottom: 20px;
-            left: 20px;
-            right: 20px;
-        }
-
-        .progress-bar {
-            height: 8px;
-            background: #eee;
-            border-radius: 4px;
-        }
-
-        .progress-fill {
             height: 100%;
-            width: 0%;
             background: var(--primary-orange);
             border-radius: 4px;
-            transition: width 0.3s;
-        }
-
-        @media (max-width: 768px) {
-            .brand-sidebar {
-                width: 100%;
-                position: relative;
-                height: auto;
-            }
-            
-            .content-area {
-                margin-left: 0;
-            }
+            transition: width 0.3s ease;
         }
     </style>
 </head>
 <body>
-    <!-- Navigation -->
-    <nav class="brand-sidebar">
-        <div class="sidebar-header">
-            <img src="data:image/svg+xml;base64,PHN2ZyB4bWxucz0iaHR0cDovL3d3dy53My5vcmcvMjAwMC9zdmciIHdpZHRoPSI2MCIgaGVpZ2h0PSI2MCI+PHJlY3Qgd2lkdGg9IjYwIiBoZWlnaHQ9IjYwIiBmaWxsPSIjZWY5YTVjIi8+PC9zdmc+" 
-                 alt="Articulate Logo" 
-                 class="brand-logo">
-            <h1>Online Safety Hub</h1>
-        </div>
-        <div class="chapters-list">
-            <a href="#welcome" class="nav-item active">🏠 Welcome</a>
-            <a href="#passwords" class="nav-item">🔑 Passwords</a>
-            <a href="#phishing" class="nav-item">🎣 Phishing</a>
-            <a href="#privacy" class="nav-item">🛡️ Privacy</a>
-        </div>
-        <div class="progress-container">
-            <div class="progress-bar">
-                <div class="progress-fill" style="width: 0%"></div>
-            </div>
-            <span class="progress-text">0% Complete</span>
-        </div>
-    </nav>
+    <button class="btn btn-primary toc-toggle" onclick="toggleTOC()">📖 Contents</button>
 
-    <!-- Main Content -->
-    <main class="content-area">
-        <!-- Welcome Chapter -->
-        <section id="welcome" class="chapter active">
-            <div class="interactive-card">
-                <h2>Welcome to Digital Safety</h2>
-                <p>Empowering young people to navigate the online world securely</p>
-                <button class="btn btn-primary" onclick="showChapter('passwords')">
-                    Start Learning →
-                </button>
-            </div>
-        </section>
+    <div class="toc-sidebar">
+        <h4>Table of Contents</h4>
+        <div class="toc-item" onclick="showPage('cover')">Cover Page</div>
+        <div class="toc-item" onclick="showPage(1)">Chapter 1: Password Security</div>
+        <div class="toc-item" onclick="showPage(2)">Chapter 2: Phishing Awareness</div>
+        <div class="toc-item" onclick="showPage(3)">Chapter 3: Privacy Settings</div>
+        <div class="toc-item" onclick="showPage(4)">Chapter 4: Cyberbullying</div>
+    </div>
 
-        <!-- Password Safety Chapter -->
-        <section id="passwords" class="chapter">
-            <div class="interactive-card">
-                <h2>🔒 Password Security</h2>
-                <div class="password-rules">
-                    <div class="row">
-                        <div class="col-md-6 mb-3">
-                            <div class="alert alert-primary">
-                                <h4>✓ Minimum 12 characters</h4>
-                                <p>Longer passwords are harder to crack</p>
-                            </div>
-                        </div>
-                        <div class="col-md-6 mb-3">
-                            <div class="alert alert-primary">
-                                <h4>✓ Mix character types</h4>
-                                <p>Use uppercase, lowercase, numbers & symbols</p>
-                            </div>
-                        </div>
-                    </div>
+    <div class="ebook-container">
+        <!-- Cover Page -->
+        <div class="chapter-page active" id="cover">
+            <div class="page-header text-center">
+                <h1>Online Safety Guide</h1>
+                <p>Empowering Digital Citizenship</p>
+            </div>
+            <div class="text-center mt-5">
+                <img src="data:image/svg+xml;base64,PHN2ZyB4bWxucz0iaHR0cDovL3d3dy53My5vcmcvMjAwMC9zdmciIHdpZHRoPSIxMDAiIGhlaWdodD0iMTAwIj48cmVjdCB3aWR0aD0iMTAwIiBoZWlnaHQ9IjEwMCIgZmlsbD0iI2VmOWE1YyIvPjwvc3ZnPg==" 
+                     alt="Shield Icon" 
+                     style="width: 150px; opacity: 0.8;">
+                <div class="mt-4">
+                    <button class="btn btn-lg btn-primary" onclick="showPage(1)">
+                        Start Reading →
+                    </button>
                 </div>
-                <div class="password-checker">
+            </div>
+            <div class="page-number">Cover</div>
+        </div>
+
+        <!-- Chapter 1: Password Security -->
+        <div class="chapter-page" id="page1">
+            <div class="page-header">
+                <h2>Chapter 1: Password Security</h2>
+            </div>
+            <div class="p-4">
+                <h4>The Basics of Strong Passwords</h4>
+                <p>Create passwords that are both secure and memorable:</p>
+                
+                <div class="interactive-box">
+                    <h5>Password Strength Checker</h5>
                     <input type="password" 
                            class="form-control" 
                            placeholder="Test your password"
-                           id="passwordInput"
-                           aria-label="Password strength tester">
-                    <div class="strength-meter mt-2">
-                        <div class="strength-bar" id="strengthBar"></div>
+                           oninput="updatePasswordMeter(this.value)">
+                    <div class="password-meter mt-2">
+                        <div class="password-meter-bar" id="passwordStrength"></div>
                     </div>
+                    <div class="mt-2 text-muted small" id="passwordTips"></div>
                 </div>
-            </div>
-        </section>
 
-        <!-- Phishing Chapter -->
-        <section id="phishing" class="chapter">
-            <div class="interactive-card">
-                <h2>🎣 Spot Phishing Attempts</h2>
-                <div class="phishing-simulator">
-                    <div class="email-mockup alert alert-warning">
-                        <div class="email-header">
-                            <h4>URGENT: Account Verification Required</h4>
-                            <p>From: support@secure-service.com</p>
-                        </div>
-                        <div class="email-body">
-                            <p>Dear User,</p>
-                            <p>Click here to verify your account immediately:</p>
-                            <button class="btn btn-link text-danger" onclick="showPhishingTip()">
-                                https://secure-service.verify-now.com
-                            </button>
+                <div class="row mt-4">
+                    <div class="col-md-6">
+                        <div class="alert alert-primary">
+                            <h5>✓ Do's</h5>
+                            <ul>
+                                <li>Use 12+ characters</li>
+                                <li>Mix character types</li>
+                                <li>Use passphrases</li>
+                            </ul>
                         </div>
                     </div>
-                    <div id="phishingFeedback" class="feedback-box alert alert-danger mt-3">
-                        <p>🚩 This link is suspicious! Look for:</p>
-                        <ul>
-                            <li>Misspelled domain name</li>
-                            <li>Urgent language</li>
-                            <li>Generic greeting</li>
-                        </ul>
+                    <div class="col-md-6">
+                        <div class="alert alert-danger">
+                            <h5>✗ Don'ts</h5>
+                            <ul>
+                                <li>Reuse passwords</li>
+                                <li>Use personal info</li>
+                                <li>Write them down</li>
+                            </ul>
+                        </div>
                     </div>
                 </div>
             </div>
-        </section>
-    </main>
+            <div class="page-number">1</div>
+        </div>
+
+        <!-- Chapter 2: Phishing Awareness -->
+        <div class="chapter-page" id="page2">
+            <div class="page-header">
+                <h2>Chapter 2: Phishing Awareness</h2>
+            </div>
+            <div class="p-4">
+                <h4>Spotting Suspicious Communications</h4>
+                <div class="interactive-box">
+                    <div class="email-mockup alert alert-warning">
+                        <h5>Urgent: Account Verification Needed</h5>
+                        <p>From: security@yourbank.com</p>
+                        <hr>
+                        <p>Dear Customer,</p>
+                        <p>Click immediately to verify your account:</p>
+                        <button class="btn btn-link text-danger" 
+                                onclick="showPhishingTip()">
+                            https://verify-yourbank.com
+                        </button>
+                    </div>
+                    <div id="phishingTip" class="mt-3" style="display: none;">
+                        <div class="alert alert-success">
+                            <h5>Red Flags Identified:</h5>
+                            <ul>
+                                <li>Generic greeting</li>
+                                <li>Urgent language</li>
+                                <li>Suspicious domain</li>
+                            </ul>
+                        </div>
+                    </div>
+                </div>
+            </div>
+            <div class="page-number">2</div>
+        </div>
+
+        <!-- Navigation Controls -->
+        <div class="ebook-nav">
+            <button class="btn btn-outline-secondary" onclick="previousPage()">← Previous</button>
+            <div class="progress" style="width: 200px; height: 8px;">
+                <div class="progress-bar bg-warning" 
+                     id="globalProgress" 
+                     style="width: 0%"></div>
+            </div>
+            <button class="btn btn-primary" onclick="nextPage()">Next →</button>
+        </div>
+    </div>
 
     <script>
-        document.addEventListener('DOMContentLoaded', () => {
-            // Navigation logic
-            document.querySelectorAll('.nav-item').forEach(item => {
-                item.addEventListener('click', function(e) {
-                    e.preventDefault();
-                    const targetId = this.getAttribute('href').substring(1);
-                    showChapter(targetId);
-                    updateProgress();
-                });
-            });
+        let currentPage = 0;
+        const totalPages = 4; // Update with total chapter count
 
-            // Password strength checker
-            document.getElementById('passwordInput').addEventListener('input', function(e) {
-                const strength = calculatePasswordStrength(e.target.value);
-                updateStrengthMeter(strength);
-            });
-        });
-
-        function showChapter(chapterId) {
-            // Hide all chapters
-            document.querySelectorAll('.chapter').forEach(chapter => {
-                chapter.classList.remove('active');
-            });
-            
-            // Show selected chapter
-            document.getElementById(chapterId).classList.add('active');
-            
-            // Update navigation
-            document.querySelectorAll('.nav-item').forEach(item => {
-                item.classList.remove('active');
-            });
-            document.querySelector(`[href="#${chapterId}"]`).classList.add('active');
+        function toggleTOC() {
+            document.querySelector('.toc-sidebar').classList.toggle('active');
         }
 
-        function calculatePasswordStrength(password) {
-            let strength = 0;
-            if (password.length >= 12) strength += 25;
-            if (/[A-Z]/.test(password)) strength += 25;
-            if (/[0-9]/.test(password)) strength += 25;
-            if (/[^A-Za-z0-9]/.test(password)) strength += 25;
-            return Math.min(strength, 100);
+        function showPage(pageNumber) {
+            document.querySelectorAll('.chapter-page').forEach(page => {
+                page.classList.remove('active');
+            });
+            document.querySelector(`#page${pageNumber}`).classList.add('active');
+            currentPage = pageNumber;
+            updateProgress();
+            toggleTOC();
         }
 
-        function updateStrengthMeter(strength) {
-            const bar = document.getElementById('strengthBar');
-            bar.style.width = `${strength}%`;
-            bar.style.backgroundColor = strength < 50 ? '#eb8e75' : 
-                                      strength < 75 ? '#ef9a5c' : '#53aec9';
+        function nextPage() {
+            if(currentPage < totalPages) showPage(currentPage + 1);
         }
 
-        function showPhishingTip() {
-            const feedback = document.getElementById('phishingFeedback');
-            feedback.style.display = 'block';
+        function previousPage() {
+            if(currentPage > 0) showPage(currentPage - 1);
         }
 
         function updateProgress() {
-            const chapters = document.querySelectorAll('.chapter').length - 1;
-            const current = Array.from(document.querySelectorAll('.chapter'))
-                              .indexOf(document.querySelector('.chapter.active'));
-            const progress = (current / chapters) * 100;
-            
-            document.querySelector('.progress-fill').style.width = `${progress}%`;
-            document.querySelector('.progress-text').textContent = 
-                `${Math.round(progress)}% Complete`;
+            const progress = (currentPage / totalPages) * 100;
+            document.getElementById('globalProgress').style.width = `${progress}%`;
         }
+
+        function updatePasswordMeter(password) {
+            let strength = 0;
+            if(password.length >= 12) strength += 25;
+            if(/[A-Z]/.test(password)) strength += 25;
+            if(/[0-9]/.test(password)) strength += 25;
+            if(/[^A-Za-z0-9]/.test(password)) strength += 25;
+            
+            const meter = document.getElementById('passwordStrength');
+            meter.style.width = `${strength}%`;
+            
+            const tips = document.getElementById('passwordTips');
+            tips.innerHTML = strength < 50 ? 'Weak - Needs improvement' :
+                            strength < 75 ? 'Good - Could be stronger' :
+                            'Excellent - Strong password!';
+        }
+
+        function showPhishingTip() {
+            document.getElementById('phishingTip').style.display = 'block';
+        }
+
+        // Keyboard navigation
+        document.addEventListener('keydown', (e) => {
+            if(e.key === 'ArrowLeft') previousPage();
+            if(e.key === 'ArrowRight') nextPage();
+        });
     </script>
-    <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.3.0/dist/js/bootstrap.bundle.min.js"></script>
 </body>
 </html>
