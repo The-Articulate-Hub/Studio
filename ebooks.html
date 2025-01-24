@@ -1,9 +1,9 @@
 <!DOCTYPE html>
-<html lang="en" data-bs-theme="light">
+<html lang="en">
 <head>
   <meta charset="UTF-8">
   <meta name="viewport" content="width=device-width, initial-scale=1.0">
-  <title>Online Safety Hub - Interactive eBook</title>
+  <title>Digital Safety Hub - Interactive Guide</title>
   <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.3.0/dist/css/bootstrap.min.css" rel="stylesheet">
   <link href="https://fonts.googleapis.com/css2?family=Rubik:wght@300;400;500;700&display=swap" rel="stylesheet">
   <style>
@@ -17,232 +17,192 @@
     body {
       font-family: 'Rubik', sans-serif;
       background: linear-gradient(45deg, #f8f9fa 0%, #f4f4f9 100%);
+      color: var(--primary-black);
     }
 
-    .brand-sidebar {
+    .brand-header {
       background: var(--primary-black);
-      border-right: 3px solid var(--primary-orange);
+      color: white;
+      padding: 2rem;
+      border-bottom: 4px solid var(--primary-orange);
     }
 
-    .chapter-card {
-      background: rgba(255, 255, 255, 0.95);
-      border: none;
+    .interactive-card {
+      background: white;
       border-radius: 15px;
       box-shadow: 0 8px 30px rgba(0, 0, 0, 0.1);
       transition: transform 0.3s ease;
-    }
-
-    .chapter-card:hover {
-      transform: translateY(-5px);
-    }
-
-    .interactive-quiz {
-      background: linear-gradient(135deg, var(--primary-blue) 0%, var(--secondary-coral) 100%);
-      color: white;
-      border-radius: 15px;
+      margin: 1rem 0;
+      padding: 2rem;
     }
 
     .progress-brand {
       height: 12px;
       background-color: #e9ecef;
+      border-radius: 10px;
     }
 
     .progress-brand .progress-bar {
       background: linear-gradient(90deg, var(--primary-orange) 0%, var(--secondary-coral) 100%);
     }
 
-    .brand-btn-primary {
-      background: var(--primary-orange);
-      border: none;
-      padding: 12px 24px;
-      font-weight: 500;
-      letter-spacing: 0.5px;
+    .quiz-option {
+      border: 2px solid var(--primary-blue);
+      border-radius: 10px;
+      padding: 1rem;
+      margin: 1rem 0;
+      cursor: pointer;
+      transition: all 0.3s ease;
     }
 
-    .brand-btn-primary:hover {
-      background: var(--secondary-coral);
+    .quiz-option:hover {
+      background-color: var(--primary-blue);
+      color: white;
     }
 
-    .accessibility-tools {
-      position: fixed;
-      bottom: 20px;
-      right: 20px;
-      z-index: 1000;
+    .password-strength-meter {
+      height: 8px;
+      border-radius: 4px;
+      margin-top: 1rem;
+      background: #eee;
     }
 
-    @media (max-width: 768px) {
-      .brand-sidebar {
-        width: 100%;
-        position: relative;
-        height: auto;
-      }
-      .content-area {
-        margin-left: 0 !important;
-      }
+    .strength-indicator {
+      width: 0%;
+      height: 100%;
+      border-radius: 4px;
+      transition: width 0.3s ease;
     }
   </style>
 </head>
-<body class="d-flex">
+<body>
 
-<!-- Sidebar Navigation -->
-<nav class="brand-sidebar vh-100 p-4 d-flex flex-column" style="width: 280px;">
-  <div class="mb-5 text-center">
-    <img src="data:image/svg+xml;base64,PHN2ZyB4bWxucz0iaHR0cDovL3d3dy53My5vcmcvMjAwMC9zdmciIHZpZXdCb3g9IjAgMCAxMDAgMTAwIj48cmVjdCB3aWR0aD0iMTAwIiBoZWlnaHQ9IjEwMCIgZmlsbD0iI2VmOWE1YyIvPjwvc3ZnPg==" 
-         alt="Brand logo" 
-         class="mb-3" 
-         style="width: 60px; height: 60px; border-radius: 12px;">
-    <h2 class="text-white mb-0">Online Safety Hub</h2>
-    <small class="text-white-50">Powered by Articulate</small>
-  </div>
-
-  <div class="nav flex-column gap-2">
-    <a href="#welcome" class="nav-link text-white d-flex align-items-center gap-2" 
-       data-bs-toggle="tooltip" data-bs-placement="right" title="Start here">
-      <span class="material-symbols-outlined">home</span>
-      Welcome
-    </a>
-    <!-- Repeat for other chapters -->
-  </div>
-
-  <div class="mt-auto">
-    <div class="progress progress-brand">
-      <div class="progress-bar" role="progressbar" style="width: 0%"></div>
-    </div>
-    <small class="text-white-50 d-block mt-2">Progress: <span id="progressPercentage">0%</span></small>
-  </div>
-</nav>
-
-<!-- Main Content -->
-<main class="content-area flex-grow-1 p-4" style="margin-left: 280px;">
-  
-  <!-- Welcome Chapter -->
-  <article id="welcome" class="chapter-card p-4 active">
-    <h1 class="display-4 mb-4">Welcome to Digital Safety</h1>
-    <div class="row g-4">
-      <div class="col-md-6">
-        <div class="interactive-quiz p-4">
-          <h3>Quick Safety Check</h3>
-          <p>How confident do you feel about your online safety?</p>
-          <div class="btn-group-vertical w-100">
-            <button class="btn btn-outline-light">Very Confident</button>
-            <button class="btn btn-outline-light">Somewhat Confident</button>
-            <button class="btn btn-outline-light">Need Help</button>
-          </div>
-        </div>
-      </div>
-      <div class="col-md-6">
-        <div class="bg-white p-4 rounded-3">
-          <h3>What You'll Learn</h3>
-          <ul class="list-unstyled">
-            <li class="d-flex gap-2 mb-2">
-              <span class="badge bg-primary">1</span>
-              Creating secure passwords
-            </li>
-            <!-- Add other learning points -->
-          </ul>
-        </div>
-      </div>
-    </div>
-  </article>
-
-  <!-- Chapter 1: Strong Passwords -->
-  <article id="chapter-1" class="chapter-card p-4">
-    <header class="mb-4">
-      <h1 class="display-6">Mastering Password Security</h1>
-      <div class="d-flex align-items-center gap-2 text-muted">
-        <small>Estimated time: 8 minutes</small>
-        <span class="badge bg-success">Essential Skill</span>
-      </div>
-    </header>
-
-    <div class="row g-4">
-      <div class="col-lg-8">
-        <div class="accordion" id="passwordAccordion">
-          <div class="accordion-item">
-            <h2 class="accordion-header">
-              <button class="accordion-button" type="button" data-bs-toggle="collapse" data-bs-target="#passwordBasics">
-                Password Fundamentals
-              </button>
-            </h2>
-            <div id="passwordBasics" class="accordion-collapse collapse show">
-              <div class="accordion-body">
-                <ul class="list-check">
-                  <li>Minimum 12 characters</li>
-                  <li>Mix of character types</li>
-                  <li>Avoid personal information</li>
-                </ul>
-                <div class="password-strength-meter mt-3">
-                  <input type="password" class="form-control" placeholder="Test your password" 
-                         aria-label="Password strength tester">
-                  <div class="strength-visual mt-2"></div>
-                </div>
-              </div>
-            </div>
-          </div>
-        </div>
-      </div>
-
-      <div class="col-lg-4">
-        <div class="bg-light p-4 rounded-3">
-          <h4>Interactive Practice</h4>
-          <p>Which password is strongest?</p>
-          <div class="vstack gap-2">
-            <button class="btn btn-outline-primary text-start">Fluffy123</button>
-            <button class="btn btn-outline-primary text-start">P@ssw0rd!</button>
-            <button class="btn btn-outline-primary text-start">Sunshine2023</button>
-          </div>
-          <div class="feedback mt-3"></div>
-        </div>
-      </div>
-    </div>
-  </article>
-
-</main>
-
-<!-- Accessibility Tools -->
-<div class="accessibility-tools btn-group">
-  <button class="btn btn-sm btn-secondary" onclick="toggleContrast()">
-    High Contrast
-  </button>
-  <button class="btn btn-sm btn-secondary" onclick="toggleFontSize()">
-    Text Size
-  </button>
+<div class="brand-header text-center">
+  <h1>Welcome to Digital Safety</h1>
+  <p class="lead">Empowering you to navigate the digital world securely</p>
 </div>
 
-<script src="https://cdn.jsdelivr.net/npm/bootstrap@5.3.0/dist/js/bootstrap.bundle.min.js"></script>
-<script>
-  // Enhanced interactivity
-  document.querySelectorAll('.nav-link').forEach(link => {
-    link.addEventListener('click', function(e) {
-      e.preventDefault()
-      const target = document.querySelector(this.getAttribute('href'))
-      document.querySelectorAll('.chapter-card').forEach(c => c.classList.remove('active'))
-      target.classList.add('active')
-      updateProgress()
-    })
-  })
+<div class="container py-5">
+  <!-- Safety Check Section -->
+  <div class="interactive-card">
+    <h2 class="mb-4">🔒 Quick Safety Check</h2>
+    <p>How confident do you feel about your online safety?</p>
+    <div class="quiz-option" onclick="handleSafetyResponse('confident')">
+      <h4>Very Confident</h4>
+      <p class="text-muted">I regularly update my security settings and use strong passwords</p>
+    </div>
+    <div class="quiz-option" onclick="handleSafetyResponse('somewhat')">
+      <h4>Somewhat Confident</h4>
+      <p class="text-muted">I know the basics but could improve some areas</p>
+    </div>
+    <div class="quiz-option" onclick="handleSafetyResponse('help')">
+      <h4>Need Help</h4>
+      <p class="text-muted">I want to learn more about protecting myself online</p>
+    </div>
+  </div>
 
-  function updateProgress() {
-    const activeChapter = document.querySelector('.chapter-card.active')
-    const chapters = document.querySelectorAll('.chapter-card').length
-    const current = Array.from(document.querySelectorAll('.chapter-card')).indexOf(activeChapter)
-    const percentage = (current / (chapters - 1)) * 100
+  <!-- Learning Objectives -->
+  <div class="interactive-card">
+    <h2 class="mb-4">📚 What You'll Learn</h2>
+    <div class="row">
+      <div class="col-md-6">
+        <div class="d-flex align-items-center mb-3">
+          <div class="bg-primary-blue text-white rounded-circle p-3 me-3">1</div>
+          <div>
+            <h4>Creating Secure Passwords</h4>
+            <p class="text-muted">Master password security fundamentals</p>
+          </div>
+        </div>
+      </div>
+      <!-- Add more learning objectives here -->
+    </div>
+  </div>
+
+  <!-- Password Security Section -->
+  <div class="interactive-card">
+    <div class="d-flex justify-content-between align-items-center mb-4">
+      <h2>🔑 Mastering Password Security</h2>
+      <span class="badge bg-primary-orange">8 min read</span>
+    </div>
     
-    document.querySelector('.progress-bar').style.width = `${percentage}%`
-    document.getElementById('progressPercentage').textContent = `${Math.round(percentage)}%`
+    <div class="row">
+      <div class="col-md-6">
+        <h4>Password Fundamentals</h4>
+        <ul class="list-check">
+          <li>Minimum 12 characters</li>
+          <li>Mix of character types (upper/lower case, numbers, symbols)</li>
+          <li>Avoid personal information</li>
+        </ul>
+        
+        <div class="mt-4">
+          <h5>Test Your Password</h5>
+          <input type="password" class="form-control" placeholder="Enter password" 
+                 oninput="checkPasswordStrength(this.value)">
+          <div class="password-strength-meter mt-2">
+            <div class="strength-indicator" id="strengthIndicator"></div>
+          </div>
+        </div>
+      </div>
+
+      <div class="col-md-6">
+        <div class="bg-light p-4 rounded-3">
+          <h4>Interactive Practice</h4>
+          <p class="text-muted">Which password is strongest?</p>
+          <div class="quiz-option" onclick="handleQuizAnswer('Fluffy123')">
+            Fluffy123
+          </div>
+          <div class="quiz-option" onclick="handleQuizAnswer('P@ssw0rd!')">
+            P@ssw0rd!
+          </div>
+          <div class="quiz-option" onclick="handleQuizAnswer('Sunshine2023')">
+            Sunshine2023
+          </div>
+          <div id="quizFeedback" class="mt-3"></div>
+        </div>
+      </div>
+    </div>
+  </div>
+
+  <!-- Progress Section -->
+  <div class="interactive-card">
+    <div class="d-flex justify-content-between align-items-center">
+      <h4>Your Progress</h4>
+      <span>25% Complete</span>
+    </div>
+    <div class="progress-brand mt-2">
+      <div class="progress-bar" style="width: 25%"></div>
+    </div>
+  </div>
+</div>
+
+<script>
+  function checkPasswordStrength(password) {
+    const strengthIndicator = document.getElementById('strengthIndicator');
+    let strength = 0;
+    
+    if (password.length >= 12) strength += 25;
+    if (/[A-Z]/.test(password)) strength += 25;
+    if (/[0-9]/.test(password)) strength += 25;
+    if (/[^A-Za-z0-9]/.test(password)) strength += 25;
+    
+    strengthIndicator.style.width = `${strength}%`;
+    strengthIndicator.style.backgroundColor = strength < 50 ? '#eb8e75' : 
+                                            strength < 75 ? '#ef9a5c' : '#53aec9';
   }
 
-  function toggleContrast() {
-    document.body.dataset.bsTheme = document.body.dataset.bsTheme === 'dark' ? 'light' : 'dark'
+  function handleQuizAnswer(answer) {
+    const feedback = document.getElementById('quizFeedback');
+    feedback.innerHTML = answer === 'P@ssw0rd!' ?
+      '<div class="alert alert-success">✓ Correct! This password uses multiple character types</div>' :
+      '<div class="alert alert-danger">✗ Try again! Consider using special characters and numbers</div>';
   }
 
-  function toggleFontSize() {
-    document.body.style.fontSize = document.body.style.fontSize === '1.2em' ? '1em' : '1.2em'
+  function handleSafetyResponse(response) {
+    // Add analytics or personalized content based on response
+    console.log('User selected:', response);
   }
-
-  // Initialize tooltips
-  const tooltips = document.querySelectorAll('[data-bs-toggle="tooltip"]')
-  tooltips.forEach(t => new bootstrap.Tooltip(t))
 </script>
+
+<script src="https://cdn.jsdelivr.net/npm/bootstrap@5.3.0/dist/js/bootstrap.bundle.min.js"></script>
 </body>
 </html>
