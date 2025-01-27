@@ -37,19 +37,6 @@
 5. [Acknowledgements](#acknowledgements)
 
 ---
-
-## 🌟 About the Project
-
-The Articulate Hub Repository serves as the backbone for the digital platforms supporting young people with care experience. This repository powers:
-
-- **Live GitHub Pages Website:** Hosting creative content and digital tools.
-- **Articulate Hub Studio Integration:** Providing resources and features to enhance user experiences.
-- **Scalable & Accessible Solutions:** Designed with inclusivity and ease of use in mind.
-
-This repository reflects our commitment to secure, trauma-informed, and accessible design principles. It is a collaborative space where innovation meets impact.
-
-<p align="right">(<a href="#readme-top">back to top</a>)</p>
-
 ---
 
 ## 🚀 Getting Started
