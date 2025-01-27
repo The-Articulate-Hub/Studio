@@ -60,7 +60,6 @@ Visit the live website by clicking below:
 
 - **index.html**: The main landing page of the website.
 - **ebook.html, ebooks.html, ebooks copy.html**: Pages showcasing and providing access to eBooks.
-- **Haxor.html**: A specialised feature or experimental page.
 - **deep.html**: In-depth resources and tools for users.
 - **kit.html**: A repository of downloadable kits and resources.
 - **.github/workflows/static.yml**: Automates deployment to GitHub Pages using GitHub Actions.
