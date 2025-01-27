@@ -6,12 +6,12 @@
 <br />
 <div align="center">
   <a href="https://studio.articulatehub.com/">
-    <img src="https://lwfiles.mycourse.app/655b35fbfdce42739eabd7cf-public/e7bb21dceaac753035eba14d6abfd207.png" alt="Articulate Hub Logo" width="150" height="150">
+    <img src="https://lwfiles.mycourse.app/655b35fbfdce42739eabd7cf-public/e7bb21dceaac753035eba14d6abfd207.png" alt="The Articulate Hub Logo" width="150" height="150">
   </a>
-  <h1 align="center">Articulate Hub Repository</h1>
+  <h1 align="center">The Articulate Hub Repository</h1>
 
   <p align="center">
-    Your go-to repository for developing and showcasing creative resources within the Articulate Hub ecosystem.
+    Your go-to repository for developing and showcasing creative resources within  The Articulate Hub ecosystem.
     <br />
     <a href="https://github.articulatehub.com/"><strong>Explore the Live Site »</strong></a>
     <br />
@@ -84,12 +84,12 @@ We welcome contributions from the community to make this repository even better.
 
 ## 🙏 Acknowledgements
 
-Special thanks to everyone contributing to the Articulate Hub and its community. This repository wouldn’t be possible without your support and collaboration.
+Special thanks to everyone contributing to  The Articulate Hub and its community. This repository wouldn’t be possible without your support and collaboration.
 
 Resources and inspirations:
 
 - [GitHub Pages Documentation](https://pages.github.com/)
-- [Articulate Hub Studio](https://studio.articulatehub.com/)
+- [The Articulate Hub Studio](https://studio.articulatehub.com/)
 - [Markdown Guide](https://www.markdownguide.org/)
 
 <p align="right">(<a href="#readme-top">back to top</a>)</p>
