@@ -6,27 +6,27 @@
 <br />
 <div align="center">
   <a href="https://studio.articulatehub.com/">
-    <img src="https://lwfiles.mycourse.app/655b35fbfdce42739eabd7cf-public/e7bb21dceaac753035eba14d6abfd207.png" alt="Articulate Hub Logo" width="120" height="120">
+    <img src="https://lwfiles.mycourse.app/655b35fbfdce42739eabd7cf-public/e7bb21dceaac753035eba14d6abfd207.png" alt="Articulate Hub Logo" width="150" height="150">
   </a>
-  <h3 align="center">Articulate Hub Repository</h3>
+  <h1 align="center">Articulate Hub Repository</h1>
 
   <p align="center">
-    A repository to showcase and develop HTML pages for the Articulate Hub.
+    Your go-to repository for developing and showcasing creative resources within the Articulate Hub ecosystem.
     <br />
-    <a href="https://github.articulatehub.com/"><strong>View Live Site »</strong></a>
+    <a href="https://github.articulatehub.com/"><strong>Explore the Live Site »</strong></a>
     <br />
-    <a href="https://studio.articulatehub.com/"><strong>Visit Articulate Hub Studio »</strong></a>
+    <a href="https://studio.articulatehub.com/"><strong>Access the Studio Platform »</strong></a>
     <br />
     <br />
-    <a href="https://github.com/JasonArticulate/Repository/issues">Report Bug</a>
+    <a href="https://github.com/JasonArticulate/Repository/issues">Report a Bug</a>
     ·
-    <a href="https://github.com/JasonArticulate/Repository/issues">Request Feature</a>
+    <a href="https://github.com/JasonArticulate/Repository/issues">Request a Feature</a>
   </p>
 </div>
 
 ---
 
-## Table of Contents
+## 📖 Table of Contents
 
 1. [About the Project](#about-the-project)
 2. [Getting Started](#getting-started)
@@ -34,22 +34,29 @@
    - [Opening the Code in VS Code](#opening-the-code-in-vs-code)
 3. [File Descriptions](#file-descriptions)
 4. [How to Contribute](#how-to-contribute)
+5. [Acknowledgements](#acknowledgements)
 
 ---
 
-## About the Project
+## 🌟 About the Project
 
-This repository contains several HTML files designed for deployment on GitHub Pages. It provides a digital platform to showcase various creative resources, aligning with Articulate Hub's mission to support young people with care experience. It also integrates resources from the [Articulate Hub Studio](https://studio.articulatehub.com/) to enhance the user experience.
+The Articulate Hub Repository serves as the backbone for the digital platforms supporting young people with care experience. This repository powers:
+
+- **Live GitHub Pages Website:** Hosting creative content and digital tools.
+- **Articulate Hub Studio Integration:** Providing resources and features to enhance user experiences.
+- **Scalable & Accessible Solutions:** Designed with inclusivity and ease of use in mind.
+
+This repository reflects our commitment to secure, trauma-informed, and accessible design principles. It is a collaborative space where innovation meets impact.
 
 <p align="right">(<a href="#readme-top">back to top</a>)</p>
 
 ---
 
-## Getting Started
+## 🚀 Getting Started
 
 ### Accessing GitHub Pages
 
-Visit the live site by clicking the link below:
+Visit the live website by clicking below:
 [GitHub Pages](https://github.articulatehub.com/)
 
 ### Opening the Code in VS Code
@@ -74,26 +81,42 @@ Visit the live site by clicking the link below:
 
 ---
 
-## File Descriptions
+## 📂 File Descriptions
 
-- **index.html**: Main landing page of the site.
-- **ebook.html, ebooks.html, ebooks copy.html**: Various pages showcasing eBooks.
-- **Haxor.html**: Specialised page for advanced features or testing.
-- **deep.html**: Section for in-depth resources or experiments.
-- **kit.html**: Page containing downloadable kits or tools.
-- **.github/workflows/static.yml**: Workflow for auto-deploying to GitHub Pages.
+- **index.html**: The main landing page of the website.
+- **ebook.html, ebooks.html, ebooks copy.html**: Pages showcasing and providing access to eBooks.
+- **Haxor.html**: A specialised feature or experimental page.
+- **deep.html**: In-depth resources and tools for users.
+- **kit.html**: A repository of downloadable kits and resources.
+- **.github/workflows/static.yml**: Automates deployment to GitHub Pages using GitHub Actions.
 
 <p align="right">(<a href="#readme-top">back to top</a>)</p>
 
 ---
 
-## How to Contribute
+## 🤝 How to Contribute
+
+We welcome contributions from the community to make this repository even better. Here's how you can help:
 
 1. Fork the repository.
-2. Create your feature branch (`git checkout -b feature/YourFeature`).
-3. Commit your changes (`git commit -m 'Add some feature'`).
-4. Push to the branch (`git push origin feature/YourFeature`).
+2. Create a new feature branch (`git checkout -b feature/YourFeature`).
+3. Commit your changes (`git commit -m 'Add AmazingFeature'`).
+4. Push to your branch (`git push origin feature/YourFeature`).
 5. Open a pull request.
+
+<p align="right">(<a href="#readme-top">back to top</a>)</p>
+
+---
+
+## 🙏 Acknowledgements
+
+Special thanks to everyone contributing to the Articulate Hub and its community. This repository wouldn’t be possible without your support and collaboration.
+
+Resources and inspirations:
+
+- [GitHub Pages Documentation](https://pages.github.com/)
+- [Articulate Hub Studio](https://studio.articulatehub.com/)
+- [Markdown Guide](https://www.markdownguide.org/)
 
 <p align="right">(<a href="#readme-top">back to top</a>)</p>
 
