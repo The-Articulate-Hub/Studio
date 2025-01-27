@@ -48,11 +48,7 @@ Visit the live website by clicking below:
 
 ### Opening the Code in VS Code
 
-1. **Open VS Code:**
-   ```bash
-   code .
-   ```
-2. **Quick Edit on GitHub:**
+1. **Quick Edit on GitHub:**
    - Open the repository in your browser.
    - Press `.` to launch the web-based VS Code environment.
 
