@@ -48,19 +48,11 @@ Visit the live website by clicking below:
 
 ### Opening the Code in VS Code
 
-1. **Clone the Repository:**
-   ```bash
-   git clone <repository_url>
-   ```
-2. **Navigate to the Folder:**
-   ```bash
-   cd <repository_folder>
-   ```
-3. **Open VS Code:**
+1. **Open VS Code:**
    ```bash
    code .
    ```
-4. **Quick Edit on GitHub:**
+2. **Quick Edit on GitHub:**
    - Open the repository in your browser.
    - Press `.` to launch the web-based VS Code environment.
 
