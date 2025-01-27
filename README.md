@@ -1,5 +1,5 @@
 <!-- PROJECT SHIELDS -->
-[![GitHub deployments](https://img.shields.io/github/deployments/JasonArticulate/Repository/github-pages?style=for-the-badge)]([https://github.com/The-Articulate-Hub/Studio/)]
+[![GitHub deployments](https://img.shields.io/github/deployments/JasonArticulate/Repository/github-pages?style=for-the-badge)]([https://github.com/The-Articulate-Hub/Studio/)
 [![HTML][html-shield]][html-url]
 
 <!-- PROJECT LOGO -->
