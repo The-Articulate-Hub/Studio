@@ -3,14 +3,26 @@
 <head>
   <meta charset="UTF-8">
   <meta name="viewport" content="width=device-width, initial-scale=1.0">
-  <title> The Articulate Hub Gallery</title>
+  <title>Living Archive - Fullscreen Embed</title>
   <style>
+    /* Reset margins and padding */
     html, body {
       margin: 0;
       padding: 0;
       height: 100%;
       overflow: hidden;
+      font-family: Arial, sans-serif;
+      background: #f0f0f0;
     }
+
+    /* Container for the iframe */
+    .iframe-container {
+      position: relative;
+      width: 100%;
+      height: 100%;
+    }
+
+    /* Fullscreen iframe */
     iframe {
       position: absolute;
       top: 0;
@@ -18,12 +30,92 @@
       width: 100%;
       height: 100%;
       border: none;
+      background: #fff;
+    }
+
+    /* Loading spinner */
+    .loader {
+      position: absolute;
+      top: 50%;
+      left: 50%;
+      transform: translate(-50%, -50%);
+      border: 6px solid #f3f3f3;
+      border-top: 6px solid #3498db;
+      border-radius: 50%;
+      width: 50px;
+      height: 50px;
+      animation: spin 1s linear infinite;
+    }
+
+    @keyframes spin {
+      0% { transform: translate(-50%, -50%) rotate(0deg); }
+      100% { transform: translate(-50%, -50%) rotate(360deg); }
+    }
+
+    /* Error message */
+    .error-message {
+      position: absolute;
+      top: 50%;
+      left: 50%;
+      transform: translate(-50%, -50%);
+      text-align: center;
+      color: #333;
+    }
+
+    .error-message a {
+      color: #3498db;
+      text-decoration: none;
+    }
+
+    .error-message a:hover {
+      text-decoration: underline;
+    }
+
+    /* Hide loader and error message by default */
+    .loader, .error-message {
+      display: none;
     }
   </style>
 </head>
 <body>
-  <iframe src="https://livingarchive.net/" frameborder="0" allowfullscreen>
-    <p>Your browser does not support iframes. Please visit <a href="https://livingarchive.net/">Living Archive</a> directly.</p>
-  </iframe>
+  <div class="iframe-container">
+    <!-- Loading Spinner -->
+    <div class="loader" role="status" aria-label="Loading"></div>
+
+    <!-- Error Message -->
+    <div class="error-message" role="alert">
+      <p>Oops! The content could not be loaded.</p>
+      <p>Please <a href="https://livingarchive.net/" target="_blank">visit the website directly</a>.</p>
+    </div>
+
+    <!-- Iframe -->
+    <iframe
+      src="https://livingarchive.net/"
+      frameborder="0"
+      allowfullscreen
+      onload="hideLoader()"
+      onerror="showError()"
+      aria-label="Embedded content from Living Archive"
+    ></iframe>
+  </div>
+
+  <script>
+    // Function to hide the loader when the iframe loads
+    function hideLoader() {
+      const loader = document.querySelector('.loader');
+      loader.style.display = 'none';
+    }
+
+    // Function to show the error message if the iframe fails to load
+    function showError() {
+      const loader = document.querySelector('.loader');
+      const errorMessage = document.querySelector('.error-message');
+      loader.style.display = 'none';
+      errorMessage.style.display = 'block';
+    }
+
+    // Show the loader initially
+    document.querySelector('.loader').style.display = 'block';
+  </script>
 </body>
 </html>
